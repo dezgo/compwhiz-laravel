@@ -8,8 +8,12 @@ body {
     background-repeat: repeat-y;
 	background-attachment: scroll;
 }
+ul li {
+	padding: 5px;
+}
 #wrapper {
-	background-color: #F4F4F4;
+//	background-color: #F4F4F4;
+	background-color: #FFF;
 	text-align: left;
 	padding: 0px;
 	height: auto;
@@ -25,7 +29,6 @@ body {
 	background-image: url('/images/header.jpg');
 }
 #navigation {
-	background-color: #6C6;
 	margin: 0px;
 	padding: 0px;
 	height: 34px;
@@ -37,7 +40,7 @@ body {
 	float: left;
 	height: 234px;
 	width: 439px;
-	background-image: url('/images/sidebar.jpg');
+	//background-image: url('/images/sidebar.jpg');
 }
 .listItem {
 	font-family: Arial, Helvetica, sans-serif;
@@ -52,21 +55,18 @@ body {
 	color: #666;
 }
 #content {
-	background-color: f9fafa;
 	margin: 0px;
 	padding: 0px;
 	float: left;
-	height: 234px;
 	width: 510px;
-	color: #9f9;
 }
 #rightbar {
 	background-color: #FFF;
-	height: 234px;
 	width: 75px;
 	margin: 0px;
 	padding: 0px;
 	float: left;
+	height: 234px;
 	background-image: url('/images/rightbar.jpg');
 }
 #divider {
@@ -79,7 +79,7 @@ body {
 }
 
 #left_im {
-	background-color: #ECEDEF;
+	/* background-color: #ECEDEF; */
 	margin: 0px;
 	padding: 0px;
 	float: left;
@@ -91,7 +91,7 @@ body {
 
 }
 #info1 {
-	background-color: #ecedef;
+	/* background-color: #ecedef; */
 	margin: 0px;
 	padding: 0px;
 	float: left;
@@ -109,7 +109,6 @@ body {
 	border-right-color: #C7C5C6;
 	border-bottom-color: #C7C5C6;
 	border-left-color: #C7C5C6;
-	font: open sans;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	color: #333;
@@ -128,13 +127,13 @@ body {
 	background-attachment: scroll;
 }
 #info2 {
-	background-color: #ecedef;
+	/* background-color: #ecedef; */
 	margin: 0px;
 	padding: 0px;
 	float: left;
 	height: auto;
 	width: 508px;
-	font: impact;
+	font-family: impact;
 	font-size: 28px;
 	color: #BD1522;
 }
@@ -242,7 +241,7 @@ body {
 
 #content p {
 	font-size: 16px;
-	font-family: Arial, Helvetica, sans-serif;;
+	font-family: Arial, Helvetica, sans-serif;
 	color: #333;
 	margin-left: 25px;
 	margin-top: 25px;
@@ -258,7 +257,7 @@ h1 {
 }
 h3 {
 	font-size: 18px;
-	font-family: arial;
+	font-family: Arial, Helvetica, sans-serif;
 	color: #333;
 	margin-left: 25px;
 	margin-top: 25px;
@@ -273,4 +272,9 @@ h3 {
 	font-size: 11px;
 	height: inherit;
 	margin-top: 40px;
+}
+#centred {
+	//margin-left: auto;
+	//margin-right: auto;
+	text-align: center;
 }
