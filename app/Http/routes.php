@@ -39,3 +39,19 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 // Registration routes...
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+{
+
+// Admin routes
+Route::get('/admin/invoice', function ()
+{
+    if (Auth::check()) {
+        return view('admin.invoice');
+    }
+    else
+    {
+        return view('content.index');
+    }
+});
+
+}
