@@ -1,9 +1,8 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 100%;
-	text-align: center;
 	margin: 0px;
 	padding: 0px;
+	font-size: 16px;
 	background-image: url('/images/right_im.jpg');
     background-repeat: repeat-y;
 	background-attachment: scroll;
@@ -11,8 +10,14 @@ body {
 ul li {
 	padding: 5px;
 }
+a:link, a:visited {
+	color: black;
+}
+a:hover {
+	color: blue;
+}
+
 #wrapper {
-//	background-color: #F4F4F4;
 	background-color: #FFF;
 	text-align: left;
 	padding: 0px;
@@ -21,9 +26,16 @@ ul li {
 	margin-right: auto;
 	margin-left: auto;
 }
+#login-status {
+	margin: 0px;
+	padding: 0px;
+	float: right;
+	font-size: 14px;
+}
 #header {
 	background-color: #FFF;
 	margin: 0px;
+	margin-top: 25px;
 	padding: 0px;
 	height: 148px;
 	background-image: url('/images/header.jpg');
@@ -43,7 +55,6 @@ ul li {
 	//background-image: url('/images/sidebar.jpg');
 }
 .listItem {
-	font-family: Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	font-weight: bold;
 	margin-top: 25px;
@@ -109,7 +120,6 @@ ul li {
 	border-right-color: #C7C5C6;
 	border-bottom-color: #C7C5C6;
 	border-left-color: #C7C5C6;
-	font-family: Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	color: #333;
 	margin-right: 14px;
@@ -229,7 +239,6 @@ ul li {
 	margin-top: 25px;
 }
 #footertext {
-	font-family: Arial, Helvetica, sans-serif;
 	color: #666;
 	margin-top: 200px;
 	background-position: center;
@@ -241,29 +250,19 @@ ul li {
 
 #content p {
 	font-size: 16px;
-	font-family: Arial, Helvetica, sans-serif;
 	color: #333;
 	margin-left: 25px;
 	margin-top: 25px;
 	margin-right:28px;
 }
 
-h1 {
-	font-size: 25px;
-	font-family: Impact;
-	color: #BD1522;
-	margin-left: 25px;
-	margin-top: 25px;
-}
 h3 {
 	font-size: 18px;
-	font-family: Arial, Helvetica, sans-serif;
 	color: #333;
 	margin-left: 25px;
 	margin-top: 25px;
 }
 #wrapper #footer {
-	font-family: Arial, Helvetica, sans-serif;
 	color: #333;
 	text-align: center;
 	word-spacing: normal;

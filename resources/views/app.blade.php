@@ -3,12 +3,30 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Computer Whiz - Canberra</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    {!! Html::script('js/image_manipulation.js', array('type' => 'text/javascript')) !!}
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    {!! Html::script('/js/image_manipulation.js', array('type' => 'text/javascript')) !!}
 </head>
 
-<body onload="MM_preloadImages('images/btn01r.jpg','images/btn03r.jpg','images/btn04r.jpg','images/btn05r.jpg')">
+<body onload="MM_preloadImages('/images/btn01r.jpg','/images/btnPricingR.jpg','/images/btn03r.jpg','/images/btn04r.jpg','/images/btn05r.jpg')">
 <div id="wrapper">
+    <div id="login-status">
+    <p>
+        <?php
+        if (Auth::check())
+        {
+            $user = Auth::user();
+            echo 'Hi '. $user->name.'!&nbsp;';
+            echo Html::link('/auth/logout', 'Logout');
+        }
+        else
+        {
+            echo Html::link('/auth/register', 'Register').'&nbsp';
+            echo Html::link('/auth/login', 'Login');
+        }
+        ?>
+    </p>
+    </div>
+    &nbsp;
     <div id="header"></div>
     <div id="navigation">
         <div id="navigation_im"></div>
@@ -20,25 +38,25 @@
         if (Request::segment(1) == 'subscribe') $btn5 = 'r'; else $btn5 = '';
         ?>
         <div id="btn01">
-            <a href="/" target="_self" onmouseover="MM_swapImage('Image8','','images/btn01r.jpg',1)" onmouseout="MM_swapImgRestore()">
-                <img src="images/btn01{{ $btn1 }}.jpg" alt="home" name="Image8" width="85" height="34" border="0" id="Image8" />
+            <a href="/" target="_self" onmouseover="MM_swapImage('Image8','','/images/btn01r.jpg',1)" onmouseout="MM_swapImgRestore()">
+                <img src="/images/btn01{{ $btn1 }}.jpg" alt="home" name="Image8" width="85" height="34" border="0" id="Image8" />
             </a>
         </div>
         <div id="btn02">
-            <a href="about" target="_self" onmouseover="MM_swapImage('Image2','','images/btnPricingR.jpg',0)" onmouseout="MM_swapImgRestore()">
-                <img src="images/btnPricing{{ $btn2 }}.jpg" alt="about" name="Image2" width="86" height="34" border="0" id="Image2" />
+            <a href="/about" target="_self" onmouseover="MM_swapImage('Image2','','/images/btnPricingR.jpg',0)" onmouseout="MM_swapImgRestore()">
+                <img src="/images/btnPricing{{ $btn2 }}.jpg" alt="about" name="Image2" width="86" height="34" border="0" id="Image2" />
             </a>
         </div>
-        <div id="btn03"><a href="services" target="_self" onmouseover="MM_swapImage('Image7','','images/btn03r.jpg',1)" onmouseout="MM_swapImgRestore()">
-                <img src="images/btn03{{ $btn3 }}.jpg" alt="services" name="Image7" width="85" height="34" border="0" id="Image7" />
+        <div id="btn03"><a href="/services" target="_self" onmouseover="MM_swapImage('Image7','','/images/btn03r.jpg',1)" onmouseout="MM_swapImgRestore()">
+                <img src="/images/btn03{{ $btn3 }}.jpg" alt="services" name="Image7" width="85" height="34" border="0" id="Image7" />
             </a>
         </div>
-        <div id="btn04"><a href="contact" target="_self" onmouseover="MM_swapImage('Image9','','images/btn04r.jpg',1)" onmouseout="MM_swapImgRestore()">
-                <img src="images/btn04{{ $btn4 }}.jpg" alt="contact" name="Image9" width="85" height="34" border="0" id="Image9" />
+        <div id="btn04"><a href="/contact" target="_self" onmouseover="MM_swapImage('Image9','','/images/btn04r.jpg',1)" onmouseout="MM_swapImgRestore()">
+                <img src="/images/btn04{{ $btn4 }}.jpg" alt="contact" name="Image9" width="85" height="34" border="0" id="Image9" />
             </a>
         </div>
-        <div id="btn05"><a href="subscribe" target="_self" onmouseover="MM_swapImage('Image10','','images/btn05r.jpg',1)" onmouseout="MM_swapImgRestore()">
-                <img src="images/btn05{{ $btn5 }}.jpg" alt="subscribe" name="Image10" width="171" height="34" border="0" id="Image10" />
+        <div id="btn05"><a href="/subscribe" target="_self" onmouseover="MM_swapImage('Image10','','/images/btn05r.jpg',1)" onmouseout="MM_swapImgRestore()">
+                <img src="/images/btn05{{ $btn5 }}.jpg" alt="subscribe" name="Image10" width="171" height="34" border="0" id="Image10" />
             </a>
         </div>
     </div>

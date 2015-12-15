@@ -11,7 +11,7 @@
         from my home since 2009. I previously ran a similar business in Brisbane before moving to Canberra.
     </p>
     <div id="centred">
-        <img src="{{asset('images/selfie_bw.jpg')}}">
+        <img src="{{asset('/images/selfie_bw.jpg')}}">
     </div>
     <p>
         I'm passionate about all things I.T. My aim is to provide expert technical advice and assistance
