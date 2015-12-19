@@ -1,4 +1,6 @@
-@include('header')
+@extends('master')
+
+@section('content')
     <div id="navigation">
         <div id="navigation_im"></div>
         <?php
@@ -41,10 +43,5 @@
     <div id="content2">
         @yield('content2')
     </div>
-    <div id="footer">
-        <p>COMPUTER WHIZ CANBERRA 2015</p>
-    </div>
-</div>
-</div>
-</body>
-</html>
+
+@endsection

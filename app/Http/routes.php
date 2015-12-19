@@ -40,18 +40,37 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-{
-
-// Admin routes
-Route::get('/admin/invoice', function ()
-{
-    if (Auth::check()) {
+// Invoicing routes
+Route::get('/admin/invoice', [
+    'middleware' => 'admin',
+    function ()
+    {
         return view('admin.invoice');
     }
-    else
-    {
-        return view('content.index');
-    }
-});
+]);
 
-}
+Route::get('invoice/item', [
+    'middleware' => 'admin',
+    'uses' => 'Invoice\InvoiceItemController@create'
+]);
+
+Route::post('invoice/item', [
+    'as' => 'invoice/store_item',
+    'middleware' => 'admin',
+    'uses' => 'Invoice\InvoiceItemController@store'
+]);
+
+Route::get('invoice/customer', [
+    'middleware' => 'admin',
+    function ()
+    {
+        return view('invoice.create_customer');
+    }
+]);
+
+Route::post('invoice/customer', [
+    'as' => 'invoice/store_customer',
+    'middleware' => 'admin',
+    'uses' => 'Invoice\CustomerController@store'
+]);
+
