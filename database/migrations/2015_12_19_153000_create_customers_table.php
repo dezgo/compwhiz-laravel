@@ -21,6 +21,7 @@ class CreateCustomersTable extends Migration
 			$table->string('suburb');
 			$table->string('state');
 			$table->string('postcode');
+			$table->softDeletes();
 			$table->timestamps();
 		});
 	}

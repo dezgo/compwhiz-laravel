@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Invoice;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
@@ -29,7 +29,7 @@ class InvoiceItemController extends Controller
     public function create()
     {
         $item_categories = InvoiceItemCategory::lists('description', 'id');
-        return view('invoice.create_invoice_item', compact('item_categories'));
+        return view('invoiceitem.create', compact('item_categories'));
     }
 
     /**

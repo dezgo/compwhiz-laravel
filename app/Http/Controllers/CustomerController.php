@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Invoice;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Customer;
+use App\Http\Requests\CustomerRequest;
 
 class CustomerController extends Controller
 {
@@ -17,7 +18,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customer::all();
+        return view('customer.index', compact('customers'));
     }
 
     /**
@@ -27,7 +29,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customer.create');
     }
 
     /**
@@ -36,20 +38,11 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
-//        dd($request->all());
-        $customer = new Customer;
-        $customer->first_name = $request->first_name;
-        $customer->last_name = $request->last_name;
-        $customer->address1 = $request->address1;
-        $customer->address2 = $request->address2;
-        $customer->suburb = $request->suburb;
-        $customer->state = $request->state_list;
-        $customer->postcode = $request->postcode;
-        $customer->save();
+        Customer::create($request->all());
 
-        return view('/admin/invoice');
+        return redirect('/customer');
     }
 
     /**
@@ -60,7 +53,9 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+        $customer_list = Customer::customerList();
+        $customer = Customer::findOrFail($id);
+        return view('customer.show', compact('customer', 'customer_list'));
     }
 
     /**
@@ -71,7 +66,9 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer = Customer::findOrFail($id);
+        $customer_list = Customer::customerList();
+        return view('customer.edit', compact('customer', 'customer_list'));
     }
 
     /**
@@ -81,9 +78,11 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CustomerRequest $request, $id)
     {
-        //
+        $customer = Customer::findOrFail($id);
+        $customer->update($request->all());
+        return redirect('/customer');
     }
 
     /**
@@ -94,6 +93,21 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $customer = Customer::findOrFail($id);
+        $customer->delete();
+        return redirect('/customer');
+    }
+
+    /**
+     * Show the specified resource to be deleted.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $customer = Customer::findOrFail($id);
+        return view('customer.delete', compact('customer'));
+
     }
 }

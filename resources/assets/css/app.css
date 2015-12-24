@@ -209,7 +209,7 @@ body {
   width: 171px;
   background-image: url("/images/btn05.jpg"); }
 
-#content h1 {
+#content h1, #wrapper h1 {
   font-size: 24px;
   font-family: "impact";
   color: #BD1522;
@@ -224,7 +224,7 @@ body {
   text-align: center;
   margin-left: 400px; }
 
-#content p, .form-group {
+#content p, .form-group, #wrapper p {
   font-size: 16px;
   color: #333;
   margin-left: 25px;
@@ -250,4 +250,22 @@ h3 {
 #centred {
   text-align: center; }
 
+.inv-customerblock {
+  float: left;
+  width: 700px;
+  padding: 10px;
+}
+
+.inv-topinfoblock {
+  float: right;
+  width: 200px;
+  padding: 10px;
+}
+
+.inv-itemsblock {
+  float: left;
+  width: 100%;
+  padding: 10px;
+  clear: left;
+}
 /*# sourceMappingURL=app.css.map */

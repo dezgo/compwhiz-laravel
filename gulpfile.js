@@ -17,12 +17,14 @@ elixir(function(mix) {
     mix.styles([
         'libs/bootstrap.min.css',
         'app.css',
-        'libs/select2.min.css'
+        'libs/select2.min.css',
+        'libs/jquery-ui.css'
     ]);
 
     mix.scripts([
         'image_manipulation.js',
         'libs/jquery.js',
+        'libs/jquery-ui.js',
         'libs/select2.min.js'
     ])
 });
