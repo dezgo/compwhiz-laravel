@@ -1,11 +1,10 @@
 @extends('admin')
 
 @section('content1')
-    <h1 align="left">Create Customer</h1>
+    <h1 align="left">Create Invoice Item</h1>
 
-    {!! Form::open(['route' => 'customer.store']) !!}
-{{--        @include('customer.select')--}}
-        @include('customer.form', ['submitButtonText' => 'Save'])
+    {!! Form::open(['route' => 'invoiceitem.store']) !!}
+        @include('invoiceitem.form', ['submitButtonText' => 'Save'])
     {!! Form::close() !!}
 
     @include('errors.list')
@@ -13,14 +12,8 @@
 
 @section('footer')
     <script type="text/javascript">
-        $('#state_list').select2({
-            placeholder: 'Choose a state',
-            tags: false,
-            theme: "classic"
-        });
-
-        $('#customer_list').select2({
-            placeholder: 'Choose a customer',
+        $('#category_list').select2({
+            placeholder: "Choose a category",
             tags: false,
             theme: "classic"
         });

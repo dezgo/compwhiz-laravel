@@ -19,7 +19,8 @@ class InvoiceController extends Controller
 	 */
 	public function index()
 	{
-		//
+		$invoices = Invoice::all();
+		return view('invoice.index', compact('invoices'));
 	}
 
 	/**
@@ -27,15 +28,11 @@ class InvoiceController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function create(Request $request)
+	public function create()
 	{
 		$customer_list = Customer::customerList();
-
-		$customer = Customer::find($request->customer_list);
-		$invoice = new Invoice();
-		$invoice->invoice_date = $invoice->getDefaultInvoiceDate();
-		$invoice->invoice_number = $invoice->getNextInvoiceNumber();
-		return view('invoice/create', compact('customer_list','customer','invoice'));
+		$invoice_items = InvoiceItem::invoiceItemList();
+		return view('invoice.create',compact('customer_list'));
 	}
 
 	/**

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\InvoiceItem;
 use App\InvoiceItemCategory;
+use App\Http\Requests\InvoiceItemRequest;
 
 class InvoiceItemController extends Controller
 {
@@ -18,7 +19,8 @@ class InvoiceItemController extends Controller
      */
     public function index()
     {
-        //
+        $invoice_items = InvoiceItem::all();
+        return view('invoiceitem.index', compact('invoice_items'));
     }
 
     /**
@@ -28,8 +30,8 @@ class InvoiceItemController extends Controller
      */
     public function create()
     {
-        $item_categories = InvoiceItemCategory::lists('description', 'id');
-        return view('invoiceitem.create', compact('item_categories'));
+        $invoice_item_categories = InvoiceItemCategory::lists('description', 'id');
+        return view('invoiceitem.create', compact('invoice_item_categories'));
     }
 
     /**
@@ -38,16 +40,10 @@ class InvoiceItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InvoiceItemRequest $request)
     {
-        //dd($request->all());
-        $invoiceItem = new InvoiceItem;
-        $invoiceItem->category_id = $request->category_list;
-        $invoiceItem->buyprice = $request->buy_price;
-        $invoiceItem->sellprice = $request->sell_price;
-        $invoiceItem->description = $request->description;
-        $invoiceItem->save();
-        return ('Item saved');
+        InvoiceItem::create($request->all());
+        return redirect('/invoiceitem');
     }
 
     /**
@@ -58,7 +54,9 @@ class InvoiceItemController extends Controller
      */
     public function show($id)
     {
-        //
+        $invoice_item_categories = InvoiceItemCategory::categoryList();
+        $invoice_item = InvoiceItem::findOrFail($id);
+        return view('invoiceitem.show', compact('invoice_item', 'invoice_item_categories'));
     }
 
     /**
@@ -69,7 +67,9 @@ class InvoiceItemController extends Controller
      */
     public function edit($id)
     {
-        //
+        $invoice_item = InvoiceItem::findOrFail($id);
+        $invoice_item_categories = InvoiceItemCategory::categoryList();
+        return view('invoiceitem.edit', compact('invoice_item', 'invoice_item_categories'));
     }
 
     /**
@@ -81,7 +81,9 @@ class InvoiceItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $invoice_item = InvoiceItem::findOrFail($id);
+        $invoice_item->update($request->all());
+        return redirect('/invoiceitem');
     }
 
     /**
@@ -92,6 +94,21 @@ class InvoiceItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $invoice_item = InvoiceItem::findOrFail($id);
+        $invoice_item->delete();
+        return redirect('/invoiceitem');
+    }
+
+    /**
+     * Show the specified resource to be deleted.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $invoice_item = InvoiceItem::findOrFail($id);
+        $invoice_item_categories = InvoiceItemCategory::lists('description', 'id');
+        return view('invoiceitem.delete', compact('invoice_item','invoice_item_categories'));
     }
 }

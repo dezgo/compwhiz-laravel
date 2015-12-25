@@ -4,7 +4,6 @@
     <h1 align="left">Create Customer</h1>
 
     {!! Form::open(['route' => 'customer.store']) !!}
-{{--        @include('customer.select')--}}
         @include('customer.form', ['submitButtonText' => 'Save'])
     {!! Form::close() !!}
 

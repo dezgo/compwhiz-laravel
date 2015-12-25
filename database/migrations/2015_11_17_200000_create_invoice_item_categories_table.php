@@ -15,6 +15,7 @@ class CreateInvoiceItemCategoriesTable extends Migration
 		Schema::create('invoice_item_categories', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('description');
+			$table->softDeletes();
 			$table->timestamps();
 		});
 	}

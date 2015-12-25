@@ -19,4 +19,12 @@ class Invoice extends Model
 	public function getDefaultInvoiceDate() {
 		return Carbon::today();
 	}
+
+	/**
+	 * Get the invoice items for this invoice
+	 */
+	public function invoiceitems()
+	{
+		return $this->hasMany('App\InvoiceItem');
+	}
 }

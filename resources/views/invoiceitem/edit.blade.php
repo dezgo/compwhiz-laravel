@@ -1,11 +1,10 @@
 @extends('admin')
 
 @section('content1')
-    <h1 align="left">Edit Customer</h1>
+    <h1 align="left">Edit Invoice Item</h1>
 
-    {!! Form::model($customer, ['method' => 'PUT', 'url' => 'customer/'.$customer->id]) !!}
-        {{--@include('customer.select')--}}
-        @include('customer.form', ['submitButtonText' => 'Update'])
+    {!! Form::model($invoice_item, ['method' => 'PUT', 'url' => 'invoiceitem/'.$invoice_item->id]) !!}
+        @include('invoiceitem.form', ['submitButtonText' => 'Update'])
     {!! Form::close() !!}
 
     @include('errors.list')
@@ -13,14 +12,8 @@
 
 @section('footer')
     <script type="text/javascript">
-        $('#state_list').select2({
-            placeholder: 'Choose a state',
-            tags: false,
-            theme: "classic"
-        });
-
-        $('#customer_list').select2({
-            placeholder: 'Choose a customer',
+        $('#category_list').select2({
+            placeholder: 'Choose a category',
             tags: false,
             theme: "classic"
         });

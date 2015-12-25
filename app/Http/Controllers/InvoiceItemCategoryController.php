@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\InvoiceItemCategory;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Customer;
-use App\Http\Requests\CustomerRequest;
+use App\Http\Requests\InvoiceItemCategoryRequest;
 
-class CustomerController extends Controller
+class InvoiceItemCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +18,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all();
-        return view('customer.index', compact('customers'));
+        $invoice_item_categories = InvoiceItemCategory::all();
+        return view('invoiceitemcategory.index', compact('invoice_item_categories'));
     }
 
     /**
@@ -29,7 +29,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('customer.create');
+        return view('invoiceitemcategory.create');
     }
 
     /**
@@ -38,10 +38,11 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CustomerRequest $request)
+    public function store(InvoiceItemCategoryRequest $request)
     {
-        Customer::create($request->all());
-        return redirect('/customer');
+        InvoiceItemCategory::create($request->all());
+
+        return redirect('/invoiceitemcategory');
     }
 
     /**
@@ -52,9 +53,8 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $customer_list = Customer::customerList();
-        $customer = Customer::findOrFail($id);
-        return view('customer.show', compact('customer', 'customer_list'));
+        $invoice_item_category = InvoiceItemCategory::findOrFail($id);
+        return view('invoiceitemcategory.show', compact('invoice_item_category'));
     }
 
     /**
@@ -65,9 +65,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $customer = Customer::findOrFail($id);
-        $customer_list = Customer::customerList();
-        return view('customer.edit', compact('customer', 'customer_list'));
+        $invoice_item_category = InvoiceItemCategory::findOrFail($id);
+        return view('invoiceitemcategory.edit', compact('invoice_item_category'));
     }
 
     /**
@@ -77,11 +76,11 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CustomerRequest $request, $id)
+    public function update(InvoiceItemCategoryRequest $request, $id)
     {
-        $customer = Customer::findOrFail($id);
-        $customer->update($request->all());
-        return redirect('/customer');
+        $invoice_item_category = InvoiceItemCategory::findOrFail($id);
+        $invoice_item_category->update($request->all());
+        return redirect('/invoiceitemcategory');
     }
 
     /**
@@ -92,9 +91,9 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        $customer = Customer::findOrFail($id);
-        $customer->delete();
-        return redirect('/customer');
+        $invoice_item_category = InvoiceItemCategory::findOrFail($id);
+        $invoice_item_category->delete();
+        return redirect('/invoiceitemcategory');
     }
 
     /**
@@ -105,7 +104,8 @@ class CustomerController extends Controller
      */
     public function delete($id)
     {
-        $customer = Customer::findOrFail($id);
-        return view('customer.delete', compact('customer'));
+        $invoice_item_category = InvoiceItemCategory::findOrFail($id);
+        return view('invoiceitemcategory.delete', compact('invoice_item_category'));
+
     }
 }

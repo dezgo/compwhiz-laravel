@@ -25,8 +25,8 @@
     {!! Form::text('suburb', null, $options) !!}
 </div>
 
-<?php $options['id'] = 'state_list' ?>
 <!-- State Form Input -->
+<?php $options['id'] = 'state_list' ?>
 <div class="form-group">
     {!! Form::label('state', 'State:', ['class' => 'control-label']) !!}
     {!! Form::select('state', [

@@ -3,19 +3,19 @@
     <div class="form-group">
         {!! Form::label('category', 'Category:', ['class' => 'control-label']) !!}
 
-        <?php $options['id'] = 'state_list' ?>
-        {!! Form::select('category_list', $item_categories, null, $options) !!}
+        <?php $options['id'] = 'category_list' ?>
+        {!! Form::select('category_id', $invoice_item_categories, null, $options) !!}
         <?php unset($options['id']) ?>
     </div>
 
     <div class="form-group">
-        {!! Form::label('buy_price', 'Buy Price:', ['class' => 'control-label']) !!}
-        {!! Form::text('buy_price', null, $options) !!}
+        {!! Form::label('buyprice', 'Buy Price:', ['class' => 'control-label']) !!}
+        {!! Form::text('buyprice', null, $options) !!}
     </div>
 
     <div class="form-group">
-        {!! Form::label('sell_price', 'Sell Price:', ['class' => 'control-label']) !!}
-        {!! Form::text('sell_price', null, $options) !!}
+        {!! Form::label('sellprice', 'Sell Price:', ['class' => 'control-label']) !!}
+        {!! Form::text('sellprice', null, $options) !!}
     </div>
 
     <div class="form-group">
@@ -26,4 +26,4 @@
         <?php unset($options['size']) ?>
     </div>
 
-    {!! Form::submit('Create New Invoice Item', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}

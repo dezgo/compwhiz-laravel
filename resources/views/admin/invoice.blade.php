@@ -9,8 +9,9 @@
     </ul>
     <p>Admin</p>
     <ul>
-    <li><a href="/invoice">Invoices</a></li>
-    <li><a href="/invoiceitem">Invoice Items</a></li>
-    <li><a href="/customer">Customers</a></li>
+        <li><a href="/customer">Customers</a></li>
+        <li><a href="/invoice">Invoices</a></li>
+        <li><a href="/invoiceitem">Invoice Items</a></li>
+        <li><a href="/invoiceitemcategory">Invoice Item Categories</a></li>
     </ul>
 @stop

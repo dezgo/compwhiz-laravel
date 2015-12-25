@@ -19,3 +19,17 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Customer::class, function (Faker\Generator $faker) {
+    $array = ['ACT', 'NSW', 'SA', 'NT', 'WA', 'TAS', 'QLD', 'VIC'];
+    $key = array_rand($array);
+    $state = $array[$key];
+    return [
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'address1' => $faker->streetAddress,
+        'suburb' => $faker->city,
+        'state' => $state,
+        'postcode' => rand(1000,9999),
+    ];
+});
