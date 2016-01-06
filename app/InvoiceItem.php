@@ -18,6 +18,9 @@ class InvoiceItem extends Model
 		'buyprice',
 		'sellprice',
 		'description',
+		'quantity',
+		'price',
+		'invoice_id'
 	];
 
 	/**
@@ -28,8 +31,22 @@ class InvoiceItem extends Model
 		return $this->belongsTo('App\InvoiceItemCategory');
 	}
 
-	public static function invoiceItemList() {
-		return InvoiceItem::selectRaw('CONCAT(first_name, "&nbsp;", last_name, "&nbsp;of&nbsp;", suburb) as fullname, id')
-			->orderBy('first_name')->lists('fullname', 'id');
+	public static function invoiceItemList($category_id = 0) {
+		if ($category_id == 0) {
+			return InvoiceItem::orderBy('description')
+				->lists('description', 'id');
+		}
+		else {
+			return InvoiceItem::all()
+				->where('category_id', $category_id)
+				->orderBy('description')
+				->lists('description', 'id');
+		}
 	}
+
+	public function getTotalAttribute()
+	{
+		return $this->quantity * $this->price;
+	}
+	
 }

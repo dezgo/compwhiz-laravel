@@ -23,6 +23,7 @@
             <button type="submit">Login</button>
         </p>
     </form>
+    @include('errors.list')
 @stop
 
 @section('bgimage')

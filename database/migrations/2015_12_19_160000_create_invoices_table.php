@@ -19,6 +19,7 @@ class CreateInvoicesTable extends Migration
 			$table->date('invoice_date');
 			$table->integer('invoice_number')->unsigned();
 			$table->date('due_date');
+			$table->decimal('paid',6,2);
 			$table->timestamps();
 		});
 	}

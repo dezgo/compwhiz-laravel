@@ -4,17 +4,17 @@
     <h1>Show Customers</h1>
 
     <div class="row">
-        <h4 class="col-xs-2">Category</h4>
-        <h4 class="col-xs-4">Description</h4>
+        <h4 class="col-xs-2">Name</h4>
+        <h4 class="col-xs-4">Address</h4>
         <h4 class="col-xs-4">Actions</h4>
     </div>
     @foreach($customers as $customer)
         <div class="row">
             <div class="col-xs-2">
-                {{ $customer->first_name.' '.$customer->last_name }}
+                {{ $customer->full_name }}
             </div>
             <div class="col-xs-4">
-                {{ $customer->address1.' '.$customer->address2.' '.$customer->suburb }}
+                {{ $customer->address }}
             </div>
             <div class="col-xs-4">
                 <a class="btn btn-success" href="{{ action('CustomerController@edit', [$customer->id]) }}">
@@ -25,6 +25,9 @@
                 </a>
                 <a class="btn btn-danger" href="{{ url('/customer/'.$customer->id.'/delete') }}">
                     Delete
+                </a>
+                <a class="btn btn-info" href="{{ url('/invoice/'.$customer->id.'/create') }}">
+                    Create Invoice
                 </a>
             </div>
         </div>

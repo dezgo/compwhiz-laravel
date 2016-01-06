@@ -33,3 +33,12 @@ $factory->define(App\Customer::class, function (Faker\Generator $faker) {
         'postcode' => rand(1000,9999),
     ];
 });
+
+$factory->define(App\Invoice::class, function (Faker\Generator $faker) {
+    return [
+        'invoice_date' => \Carbon\Carbon::now(),
+        'invoice_number' => Invoice::getNextInvoiceNumber(),
+        'due_date' => \Carbon\Carbon::now()->addDays(7),
+        'customer_id' => factory(App\Customer::class)->create()->id,
+    ];
+});

@@ -9,32 +9,12 @@
 
 <body onload="MM_preloadImages('/images/btn01r.jpg','/images/btnPricingR.jpg','/images/btn03r.jpg','/images/btn04r.jpg','/images/btn05r.jpg')">
 <div id="wrapper">
-    <div id="login-status">
-        <p>
-            <?php
-            if (Auth::check())
-            {
-                $user = Auth::user();
-                echo 'Hi '. $user->name.'!&nbsp;';
-                echo Html::link('', 'Home').'&nbsp';
-                echo Html::link('/admin/invoice', 'Invoicing').'&nbsp';
-                echo Html::link('/auth/logout', 'Logout');
-            }
-            else
-            {
-                echo Html::link('/auth/register', 'Register').'&nbsp';
-                echo Html::link('/auth/login', 'Login');
-            }
-            ?>
-        </p>
-    </div>
-    &nbsp;
-    <div id="header"></div>
     @yield('content')
     <div id="footer">
         <script src="/js/all.js"></script>
         @yield('footer')
-        <p>COMPUTER WHIZ CANBERRA 2015</p>
+        <span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span>
+        <small>Computer Whiz - Canberra 2015</small>
     </div>
 </div>
 </body>

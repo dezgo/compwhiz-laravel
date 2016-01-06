@@ -52,9 +52,8 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $customer_list = Customer::customerList();
         $customer = Customer::findOrFail($id);
-        return view('customer.show', compact('customer', 'customer_list'));
+        return view('customer.show', compact('customer'));
     }
 
     /**
@@ -66,8 +65,7 @@ class CustomerController extends Controller
     public function edit($id)
     {
         $customer = Customer::findOrFail($id);
-        $customer_list = Customer::customerList();
-        return view('customer.edit', compact('customer', 'customer_list'));
+        return view('customer.edit', compact('customer'));
     }
 
     /**

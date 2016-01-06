@@ -6,21 +6,32 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Invoice;
 use App\InvoiceItem;
-use App\InvoiceItemCategory;
 use App\Http\Requests\InvoiceItemRequest;
 
 class InvoiceItemController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the invoice items for the currently selected invoice
+     * OR
+     * If no invoice selected, show the invoice selection screen
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $invoice_items = InvoiceItem::all();
-        return view('invoiceitem.index', compact('invoice_items'));
+        $invoice_id = session('invoice_id', 0);
+        if ($invoice_id == 0)
+        {
+            return view('invoiceitem.invoice');
+        }
+        else
+        {
+            $invoice = Invoice::findOrFail($invoice_id);
+            $invoice_items = InvoiceItem::all()->where('invoice_id', $invoice->id);
+            return view('invoiceitem.index', compact('invoice_items', 'invoice'));
+        }
     }
 
     /**
@@ -30,8 +41,8 @@ class InvoiceItemController extends Controller
      */
     public function create()
     {
-        $invoice_item_categories = InvoiceItemCategory::lists('description', 'id');
-        return view('invoiceitem.create', compact('invoice_item_categories'));
+        $invoice = Invoice::findOrFail(session('invoice_id'));
+        return view('invoiceitem.create', compact('invoice'));
     }
 
     /**
@@ -54,9 +65,9 @@ class InvoiceItemController extends Controller
      */
     public function show($id)
     {
-        $invoice_item_categories = InvoiceItemCategory::categoryList();
+        $invoice = Invoice::findOrFail(session('invoice_id'));
         $invoice_item = InvoiceItem::findOrFail($id);
-        return view('invoiceitem.show', compact('invoice_item', 'invoice_item_categories'));
+        return view('invoiceitem.show', compact('invoice_item','invoice'));
     }
 
     /**
@@ -67,9 +78,9 @@ class InvoiceItemController extends Controller
      */
     public function edit($id)
     {
+        $invoice = Invoice::findOrFail(session('invoice_id'));
         $invoice_item = InvoiceItem::findOrFail($id);
-        $invoice_item_categories = InvoiceItemCategory::categoryList();
-        return view('invoiceitem.edit', compact('invoice_item', 'invoice_item_categories'));
+        return view('invoiceitem.edit', compact('invoice_item','invoice'));
     }
 
     /**
@@ -108,7 +119,28 @@ class InvoiceItemController extends Controller
     public function delete($id)
     {
         $invoice_item = InvoiceItem::findOrFail($id);
-        $invoice_item_categories = InvoiceItemCategory::lists('description', 'id');
-        return view('invoiceitem.delete', compact('invoice_item','invoice_item_categories'));
+        return view('invoiceitem.delete', compact('invoice_item'));
+    }
+
+	/**
+     * User has just selected a particular invoice to be processed
+     *
+     * @param Request $request
+     */
+    public function select(Request $request)
+    {
+        session(['invoice_id' => $request->invoice_id]);
+        return redirect('/invoiceitem');
+    }
+
+	/**
+     * Forget about the currently selected invoice so user can select a new one
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function clear()
+    {
+        session()->forget('invoice_id');
+        return redirect('/invoiceitem');
     }
 }

@@ -41,7 +41,6 @@ class InvoiceItemCategoryController extends Controller
     public function store(InvoiceItemCategoryRequest $request)
     {
         InvoiceItemCategory::create($request->all());
-
         return redirect('/invoiceitemcategory');
     }
 
@@ -106,6 +105,5 @@ class InvoiceItemCategoryController extends Controller
     {
         $invoice_item_category = InvoiceItemCategory::findOrFail($id);
         return view('invoiceitemcategory.delete', compact('invoice_item_category'));
-
     }
 }

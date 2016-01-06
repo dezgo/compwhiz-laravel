@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request;
 use Auth;
 
-class InvoiceItemRequest extends Request
+class InvoiceRequest extends Request
 {
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -25,10 +25,10 @@ class InvoiceItemRequest extends Request
 	public function rules()
 	{
 		return [
-			'category_id' => 'required|numeric',
-			'buy_price' => 'required|numeric',
-			'sell_price' => 'required|numeric',
-			'description' => 'required|string|min:2|unique:invoice_items,description',
+			'customer_id' => 'required|numeric',
+			'invoice_date' => 'required|date',
+			'invoice_number' => 'required|unique:invoices,invoice_number|numeric',
+			'due_date' => 'required|date',
 		];
 	}
 }

@@ -1,14 +1,14 @@
 @extends('admin')
 
 @section('content1')
-    <h1 align="left">Delete Customer</h1>
+    <h1 align="left">Delete Invoice</h1>
 
-    {!! Form::model($customer, ['method' => 'DELETE', 'url' => 'customer/'.$customer->id]) !!}
+    {!! Form::model($invoice, ['method' => 'DELETE', 'url' => 'invoice/'.$invoice->id]) !!}
 
     <?php
     $options['disabled'] = 'true';
     ?>
-    @include('customer.form', ['submitButtonText' => 'Delete'])
+    @include('invoice.form', ['submitButtonText' => 'Delete'])
     {!! Form::close() !!}
 @stop
 

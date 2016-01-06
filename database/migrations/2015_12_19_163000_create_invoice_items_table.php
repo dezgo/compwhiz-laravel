@@ -14,11 +14,13 @@ class CreateInvoiceItemsTable extends Migration
 	{
 		Schema::create('invoice_items', function (Blueprint $table) {
 			$table->increments('id');
+			$table->integer('invoice_id')->unsigned();
+			$table->foreign('invoice_id')->references('id')->on('invoices');
 			$table->integer('category_id')->unsigned();
 			$table->foreign('category_id')->references('id')->on('invoice_item_categories');
-			$table->decimal('buyprice',6,2);
-			$table->decimal('sellprice',6,2);
 			$table->string('description');
+			$table->integer('quantity')->unsigned();
+			$table->decimal('price',6,2);
 			$table->timestamps();
 		});
 	}

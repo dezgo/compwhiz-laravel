@@ -38,9 +38,20 @@ class Customer extends Model
 		'postcode'
 	];
 
-	public static function customerList() {
-		return Customer::selectRaw('CONCAT(first_name, "&nbsp;", last_name, "&nbsp;of&nbsp;", suburb) as fullname, id')
-			->orderBy('first_name')->lists('fullname', 'id');
+	public function getDescriptionAttribute()
+	{
+		return $this->full_name;
 	}
 
+	public function getFullNameAttribute() {
+		return $this->first_name.' '.$this->last_name;
+	}
+
+	public function getAddressAttribute() {
+		return $this->address1.' '.(($this->address2 != '')?$this->address2.' ':'').$this->suburb.' '.$this->state.' '.$this->postcode;
+	}
+
+	public function getAddressMultiAttribute() {
+		return $this->address1.'<br>'.(($this->address2 != '')?$this->address2.'<br>':'').$this->suburb.' '.$this->state.' '.$this->postcode;
+	}
 }

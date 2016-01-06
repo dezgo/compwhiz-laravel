@@ -1,17 +1,10 @@
 @extends('admin')
 
 @section('content1')
-    <h1 align="left">Invoicing</h1>
+    <h1>Invoicing</h1>
 
-    <p>Actions</p>
-    <ul>
-        <li><a href="/invoice/create">New Invoice</a></li>
-    </ul>
-    <p>Admin</p>
-    <ul>
-        <li><a href="/customer">Customers</a></li>
-        <li><a href="/invoice">Invoices</a></li>
-        <li><a href="/invoiceitem">Invoice Items</a></li>
-        <li><a href="/invoiceitemcategory">Invoice Item Categories</a></li>
-    </ul>
+    <a href="/customer"><button type="button" class="btn btn-primary">Customers</button></a>
+    <a href="/invoice"><button type="button" class="btn btn-primary">Invoices</button></a>
+    <a href="/invoiceitem"><button type="button" class="btn btn-primary">Invoice Items</button></a>
+    <a href="/invoiceitemcategory"><button type="button" class="btn btn-primary">Invoice Item Categories</button></a>
 @stop

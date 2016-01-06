@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Customer;
 use App\Invoice;
-use App\InvoiceItemCategory;
+use App\InvoiceItem;
+use App\Http\Requests\InvoiceRequest;
 
 class InvoiceController extends Controller
 {
@@ -28,22 +28,14 @@ class InvoiceController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function create()
+	public function create($customer_id = 0)
 	{
-		$customer_list = Customer::customerList();
+		$invoice = new Invoice();
+		if ($customer_id > 0) {
+			$invoice->customer_id = $customer_id;
+		}
 		$invoice_items = InvoiceItem::invoiceItemList();
-		return view('invoice.create',compact('customer_list'));
-	}
-
-	/**
-	 * Add items to invoice
-	 *
-	 * @param Invoice $invoice
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-	 */
-	public function add_invoice_items(Invoice $invoice)
-	{
-		return view('invoice/create_invoice_item', compact('invoice'));
+		return view('invoice.create',compact('invoice','invoice_items'));
 	}
 
 	/**
@@ -52,32 +44,11 @@ class InvoiceController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store_top(CustomerRequest $request)
+	public function store(InvoiceRequest $request)
 	{
-		if (isset($request->customer_list))
-		{
-			$customer = Customer::find($request->customer_list);
-		}
-		else
-		{
-			$customer = new Customer();
-		}
-		$customer->first_name = $request->first_name;
-		$customer->last_name = $request->last_name;
-		$customer->address1 = $request->address1;
-		$customer->address2 = $request->address2;
-		$customer->suburb = $request->suburb;
-		$customer->state = $request->state_list;
-		$customer->postcode = $request->postcode;
-		$customer->save();
-
-		$invoice = new Invoice();
-		$invoice->invoice_date = $request->invoice_date;
-		$invoice->invoice_number = $request->invoice_number;
-		$invoice->customer = $customer;
-
-		$item_categories = InvoiceItemCategory::lists('description', 'id');
-		return view('invoice/create_invoice_item', compact('invoice', 'item_categories'));
+//		dd($request->all());
+		Invoice::create($request->all());
+		return redirect('/invoice');
 	}
 
 	/**
@@ -88,7 +59,8 @@ class InvoiceController extends Controller
 	 */
 	public function show($id)
 	{
-		//
+		$invoice = Invoice::findOrFail($id);
+		return view('invoice.show', compact('invoice'));
 	}
 
 	/**
@@ -99,7 +71,8 @@ class InvoiceController extends Controller
 	 */
 	public function edit($id)
 	{
-		//
+		$invoice = Invoice::findOrFail($id);
+		return view('invoice.edit', compact('invoice'));
 	}
 
 	/**
@@ -109,9 +82,11 @@ class InvoiceController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id)
+	public function update(InvoiceRequest $request, $id)
 	{
-		//
+		$invoice = Invoice::findOrFail($id);
+		$invoice->update($request->all());
+		return redirect('/invoice');
 	}
 
 	/**
@@ -122,6 +97,26 @@ class InvoiceController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		$invoice = Invoice::findOrFail($id);
+		$invoice->delete();
+		return redirect('/invoice');
+	}
+
+	/**
+	 * Show the specified resource to be deleted.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function delete($id)
+	{
+		$invoice = Invoice::findOrFail($id);
+		return view('invoice.delete', compact('invoice'));
+	}
+
+	public function prnt($id)
+	{
+		$invoice = Invoice::findOrFail($id);
+		return view('invoice.print', compact('invoice'));
 	}
 }

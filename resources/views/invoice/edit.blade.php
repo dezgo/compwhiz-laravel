@@ -12,10 +12,8 @@
 
 @section('footer')
     <script type="text/javascript">
-        $('#state_list').select2({
-            placeholder: 'Choose a state',
-            tags: false,
-            theme: "classic"
+        $('invoice_date').datepicker({
+            format: 'dd/mm/yyyy'
         });
 
         $('#customer_list').select2({
