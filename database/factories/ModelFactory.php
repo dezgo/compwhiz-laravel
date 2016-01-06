@@ -34,11 +34,28 @@ $factory->define(App\Customer::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Invoice::class, function (Faker\Generator $faker) {
+$factory->define(App\Invoice::class, function () {
     return [
-        'invoice_date' => \Carbon\Carbon::now(),
-        'invoice_number' => Invoice::getNextInvoiceNumber(),
-        'due_date' => \Carbon\Carbon::now()->addDays(7),
         'customer_id' => factory(App\Customer::class)->create()->id,
     ];
 });
+
+
+$factory->define(App\InvoiceItem::class, function (Faker\Generator $faker) {
+    return [
+        'description' => $faker->word,
+        'quantity' => $faker->randomDigit,
+        'price' => $faker->randomFloat(2,1,500),
+        'invoice_id' => factory(App\Invoice::class)->create()->id,
+        'category_id' => App\InvoiceItemCategory::orderByRaw("RAND()")->first()->id,
+//    'category_id' => factory(App\InvoiceItemCategory::class)->create()->id,
+    ];
+});
+//
+//$factory->define(App\InvoiceItemCategory::class, function () {
+//    $item = App\InvoiceItemCategory::orderByRaw("RAND()")->first();
+//    return [
+//        'id' => $item->id,
+//        'description' => $item->description
+//    ];
+//});

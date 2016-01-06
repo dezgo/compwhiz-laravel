@@ -13,6 +13,7 @@
     <div id="footer">
         <script src="/js/all.js"></script>
         @yield('footer')
+        @yield('footer1')
         <span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span>
         <small>Computer Whiz - Canberra 2015</small>
     </div>

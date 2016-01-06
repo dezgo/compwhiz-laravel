@@ -8,10 +8,21 @@ class CustomerTest extends TestCase
 {
 	use DatabaseTransactions;
 
+	private $customer;
+	private $user;
+
+	public function setUp()
+	{
+		// This method will automatically be called prior to any of your test cases
+		parent::setUp();
+
+		$this->customer = factory(App\Customer::class)->create();
+		$this->user = factory(App\User::class)->create();
+	}
+
 	public function testShowIndex()
 	{
-		$user = factory(App\User::class)->create();
-		$this->actingAs($user)
+		$this->actingAs($this->user)
 			->visit('/customer')
 			->see('Show Customers')
 			->see('/create\'" class="btn btn-success">');
@@ -19,16 +30,14 @@ class CustomerTest extends TestCase
 
 	public function testCreate()
 	{
-		$user = factory(App\User::class)->create();
-		$this->actingAs($user)
+		$this->actingAs($this->user)
 			->visit('/customer/create')
 			->see('Create Customer');
 	}
 
 	public function testCreate_invalid()
 	{
-		$user = factory(App\User::class)->create();
-		$this->actingAs($user)
+		$this->actingAs($this->user)
 			->visit('/customer/create')
 			->press('Save')
 			->see('first name field is required');
@@ -36,8 +45,7 @@ class CustomerTest extends TestCase
 
 	public function testCreate_save()
 	{
-		$user = factory(App\User::class)->create();
-		$this->actingAs($user)
+		$this->actingAs($this->user)
 			->visit('/customer/create')
 			->type('Joe', 'first_name')
 			->type('Bloe', 'last_name')
@@ -51,18 +59,15 @@ class CustomerTest extends TestCase
 
 	public function testEdit()
 	{
-		$user = factory(App\User::class)->create();
-		$customer = factory(App\Customer::class)->create();
-		$this->actingAs($user)
-			->visit('/customer/1/edit')
+		$this->actingAs($this->user)
+			->visit('/customer/'.$this->customer->id.'/edit')
 			->see('Edit Customer');
 	}
 
 	public function testEdit_invalid()
 	{
-		$user = factory(App\User::class)->create();
-		$this->actingAs($user)
-			->visit('/customer/1/edit')
+		$this->actingAs($this->user)
+			->visit('/customer/'.$this->customer->id.'/edit')
 			->type('', 'first_name')
 			->press('Update')
 			->see('first name field is required');
@@ -70,9 +75,8 @@ class CustomerTest extends TestCase
 
 	public function testEdit_save()
 	{
-		$user = factory(App\User::class)->create();
-		$this->actingAs($user)
-			->visit('/customer/1/edit')
+		$this->actingAs($this->user)
+			->visit('/customer/'.$this->customer->id.'/edit')
 			->type('Bob', 'first_name')
 			->press('Update')
 			->seePageIs('/customer');
@@ -80,9 +84,8 @@ class CustomerTest extends TestCase
 
 		public function testDetails()
 		{
-			$user = factory(App\User::class)->create();
-			$this->actingAs($user)
-				->visit('/customer/1')
+			$this->actingAs($this->user)
+				->visit('/customer/'.$this->customer->id)
 				->see('Show Customer')
 				->see('disabled="true"')
 				->press('Edit')
@@ -93,9 +96,8 @@ class CustomerTest extends TestCase
 
 	public function testDelete()
 	{
-		$user = factory(App\User::class)->create();
-		$this->actingAs($user)
-			->visit('/customer/1/delete')
+		$this->actingAs($this->user)
+			->visit('/customer/'.$this->customer->id.'/delete')
 			->press('Delete')
 			->seePageIs('/customer');
 	}

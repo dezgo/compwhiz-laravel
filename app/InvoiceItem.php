@@ -15,8 +15,6 @@ class InvoiceItem extends Model
 	 */
 	protected $fillable = [
 		'category_id',
-		'buyprice',
-		'sellprice',
 		'description',
 		'quantity',
 		'price',
@@ -34,13 +32,13 @@ class InvoiceItem extends Model
 	public static function invoiceItemList($category_id = 0) {
 		if ($category_id == 0) {
 			return InvoiceItem::orderBy('description')
-				->lists('description', 'id');
+				->lists('description', 'description');
 		}
 		else {
 			return InvoiceItem::all()
 				->where('category_id', $category_id)
 				->orderBy('description')
-				->lists('description', 'id');
+				->lists('description', 'description');
 		}
 	}
 
@@ -48,5 +46,5 @@ class InvoiceItem extends Model
 	{
 		return $this->quantity * $this->price;
 	}
-	
+
 }

@@ -7,7 +7,7 @@
     <div class="row">
         <h4 class="col-xs-2">Category</h4>
         <h4 class="col-xs-4">Description</h4>
-        <h4 class="col-xs-2">Sell Price</h4>
+        <h4 class="col-xs-2">Price</h4>
         <h4 class="col-xs-4">Actions</h4>
     </div>
     @foreach($invoice_items as $invoice_item)
@@ -19,7 +19,7 @@
                 {{ $invoice_item->description }}
             </div>
             <div class="col-xs-2">
-                {{ $invoice_item->sell_price }}
+                {{ $invoice_item->price }}
             </div>
             <div class="col-xs-4">
                 <a class="btn btn-success" href="{{ action('InvoiceItemController@edit', [$invoice_item->id]) }}">
@@ -51,4 +51,3 @@
         </div>
     </div>
 @stop
-

@@ -9,14 +9,3 @@
 
     @include('errors.list')
 @stop
-
-@section('footer')
-    <script type="text/javascript">
-        $('#category_list').select2({
-            placeholder: 'Choose a category',
-            tags: false,
-            theme: "classic"
-        });
-    </script>
-@stop
-

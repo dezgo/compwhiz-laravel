@@ -25,10 +25,16 @@ class InvoiceItemRequest extends Request
 	public function rules()
 	{
 		return [
-			'category_id' => 'required|numeric',
-			'buy_price' => 'required|numeric',
-			'sell_price' => 'required|numeric',
+			'category_id' => 'required',
+			'price' => 'required|numeric',
 			'description' => 'required|string|min:2|unique:invoice_items,description',
+		];
+	}
+
+	public function messages()
+	{
+		return [
+			'category_id.required' => 'The category field is required'
 		];
 	}
 }
