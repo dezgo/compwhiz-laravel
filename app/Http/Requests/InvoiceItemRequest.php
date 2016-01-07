@@ -24,11 +24,12 @@ class InvoiceItemRequest extends Request
 	 */
 	public function rules()
 	{
+		$invoice_item_id = $this->request->get('id');
 		return [
 			'category_id' => 'required',
 			'price' => 'required|numeric',
 			'quantity' => 'required|numeric',
-			'description' => 'required|string|min:2|unique:invoice_items,description',
+			'description' => 'required|string|min:2|unique:invoice_items,description,'.$invoice_item_id,
 		];
 	}
 

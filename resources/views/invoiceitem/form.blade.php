@@ -1,5 +1,6 @@
 <?php $options['class'] = 'form-control' ?>
 
+    {!! Form::hidden('id', null) !!}
     {!! Form::hidden('invoice_id', $invoice->id) !!}
 
     <div class="form-group">
