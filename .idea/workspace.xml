@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8791a255-ab95-4bca-96c2-d41ff2c0d933" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/InvoiceItemRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/InvoiceItemRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/InvoiceItem.php" afterPath="$PROJECT_DIR$/app/InvoiceItem.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/factories/ModelFactory.php" afterPath="$PROJECT_DIR$/database/factories/ModelFactory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/invoiceitem/form.blade.php" afterPath="$PROJECT_DIR$/resources/views/invoiceitem/form.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/CustomerTest.php" afterPath="$PROJECT_DIR$/tests/CustomerTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/InvoiceItemTest.php" afterPath="$PROJECT_DIR$/tests/InvoiceItemTest.php" />
-    </list>
+    <list default="true" id="8791a255-ab95-4bca-96c2-d41ff2c0d933" name="Default" comment="" />
     <ignored path="cw.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -29,12 +21,52 @@
     <favorites_list name="cw" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="form.blade.php" pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="form.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/invoiceitem/form.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3654661">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state vertical-scroll-proportion="-10.461538">
+              <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InvoiceItemTest.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/InvoiceItemTest.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.80922693">
+              <caret line="113" column="34" selection-start-line="113" selection-start-column="34" selection-end-line="113" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InvoiceItemRequest.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Requests/InvoiceItemRequest.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-18.307692">
+              <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InvoiceItemController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/InvoiceItemController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.3846154">
+              <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AppServiceProvider.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-14.384615">
+              <caret line="26" column="51" selection-start-line="26" selection-start-column="51" selection-end-line="26" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -94,7 +126,6 @@
         <option value="$PROJECT_DIR$/app/Invoice.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_12_19_160000_create_invoices_table.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/InvoiceItemController.php" />
         <option value="$PROJECT_DIR$/resources/views/invoiceitem/show.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_12_19_163000_create_invoice_items_table.php" />
         <option value="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" />
@@ -102,10 +133,11 @@
         <option value="$PROJECT_DIR$/database/factories/ModelFactory.php" />
         <option value="$PROJECT_DIR$/tests/CustomerTest.php" />
         <option value="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
-        <option value="$PROJECT_DIR$/app/Http/Requests/InvoiceItemRequest.php" />
         <option value="$PROJECT_DIR$/app/InvoiceItem.php" />
-        <option value="$PROJECT_DIR$/tests/InvoiceItemTest.php" />
+        <option value="$PROJECT_DIR$/app/Http/Requests/InvoiceItemRequest.php" />
         <option value="$PROJECT_DIR$/resources/views/invoiceitem/form.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/InvoiceItemController.php" />
+        <option value="$PROJECT_DIR$/tests/InvoiceItemTest.php" />
       </list>
     </option>
   </component>
@@ -124,8 +156,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="241" />
-    <option name="y" value="69" />
+    <option name="x" value="2050" />
+    <option name="y" value="28" />
     <option name="width" value="1438" />
     <option name="height" value="966" />
   </component>
@@ -154,8 +186,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -714,6 +744,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -820,16 +852,23 @@
       <option name="project" value="LOCAL" />
       <updated>1451026125538</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="invoiceitem testing bug fixes">
+      <created>1452132690419</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1452132690419</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="241" y="69" width="1438" height="966" extended-state="0" />
-    <editor active="false" />
+    <frame x="2050" y="28" width="1438" height="966" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28720444" sideWeight="0.4915254" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28691983" sideWeight="0.4915254" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944915" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -837,7 +876,6 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2906815" sideWeight="0.5084746" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944915" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -872,7 +910,8 @@
     <MESSAGE value="add customer maintenance - add new customer" />
     <MESSAGE value="finish customer maintenance" />
     <MESSAGE value="add invoice items" />
-    <option name="LAST_COMMIT_MESSAGE" value="add invoice items" />
+    <MESSAGE value="invoiceitem testing bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="invoiceitem testing bug fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1206,169 +1245,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Requests/InvoiceItemRequest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.85275424">
-          <caret line="36" column="69" selection-start-line="36" selection-start-column="69" selection-end-line="36" selection-end-column="69" />
-          <folding>
-            <marker date="1452077197000" expanded="false" signature="41:77" placeholder="..." />
-            <marker date="1452077197000" expanded="true" signature="119:668" placeholder="{...}" />
-            <marker date="1452077197000" expanded="true" signature="126:212" placeholder=" Determine if the user is authorized to make this request. ..." />
-            <marker date="1452077197000" expanded="true" signature="243:273" placeholder="{...}" />
-            <marker date="1452077197000" expanded="true" signature="279:360" placeholder=" Get the validation rules that apply to the request. ..." />
-            <marker date="1452077197000" expanded="true" signature="387:553" placeholder="{...}" />
-            <marker date="1452077197000" expanded="true" signature="401:548" placeholder="..." />
-            <marker date="1452077197000" expanded="true" signature="582:666" placeholder="{...}" />
-            <marker date="1452077197000" expanded="true" signature="596:661" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/InvoiceItemController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.25211865">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <marker date="1452059262000" expanded="false" signature="44:209" placeholder="..." />
-            <marker date="1452059262000" expanded="true" signature="257:3857" placeholder="{...}" />
-            <marker date="1452059262000" expanded="true" signature="267:477" placeholder=" Display a listing of the invoice items for the currently selected invoice ..." />
-            <marker date="1452059262000" expanded="true" signature="507:922" placeholder="{...}" />
-            <marker date="1452059262000" expanded="true" signature="591:659" placeholder="{...}" />
-            <marker date="1452059262000" expanded="true" signature="672:916" placeholder="{...}" />
-            <marker date="1452059262000" expanded="true" signature="931:1035" placeholder=" Show the form for creating a new resource. ..." />
-            <marker date="1452059262000" expanded="true" signature="1066:1204" placeholder="{...}" />
-            <marker date="1452059262000" expanded="true" signature="1213:1367" placeholder=" Store a newly created resource in storage. ..." />
-            <marker date="1452059262000" expanded="true" signature="1424:1523" placeholder="{...}" />
-            <marker date="1452059262000" expanded="true" signature="1532:1649" placeholder=" Display the specified resource. ..." />
-            <marker date="1452059262000" expanded="true" signature="1681:1886" placeholder="{...}" />
-            <marker date="1452059262000" expanded="true" signature="1895:2030" placeholder=" Show the form for editing the specified resource. ..." />
-            <marker date="1452059262000" expanded="true" signature="2062:2267" placeholder="{...}" />
-            <marker date="1452059262000" expanded="true" signature="2276:2453" placeholder=" Update the specified resource in storage. ..." />
-            <marker date="1452059262000" expanded="true" signature="2505:2660" placeholder="{...}" />
-            <marker date="1452059262000" expanded="true" signature="2669:2798" placeholder=" Remove the specified resource from storage. ..." />
-            <marker date="1452059262000" expanded="true" signature="2833:2973" placeholder="{...}" />
-            <marker date="1452059262000" expanded="true" signature="2982:3110" placeholder=" Show the specified resource to be deleted. ..." />
-            <marker date="1452059262000" expanded="true" signature="3144:3278" placeholder="{...}" />
-            <marker date="1452059262000" expanded="true" signature="3284:3395" placeholder=" User has just selected a particular invoice to be processed ..." />
-            <marker date="1452059262000" expanded="true" signature="3442:3552" placeholder="{...}" />
-            <marker date="1452059262000" expanded="true" signature="3558:3731" placeholder=" Forget about the currently selected invoice so user can select a new one ..." />
-            <marker date="1452059262000" expanded="true" signature="3761:3855" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53601694">
-          <caret line="26" column="51" selection-start-line="26" selection-start-column="51" selection-end-line="26" selection-end-column="51" />
-          <folding>
-            <marker date="1452076428000" expanded="true" signature="37:157" placeholder="..." />
-            <marker date="1452076428000" expanded="true" signature="207:1084" placeholder="{...}" />
-            <marker date="1452076428000" expanded="true" signature="217:293" placeholder=" Bootstrap any application services. ..." />
-            <marker date="1452076428000" expanded="true" signature="322:942" placeholder="{...}" />
-            <marker date="1452076428000" expanded="true" signature="354:497" placeholder="..." />
-            <marker date="1452076428000" expanded="true" signature="392:497" placeholder="{...}" />
-            <marker date="1452076428000" expanded="true" signature="526:767" placeholder="..." />
-            <marker date="1452076428000" expanded="true" signature="561:767" placeholder="{...}" />
-            <marker date="1452076428000" expanded="true" signature="796:934" placeholder="..." />
-            <marker date="1452076428000" expanded="true" signature="827:934" placeholder="{...}" />
-            <marker date="1452076428000" expanded="true" signature="951:1026" placeholder=" Register any application services. ..." />
-            <marker date="1452076428000" expanded="true" signature="1059:1082" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/InvoiceItem.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6101695">
           <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding>
-            <marker date="1452078739000" expanded="true" signature="95:879" placeholder="{...}" />
-            <marker date="1452078739000" expanded="true" signature="140:207" placeholder=" The attributes that are mass assignable. ..." />
-            <marker date="1452078739000" expanded="true" signature="234:310" placeholder="..." />
-            <marker date="1452078739000" expanded="true" signature="318:362" placeholder=" Get the category for this invoice item ..." />
-            <marker date="1452078739000" expanded="true" signature="392:452" placeholder="{...}" />
-            <marker date="1452078739000" expanded="true" signature="513:790" placeholder="..." />
-            <marker date="1452078739000" expanded="true" signature="540:632" placeholder="..." />
-            <marker date="1452078739000" expanded="true" signature="599:627" placeholder="..." />
-            <marker date="1452078739000" expanded="true" signature="642:787" placeholder="..." />
-            <marker date="1452078739000" expanded="true" signature="684:711" placeholder="..." />
-            <marker date="1452078739000" expanded="true" signature="727:740" placeholder="..." />
-            <marker date="1452078739000" expanded="true" signature="754:782" placeholder="..." />
-            <marker date="1452078739000" expanded="true" signature="829:876" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/InvoiceItemTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3082627">
-          <caret line="89" column="39" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="39" />
-          <folding>
-            <marker date="1452078895000" expanded="false" signature="11:169" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="209:3977" placeholder="{...}" />
-            <marker date="1452078895000" expanded="true" signature="312:556" placeholder="{...}" />
-            <marker date="1452078895000" expanded="true" signature="593:868" placeholder="{...}" />
-            <marker date="1452078895000" expanded="true" signature="663:699" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="721:735" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="755:819" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="839:860" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="902:1144" placeholder="{...}" />
-            <marker date="1452078895000" expanded="true" signature="972:1008" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1030:1051" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1071:1136" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1186:1527" placeholder="{...}" />
-            <marker date="1452078895000" expanded="true" signature="1256:1292" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1314:1335" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1357:1363" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1383:1412" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1432:1467" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1487:1519" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1566:1953" placeholder="{...}" />
-            <marker date="1452078895000" expanded="true" signature="1636:1672" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1694:1715" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1738:1756" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1777:1806" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1827:1842" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1863:1877" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1899:1905" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1931:1945" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="1985:2312" placeholder="{...}" />
-            <marker date="1452078895000" expanded="true" signature="2122:2158" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="2180:2221" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="2241:2304" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="2352:2715" placeholder="{...}" />
-            <marker date="1452078895000" expanded="true" signature="2489:2525" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="2547:2588" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="2609:2626" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="2648:2656" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="2676:2707" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="2752:3123" placeholder="{...}" />
-            <marker date="1452078895000" expanded="true" signature="2889:2925" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="2947:2988" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="3009:3045" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="3067:3075" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="3101:3115" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="3158:3625" placeholder="{...}" />
-            <marker date="1452078895000" expanded="true" signature="3295:3331" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="3353:3386" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="3406:3469" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="3489:3506" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="3528:3534" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="3554:3617" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="3659:3975" placeholder="{...}" />
-            <marker date="1452078895000" expanded="true" signature="3796:3832" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="3854:3897" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="3919:3927" placeholder="..." />
-            <marker date="1452078895000" expanded="true" signature="3953:3967" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/invoiceitem/form.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3654661">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state vertical-scroll-proportion="-10.461538">
+          <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Requests/InvoiceItemRequest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.307692">
+          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.384615">
+          <caret line="26" column="51" selection-start-line="26" selection-start-column="51" selection-end-line="26" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/InvoiceItemController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.3846154">
+          <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/InvoiceItemTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.80922693">
+          <caret line="113" column="34" selection-start-line="113" selection-start-column="34" selection-end-line="113" selection-end-column="34" />
           <folding />
         </state>
       </provider>

@@ -58,7 +58,7 @@ class InvoiceItemTest extends TestCase
             ->type('2', 'quantity')
             ->type('5.2', 'price')
             ->press('Save')
-            ->seePageIs('/InvoiceItem');
+            ->seePageIs('/invoiceitem');
     }
 
     public function testEdit()
@@ -76,9 +76,9 @@ class InvoiceItemTest extends TestCase
         $this->actingAs($this->user)
             ->withSession(['invoice_id' => $this->invoice->id])
             ->visit('/invoiceitem/'.$invoice_item->id.'/edit')
-            ->type('', 'description')
+            ->type('', 'quantity')
             ->press('Update')
-            ->see('description field is required');
+            ->see('quantity field is required');
     }
 
     public function testEdit_save()
@@ -89,7 +89,7 @@ class InvoiceItemTest extends TestCase
             ->visit('/invoiceitem/'.$invoice_item->id.'/edit')
             ->type('A new description\n', 'description')
             ->press('Update')
-            ->seePageIs('/InvoiceItem');
+            ->seePageIs('/invoiceitem');
     }
 
     public function testDetails()
@@ -111,6 +111,6 @@ class InvoiceItemTest extends TestCase
             ->withSession(['invoice_id' => $this->invoice->id])
             ->visit('/invoiceitem/'.$invoice_item->id.'/delete')
             ->press('Delete')
-            ->seePageIs('/InvoiceItem');
+            ->seePageIs('/invoiceitem');
     }
 }

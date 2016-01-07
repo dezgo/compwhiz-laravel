@@ -14,8 +14,9 @@
         {!! Form::label('description', 'Description:', ['class' => 'control-label']) !!}
         <?php $options['id'] = 'description_list' ?>
         {!! Form::select('description_sel', ['' => ''] + $invoice_item_list->toArray(), null, $options) !!}
-        <?php unset($options['id']) ?>
+        <?php $options['id'] = 'description' ?>
         {!! Form::hidden('description', null, $options) !!}
+        <?php unset($options['id']) ?>
     </div>
 
     <div class="form-group">
