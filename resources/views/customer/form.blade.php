@@ -49,4 +49,3 @@
 </div>
 
 {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
-

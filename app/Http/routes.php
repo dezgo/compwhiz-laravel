@@ -51,7 +51,6 @@ Route::group(['middleware' => 'admin'], function() {
     Route::resource('customer', 'CustomerController');
     Route::get('customer/{customer}/delete', 'CustomerController@delete');
     Route::resource('invoice', 'InvoiceController');
-    Route::get('invoice/{customer}/create', 'InvoiceController@create');
     Route::get('invoice/{invoice}/delete', 'InvoiceController@delete');
     Route::get('invoice/{invoice}/print', 'InvoiceController@prnt');
     Route::get('invoiceitem/select', 'InvoiceItemController@select');

@@ -17,10 +17,10 @@
                 {{ $invoice->customer->full_name }}
             </div>
             <div class="col-xs-1 text-nowrap">
-                {{ $invoice->invoice_date->format('d-m-Y') }}
+                {{ $invoice->invoice_date }}
             </div>
             <div class="col-xs-1 text-nowrap">
-                {{ $invoice->due_date->format('d-m-Y') }}
+                {{ $invoice->due_date }}
             </div>
             <div class="col-xs-1">
                 {{ $invoice->invoice_number }}
@@ -51,4 +51,3 @@
         Create
     </button>
 @stop
-

@@ -54,7 +54,7 @@ class InvoiceItemTest extends TestCase
             ->withSession(['invoice_id' => $this->invoice->id])
             ->visit('/invoiceitem/create')
             ->select('1', 'category_id')
-            ->type('LAN Cable 1m', 'description')
+            ->type('LAN Cable 1mm', 'description')
             ->type('2', 'quantity')
             ->type('5.2', 'price')
             ->press('Save')
