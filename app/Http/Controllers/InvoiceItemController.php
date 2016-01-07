@@ -90,7 +90,7 @@ class InvoiceItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(InvoiceItemRequest $request, $id)
     {
         $invoice_item = InvoiceItem::findOrFail($id);
         $invoice_item->update($request->all());
@@ -118,8 +118,9 @@ class InvoiceItemController extends Controller
      */
     public function delete($id)
     {
+        $invoice = Invoice::findOrFail(session('invoice_id'));
         $invoice_item = InvoiceItem::findOrFail($id);
-        return view('invoiceitem.delete', compact('invoice_item'));
+        return view('invoiceitem.delete', compact('invoice_item','invoice'));
     }
 
 	/**
