@@ -29,10 +29,10 @@
                 {{ $invoice->total }}
             </div>
             <div class="col-xs-4">
-                <a class="btn btn-success" href="{{ action('InvoiceController@edit', [$invoice->id]) }}">
+                <a class="btn btn-success" href="{{ url('/invoice/'.$invoice->id.'/edit') }}">
                     Edit
                 </a>
-                <a class="btn btn-primary" href="{{ action('InvoiceController@show', [$invoice->id]) }}">
+                <a class="btn btn-primary" href="{{ url('/invoice/'.$invoice->id) }}">
                     Details
                 </a>
                 <a class="btn btn-danger" href="{{ url('/invoice/'.$invoice->id.'/delete') }}">
@@ -41,13 +41,14 @@
                 <a class="btn btn-info" href="{{ url('/invoice/'.$invoice->id.'/print') }}">
                     Print
                 </a>
+                <a class="btn btn-info" href="{{ url('/invoice/'.$invoice->id.'/email') }}">
+                    Email
+                </a>
             </div>
         </div>
         <!-- add this empty row to get a 1 pixel separator between buttons on each row -->
         <div class="row"><div class="col-md-12"></div></div>
     @endforeach
 
-    <button onclick="location.href='{{ action('InvoiceController@create') }}'" class="btn btn-success">
-        Create
-    </button>
+    <a href="/invoice/create" class="btn btn-success">Create</a>
 @stop

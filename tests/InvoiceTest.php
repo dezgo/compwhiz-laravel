@@ -16,21 +16,21 @@ class InvoiceTest extends TestCase
         // This method will automatically be called prior to any of your test cases
         parent::setUp();
 
-        $this->user = factory(App\User::class)->create();
+        $this->user = factory(App\User::class)->make();
     }
 
     public function testShowIndex()
     {
         $this->actingAs($this->user)
             ->visit('/invoice')
-            ->see('Show Invoices')
-            ->see('/invoice/create');
+            ->see('Show Invoices');
     }
 
     public function testCreate()
     {
         $this->actingAs($this->user)
-            ->visit('/invoice/create')
+            ->visit('/invoice')
+            ->click('Create')
             ->see('Create Invoice');
     }
 
@@ -100,5 +100,10 @@ class InvoiceTest extends TestCase
             ->visit('/invoice/'.$invoice->id.'/delete')
             ->press('Delete')
             ->seePageIs('/invoice');
+    }
+
+    public function testPrint()
+    {
+
     }
 }

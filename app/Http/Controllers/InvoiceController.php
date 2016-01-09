@@ -114,9 +114,22 @@ class InvoiceController extends Controller
 		return view('invoice.delete', compact('invoice'));
 	}
 
+	/**
+	 * Show the printed version of the invoice
+	 *
+	 */
 	public function prnt($id)
 	{
 		$invoice = Invoice::findOrFail($id);
 		return view('invoice.print', compact('invoice'));
+	}
+
+	/**
+	 * Email the invoice to the Customer
+	 */
+	public function email($id)
+	{
+		$invoice = Invoice::findOrFail($id);
+		
 	}
 }

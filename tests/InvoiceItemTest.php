@@ -10,6 +10,7 @@ class InvoiceItemTest extends TestCase
 
     private $invoice;
     private $user;
+    private $customer;
 
     public function setUp()
     {
@@ -17,7 +18,14 @@ class InvoiceItemTest extends TestCase
         parent::setUp();
 
         $this->invoice = factory(App\Invoice::class)->create();
-        $this->user = factory(App\User::class)->create();
+        $this->user = factory(App\User::class)->make();
+    }
+
+    public function tearDown()
+    {
+        // Artisan::call('migrate:refresh');
+        // Artisan::call('db:seed');
+        parent::tearDown();
     }
 
     public function testShowIndex()
