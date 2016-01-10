@@ -1,5 +1,8 @@
 @extends('master')
 @section('content')
+<style>
+@include('css')
+</style>
 <br>
 <div class="row">
   <div class="col-xs-9">

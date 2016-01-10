@@ -9,7 +9,8 @@ use Carbon\Carbon;
 class Invoice extends Model
 {
 	protected $table = 'invoices';
-	protected $dateFormat = 'd-m-Y';
+	protected $dateFormat = 'Y-m-d H:i:s';
+	// protected $dateFormat = 'd-m-Y';
 	protected $dates = ['invoice_date', 'due_date'];
 
 	/**
