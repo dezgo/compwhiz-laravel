@@ -33,16 +33,13 @@
                     Edit
                 </a>
                 <a class="btn btn-primary" href="{{ url('/invoice/'.$invoice->id) }}">
-                    Details
+                    View
                 </a>
                 <a class="btn btn-danger" href="{{ url('/invoice/'.$invoice->id.'/delete') }}">
                     Delete
                 </a>
-                <a class="btn btn-info" href="{{ url('/invoice/'.$invoice->id.'/print') }}">
+                <a class="btn btn-info" target="_blank" href="{{ url('/invoice/'.$invoice->id.'/print') }}">
                     Print
-                </a>
-                <a class="btn btn-info" href="{{ url('/invoice/'.$invoice->id.'/email') }}">
-                    Email
                 </a>
             </div>
         </div>
