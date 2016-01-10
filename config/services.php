@@ -15,8 +15,8 @@ return [
     */
 
     'mailgun' => [
-        'domain' => '',
-        'secret' => '',
+        'domain' => 'mg.computerwhiz.com.au',
+        'secret' => 'key-0f4694ddfc60973b2b75b6dcc096b391',
     ],
 
     'mandrill' => [
