@@ -1,7 +1,12 @@
 @extends('admin')
 
 @section('content1')
-    <h1>Show Invoice Items for invoice {{ $invoice->description }}</h1>
+    <h1>Show Invoice {{ $invoice->description }}</h1>
+
+    {!! Form::model($invoice, ['method' => 'GET', 'url' => 'invoice/'.$invoice->id.'/edit']) !!}
+        <?php $options['disabled'] = 'true'; ?>
+        @include('invoice.form', ['submitButtonText' => 'Edit'])
+    {!! Form::close() !!}
 
     <div class="form-group">
     <div class="row">

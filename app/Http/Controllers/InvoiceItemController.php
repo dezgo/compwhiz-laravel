@@ -41,6 +41,7 @@ class InvoiceItemController extends Controller
      */
     public function create()
     {
+        if (session('invoice_id') == '') return redirect('/invoiceitem');
         $invoice = Invoice::findOrFail(session('invoice_id'));
         return view('invoiceitem.create', compact('invoice'));
     }
@@ -65,6 +66,7 @@ class InvoiceItemController extends Controller
      */
     public function show($id)
     {
+        if (session('invoice_id') == '') return redirect('/invoiceitem');
         $invoice = Invoice::findOrFail(session('invoice_id'));
         $invoice_item = InvoiceItem::findOrFail($id);
         return view('invoiceitem.show', compact('invoice_item','invoice'));
@@ -78,6 +80,7 @@ class InvoiceItemController extends Controller
      */
     public function edit($id)
     {
+        if (session('invoice_id') == '') return redirect('/invoiceitem');
         $invoice = Invoice::findOrFail(session('invoice_id'));
         $invoice_item = InvoiceItem::findOrFail($id);
         return view('invoiceitem.edit', compact('invoice_item','invoice'));
@@ -118,6 +121,7 @@ class InvoiceItemController extends Controller
      */
     public function delete($id)
     {
+        if (session('invoice_id') == '') return redirect('/invoiceitem');
         $invoice = Invoice::findOrFail(session('invoice_id'));
         $invoice_item = InvoiceItem::findOrFail($id);
         return view('invoiceitem.delete', compact('invoice_item','invoice'));
@@ -143,5 +147,16 @@ class InvoiceItemController extends Controller
     {
         session()->forget('invoice_id');
         return redirect('/invoiceitem');
+    }
+
+    /**
+     * Get invoice item details based on description
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function load()
+    {
+        $description = \Input::get('description');
+        return 'done';
     }
 }
