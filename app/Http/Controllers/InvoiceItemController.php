@@ -13,25 +13,14 @@ use App\Http\Requests\InvoiceItemRequest;
 class InvoiceItemController extends Controller
 {
     /**
-     * Display a listing of the invoice items for the currently selected invoice
-     * OR
-     * If no invoice selected, show the invoice selection screen
+     * No longer showing the invoiceitem list separately, shown when viewing
+     * an invoice
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $invoice_id = session('invoice_id', 0);
-        if ($invoice_id == 0)
-        {
-            return view('invoiceitem.invoice');
-        }
-        else
-        {
-            $invoice = Invoice::findOrFail($invoice_id);
-            $invoice_items = InvoiceItem::all()->where('invoice_id', $invoice->id);
-            return view('invoiceitem.index', compact('invoice_items', 'invoice'));
-        }
+        return redirect('/invoice');
     }
 
     /**
@@ -39,10 +28,9 @@ class InvoiceItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        if (session('invoice_id') == '') return redirect('/invoiceitem');
-        $invoice = Invoice::findOrFail(session('invoice_id'));
+        $invoice = Invoice::findOrFail($id);
         return view('invoiceitem.create', compact('invoice'));
     }
 
@@ -55,7 +43,7 @@ class InvoiceItemController extends Controller
     public function store(InvoiceItemRequest $request)
     {
         InvoiceItem::create($request->all());
-        return redirect('/invoiceitem');
+        return redirect('/invoice/'.$request->invoice_id);
     }
 
     /**
@@ -66,10 +54,8 @@ class InvoiceItemController extends Controller
      */
     public function show($id)
     {
-        if (session('invoice_id') == '') return redirect('/invoiceitem');
-        $invoice = Invoice::findOrFail(session('invoice_id'));
         $invoice_item = InvoiceItem::findOrFail($id);
-        return view('invoiceitem.show', compact('invoice_item','invoice'));
+        return view('invoiceitem.show', compact('invoice_item'));
     }
 
     /**
@@ -80,10 +66,8 @@ class InvoiceItemController extends Controller
      */
     public function edit($id)
     {
-        if (session('invoice_id') == '') return redirect('/invoiceitem');
-        $invoice = Invoice::findOrFail(session('invoice_id'));
         $invoice_item = InvoiceItem::findOrFail($id);
-        return view('invoiceitem.edit', compact('invoice_item','invoice'));
+        return view('invoiceitem.edit', compact('invoice_item'));
     }
 
     /**
@@ -97,7 +81,7 @@ class InvoiceItemController extends Controller
     {
         $invoice_item = InvoiceItem::findOrFail($id);
         $invoice_item->update($request->all());
-        return redirect('/invoiceitem');
+        return redirect('/invoice/'.$invoice_item->invoice->id);
     }
 
     /**
@@ -110,7 +94,7 @@ class InvoiceItemController extends Controller
     {
         $invoice_item = InvoiceItem::findOrFail($id);
         $invoice_item->delete();
-        return redirect('/invoiceitem');
+        return redirect('/invoice/'.$invoice_item->invoice->id);
     }
 
     /**
@@ -121,42 +105,7 @@ class InvoiceItemController extends Controller
      */
     public function delete($id)
     {
-        if (session('invoice_id') == '') return redirect('/invoiceitem');
-        $invoice = Invoice::findOrFail(session('invoice_id'));
         $invoice_item = InvoiceItem::findOrFail($id);
-        return view('invoiceitem.delete', compact('invoice_item','invoice'));
-    }
-
-	/**
-     * User has just selected a particular invoice to be processed
-     *
-     * @param Request $request
-     */
-    public function select(Request $request)
-    {
-        session(['invoice_id' => $request->invoice_id]);
-        return redirect('/invoiceitem');
-    }
-
-	/**
-     * Forget about the currently selected invoice so user can select a new one
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function clear()
-    {
-        session()->forget('invoice_id');
-        return redirect('/invoiceitem');
-    }
-
-    /**
-     * Get invoice item details based on description
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function load()
-    {
-        $description = \Input::get('description');
-        return 'done';
+        return view('invoiceitem.delete', compact('invoice_item'));
     }
 }

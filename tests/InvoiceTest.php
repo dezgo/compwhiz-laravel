@@ -50,8 +50,8 @@ class InvoiceTest extends TestCase
             ->visit('/invoice/create')
             ->select($customer->id, 'customer_id')
             ->press('Save')
-            ->see('Show Invoices')
-            ->seePageIs('/invoice');
+            ->see('Show Invoice')
+            ->see('Create Item');
     }
 
     public function testEdit()
@@ -79,7 +79,7 @@ class InvoiceTest extends TestCase
             ->visit('/invoice/'.$invoice->id.'/edit')
             ->type('01-02-2015', 'invoice_date')
             ->press('Update')
-            ->seePageIs('/invoice');
+            ->seePageIs('/invoice/'.$invoice->id);
     }
 
     public function testDetails()

@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class InvoicingMainPgaeTest extends TestCase
+class InvoicingMainPageTest extends TestCase
 {
 	use DatabaseTransactions;
 
@@ -25,7 +25,6 @@ class InvoicingMainPgaeTest extends TestCase
 			->see('Invoicing')
       ->see('Customers')
       ->see('Invoices')
-      ->see('Invoice Items')
       ->see('Invoice Item Categories');
 	}
 
@@ -43,14 +42,6 @@ class InvoicingMainPgaeTest extends TestCase
       ->visit('/admin/invoice')
       ->click('Invoices')
       ->seePageIs('/invoice');
-  }
-
-  public function testInvoiceItemsLink()
-  {
-    $this->actingAs($this->user)
-      ->visit('/admin/invoice')
-      ->click('Invoice Items')
-      ->seePageIs('/invoiceitem');
   }
 
   public function testInvoiceItemCategoriesLink()

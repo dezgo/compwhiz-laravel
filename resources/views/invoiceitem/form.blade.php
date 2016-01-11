@@ -1,7 +1,7 @@
 <?php $options['class'] = 'form-control' ?>
 
     {!! Form::hidden('id', null) !!}
-    {!! Form::hidden('invoice_id', $invoice->id) !!}
+    {!! Form::hidden('invoice_id', $invoice_id) !!}
 
     <div class="form-group">
         {!! Form::label('category', 'Category:', ['class' => 'control-label']) !!}
@@ -14,7 +14,6 @@
     <div class="form-group">
         {!! Form::label('description', 'Description:', ['class' => 'control-label']) !!}
         <?php $options['id'] = 'description_list' ?>
-        <?php $options['onchange'] = 'changeDescription(this.value)' ?>
         {!! Form::select('description_sel', ['' => ''] + $invoice_item_list->toArray(), null, $options) !!}
         <?php $options['id'] = 'description' ?>
         {!! Form::hidden('description', null, $options) !!}
@@ -35,10 +34,6 @@
 
 @section('footer1')
 <script type="text/javascript">
-    function changeDescription(selectedValue) {
-        alert(selectedValue);
-    }
-
     $('#category_list').select2({
         placeholder: "Choose a category",
         tags: false,

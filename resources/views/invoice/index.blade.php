@@ -29,9 +29,6 @@
                 {{ $invoice->total }}
             </div>
             <div class="col-xs-4">
-                <a class="btn btn-success" href="{{ url('/invoice/'.$invoice->id.'/edit') }}">
-                    Edit
-                </a>
                 <a class="btn btn-primary" href="{{ url('/invoice/'.$invoice->id) }}">
                     View
                 </a>

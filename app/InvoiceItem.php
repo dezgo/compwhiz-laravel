@@ -47,4 +47,9 @@ class InvoiceItem extends Model
 		return $this->quantity * $this->price;
 	}
 
+	public function invoice()
+	{
+		return $this->belongsTo('App\Invoice');		
+	}
+
 }
