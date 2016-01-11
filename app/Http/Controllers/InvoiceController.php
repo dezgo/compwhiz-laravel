@@ -114,9 +114,28 @@ class InvoiceController extends Controller
 		return view('invoice.delete', compact('invoice'));
 	}
 
+	/**
+	 * Show the printed version of the invoice
+	 *
+	 */
 	public function prnt($id)
 	{
 		$invoice = Invoice::findOrFail($id);
 		return view('invoice.print', compact('invoice'));
+	}
+
+	/**
+	 * Email the invoice to the Customer
+	 */
+	public function email($id)
+	{
+		$invoice = Invoice::findOrFail($id);
+
+		$sent = Mail::send('invoice.print', ['invoice' => $invoice], function ($m) use ($invoice) {
+            $m->from('mail@computerwhiz.com.au', 'Computer Whiz - Canberra');
+
+			$m->to('test@derekgillett.com', 'Derek')->subject('Hi '.$invoice->customer->first_name.', here\'s that invoice');
+			// $m->to($user->email, $user->name)->subject('Here\'s that invoice!');
+        });
 	}
 }

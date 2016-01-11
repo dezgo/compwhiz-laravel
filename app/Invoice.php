@@ -82,6 +82,24 @@ class Invoice extends Model
 		return $this->total - $this->paid;
 	}
 
+	/*
+	 * Always return due date in set format
+	 *
+	 */
+	public function getDueDateAttribute($value)
+	{
+		return date($this->dateFormat, strtotime($value));
+	}
+
+	/*
+	 * Always return invoice date in set format
+	 *
+	 */
+	public function getInvoiceDateAttribute($value)
+	{
+		return date($this->dateFormat, strtotime($value));
+	}
+
 	/**
  	 * Convert due date into an instance of Carbon
 
@@ -89,7 +107,7 @@ class Invoice extends Model
 	 */
 	public function setDueDateAttribute($value)
 	{
-		$this->attributes['due_date'] = Carbon::createFromFormat('d-m-Y', $value);
+		$this->attributes['due_date'] = Carbon::createFromFormat($this->dateFormat, $value);
 	}
 
 	/**
@@ -99,6 +117,6 @@ class Invoice extends Model
 	 */
 	public function setInvoiceDateAttribute($value)
 	{
-		$this->attributes['invoice_date'] = Carbon::createFromFormat('d-m-Y', $value);
+		$this->attributes['invoice_date'] = Carbon::createFromFormat($this->dateFormat, $value);
 	}
 }

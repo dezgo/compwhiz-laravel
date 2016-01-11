@@ -1,22 +1,52 @@
+<?php $options['class'] = 'form-control' ?>
+
+{!! Form::hidden('id',null) !!}
+
 <div class="form-group">
     {!! Form::label('customer', 'Customer:', ['class' => 'control-label']) !!}
 
-    {!! Form::select('customer_id', $customer_list, null, ['class' => 'form-control', 'id' => 'customer_list']) !!}
+    <?php $options['id'] = 'customer_list' ?>
+    {!! Form::select('customer_id', ['' => ''] + $customer_list->toArray(), null, $options) !!}
+    <?php unset($options['id']) ?>
 </div>
 
 <div class="form-group">
     {!! Form::label('invoice_number', 'Invoice Number:', ['class' => 'control-label']) !!}
-    {!! Form::text('invoice_number', null, ['class' => 'form-control']) !!}
+    {!! Form::text('invoice_number', null, $options) !!}
 </div>
 
 <div class="form-group">
     {!! Form::label('invoice_date', 'Invoice Date:', ['class' => 'control-label']) !!}
-    {!! Form::text('invoice_date', null, ['class' => 'form-control', 'id' => 'invoice_date']) !!}
+
+    <?php $options['id'] = 'invoice_date' ?>
+    {!! Form::text('invoice_date', null, $options) !!}
+    <?php unset($options['id']) ?>
 </div>
 
 <div class="form-group">
     {!! Form::label('due_date', 'Due Date:', ['class' => 'control-label']) !!}
-    {!! Form::text('due_date', null, ['class' => 'form-control', 'id' => 'due_date']) !!}
+
+    <?php $options['id'] = 'due_date' ?>
+    {!! Form::text('due_date', null, $options) !!}
+    <?php unset($options['id']) ?>
 </div>
 
 {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
+
+@section('footer1')
+    <script type="text/javascript">
+        $('#invoice_date').datepicker({
+            dateFormat: 'dd-mm-yy'
+        });
+
+        $('#due_date').datepicker({
+            dateFormat: 'dd-mm-yy'
+        });
+
+        $('#customer_list').select2({
+            placeholder: 'Choose a customer',
+            tags: false,
+            theme: "classic"
+        });
+    </script>
+@stop

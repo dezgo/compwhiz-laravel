@@ -9,21 +9,3 @@
 
     @include('errors.list')
 @stop
-
-@section('footer')
-    <script type="text/javascript">
-        $('#invoice_date').datepicker({
-            dateFormat: 'dd-mm-yy',
-        });
-        $('#due_date').datepicker({
-            dateFormat: 'dd-mm-yy',
-        });
-
-        $('#customer_list').select2({
-            placeholder: 'Choose a customer',
-            tags: false,
-            theme: "classic"
-        });
-    </script>
-@stop
-

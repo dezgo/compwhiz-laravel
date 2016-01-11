@@ -17,8 +17,15 @@ class CustomerTest extends TestCase
 		parent::setUp();
 
 		$this->customer = factory(App\Customer::class)->create();
-		$this->user = factory(App\User::class)->create();
+		$this->user = factory(App\User::class)->make();
 	}
+
+	public function tearDown()
+    {
+        // Artisan::call('migrate:refresh');
+        // Artisan::call('db:seed');
+        parent::tearDown();
+    }
 
 	public function testShowIndex()
 	{
@@ -31,7 +38,8 @@ class CustomerTest extends TestCase
 	public function testCreate()
 	{
 		$this->actingAs($this->user)
-			->visit('/customer/create')
+			->visit('/customer')
+			->click('Create')
 			->see('Create Customer');
 	}
 
@@ -40,7 +48,11 @@ class CustomerTest extends TestCase
 		$this->actingAs($this->user)
 			->visit('/customer/create')
 			->press('Save')
-			->see('first name field is required');
+			->see('The first name field is required.')
+			->see('The last name field is required.')
+			->see('The address field is required.')
+			->see('The suburb field is required.')
+			->see('The postcode field is required.');
 	}
 
 	public function testCreate_save()

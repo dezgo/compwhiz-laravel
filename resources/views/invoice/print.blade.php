@@ -33,7 +33,7 @@
     <div class="cred">Invoice&nbsp;Date:</div>
   </div>
   <div class="col-xs-2 text-right">
-    {{ $invoice->invoice_date->format('d/m/Y') }}
+    {{ $invoice->invoice_date }}
   </div>
 </div>
 
@@ -64,7 +64,7 @@
   <div class="col-xs-1">{{ (int) $invoice_item->quantity }}</div>
   <div class="col-xs-1">{{ $invoice_item->id }}</div>
   <div class="col-xs-8">{{ $invoice_item->description }}</div>
-  <div class="col-xs-1 text-right">{{ $invoice_item->sell_price }}</div>
+  <div class="col-xs-1 text-right">{{ $invoice_item->price }}</div>
   <div class="col-xs-1 text-right">{{ number_format($invoice_item->total, 2) }}</div>
 </div>
 @endforeach

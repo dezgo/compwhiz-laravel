@@ -22,8 +22,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Customer::class, function (Faker\Generator $faker) {
     $array = ['ACT', 'NSW', 'SA', 'NT', 'WA', 'TAS', 'QLD', 'VIC'];
-    $key = array_rand($array);
-    $state = $array[$key];
+    $state = $faker->randomElement($array);
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
@@ -34,7 +33,9 @@ $factory->define(App\Customer::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Invoice::class, function () {
+$factory->define(App\Invoice::class, function (Faker\Generator $faker) {
+    // note the following will persist a customer to the database, so will
+    // need to clear the database now to get rid of this record
     return [
         'customer_id' => factory(App\Customer::class)->create()->id,
     ];
@@ -42,20 +43,13 @@ $factory->define(App\Invoice::class, function () {
 
 
 $factory->define(App\InvoiceItem::class, function (Faker\Generator $faker) {
+    // note the following will persist an invoice to the database, so will
+    // need to clear the database now to get rid of this record
     return [
         'description' => $faker->word,
         'quantity' => $faker->randomDigit,
         'price' => $faker->randomFloat(2,1,500),
         'invoice_id' => factory(App\Invoice::class)->create()->id,
         'category_id' => App\InvoiceItemCategory::orderByRaw("RAND()")->first()->id,
-//    'category_id' => factory(App\InvoiceItemCategory::class)->create()->id,
     ];
 });
-//
-//$factory->define(App\InvoiceItemCategory::class, function () {
-//    $item = App\InvoiceItemCategory::orderByRaw("RAND()")->first();
-//    return [
-//        'id' => $item->id,
-//        'description' => $item->description
-//    ];
-//});

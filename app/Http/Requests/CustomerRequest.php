@@ -25,10 +25,10 @@ class CustomerRequest extends Request
     public function rules()
     {
         return [
-            'first_name' => 'required|min:2',
-            'last_name' => 'required|min:2',
-            'address1' => 'required|min:2',
-            'suburb' => 'required|min:2',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'address1' => 'required',
+            'suburb' => 'required',
             'state' => 'required|min:2|max:3',
             'postcode' => 'required|Regex:/^[0-9]{4}$/',
         ];
@@ -42,7 +42,8 @@ class CustomerRequest extends Request
     public function messages()
     {
         return [
-            'postcode.regex' => 'Postcode must be 4 numbers',
+            'postcode.regex' => 'Postcode must be 4 numbers.',
+            'address1.required' => 'The address field is required.',
         ];
     }
 }

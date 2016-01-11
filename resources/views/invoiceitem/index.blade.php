@@ -5,20 +5,24 @@
 
     <div class="form-group">
     <div class="row">
+        <h4 class="col-xs-1">Quantity</h4>
         <h4 class="col-xs-2">Category</h4>
         <h4 class="col-xs-4">Description</h4>
-        <h4 class="col-xs-2">Price</h4>
+        <h4 class="col-xs-1">Price</h4>
         <h4 class="col-xs-4">Actions</h4>
     </div>
     @foreach($invoice_items as $invoice_item)
         <div class="row">
+            <div class="col-xs-1">
+                {{ $invoice_item->quantity }}
+            </div>
             <div class="col-xs-2">
                 {{ $invoice_item->category->description }}
             </div>
             <div class="col-xs-4">
                 {{ $invoice_item->description }}
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-1">
                 {{ $invoice_item->price }}
             </div>
             <div class="col-xs-4">

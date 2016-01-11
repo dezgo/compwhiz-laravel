@@ -1,5 +1,6 @@
 <?php $options['class'] = 'form-control' ?>
 
+    {!! Form::hidden('id', null) !!}
     {!! Form::hidden('invoice_id', $invoice->id) !!}
 
     <div class="form-group">
@@ -46,12 +47,13 @@
         tags: true,
         theme: "classic",
     });
+    // trigger the change event to populate the select
+    // box with the hidden description fields value
     $sel.val($desc).trigger("change");
 
-    // when the form is submitted, populate the hidden description field
-    // with the value of the select
-    // makes it easier to test as we can just populate the description field
-    // directly rather than mucking around with the jquery select2 element
+    // When the form is submitted, populate the hidden description field
+    // with the value of the select. Using the hidden field is easier
+    // than accessing the jquery select element when running tests.
     function populateDescription() {
       $('[name="description"]').val($('#description_list').val());
     }

@@ -26,17 +26,11 @@
                 <a class="btn btn-danger" href="{{ url('/customer/'.$customer->id.'/delete') }}">
                     Delete
                 </a>
-                <a class="btn btn-info" href="{{ url('/invoice/'.$customer->id.'/create') }}">
-                    Create Invoice
-                </a>
             </div>
         </div>
         <!-- add this empty row to get a 1 pixel separator between buttons on each row -->
         <div class="row"><div class="col-md-10"></div></div>
     @endforeach
 
-    <button onclick="location.href='{{ action('CustomerController@create') }}'" class="btn btn-success">
-        Create
-    </button>
+    <a href='{{ action('CustomerController@create') }}'" class="btn btn-success">Create</a>
 @stop
-

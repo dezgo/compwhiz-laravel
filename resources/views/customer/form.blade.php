@@ -30,6 +30,7 @@
 <div class="form-group">
     {!! Form::label('state', 'State:', ['class' => 'control-label']) !!}
     {!! Form::select('state', [
+            '' => '',
             'ACT' => 'ACT',
             'NSW' => 'NSW',
             'SA' => 'SA',
@@ -50,3 +51,12 @@
 
 {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
 
+@section('footer1')
+    <script type="text/javascript">
+        $('#state_list').select2({
+            placeholder: 'Choose a state',
+            tags: false,
+            theme: "classic"
+        });
+    </script>
+@stop

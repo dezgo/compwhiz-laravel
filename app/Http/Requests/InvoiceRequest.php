@@ -24,10 +24,11 @@ class InvoiceRequest extends Request
 	 */
 	public function rules()
 	{
+		$invoice_id = $this->request->get('id');
 		return [
 			'customer_id' => 'required|numeric',
 			'invoice_date' => 'required|date',
-			'invoice_number' => 'required|unique:invoices,invoice_number|numeric',
+			'invoice_number' => 'required|numeric|unique:invoices,invoice_number,'.$invoice_id,
 			'due_date' => 'required|date',
 		];
 	}

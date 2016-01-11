@@ -17,10 +17,10 @@
                 {{ $invoice->customer->full_name }}
             </div>
             <div class="col-xs-1 text-nowrap">
-                {{ $invoice->invoice_date->format('d-m-Y') }}
+                {{ $invoice->invoice_date }}
             </div>
             <div class="col-xs-1 text-nowrap">
-                {{ $invoice->due_date->format('d-m-Y') }}
+                {{ $invoice->due_date }}
             </div>
             <div class="col-xs-1">
                 {{ $invoice->invoice_number }}
@@ -29,16 +29,16 @@
                 {{ $invoice->total }}
             </div>
             <div class="col-xs-4">
-                <a class="btn btn-success" href="{{ action('InvoiceController@edit', [$invoice->id]) }}">
+                <a class="btn btn-success" href="{{ url('/invoice/'.$invoice->id.'/edit') }}">
                     Edit
                 </a>
-                <a class="btn btn-primary" href="{{ action('InvoiceController@show', [$invoice->id]) }}">
-                    Details
+                <a class="btn btn-primary" href="{{ url('/invoice/'.$invoice->id) }}">
+                    View
                 </a>
                 <a class="btn btn-danger" href="{{ url('/invoice/'.$invoice->id.'/delete') }}">
                     Delete
                 </a>
-                <a class="btn btn-info" href="{{ url('/invoice/'.$invoice->id.'/print') }}">
+                <a class="btn btn-info" target="_blank" href="{{ url('/invoice/'.$invoice->id.'/print') }}">
                     Print
                 </a>
             </div>
@@ -47,8 +47,5 @@
         <div class="row"><div class="col-md-12"></div></div>
     @endforeach
 
-    <button onclick="location.href='{{ action('InvoiceController@create') }}'" class="btn btn-success">
-        Create
-    </button>
+    <a href="/invoice/create" class="btn btn-success">Create</a>
 @stop
-
