@@ -33,7 +33,7 @@ class InvoiceItemTest extends TestCase
         $this->actingAs($this->user)
             ->withSession(['invoice_id' => $this->invoice->id])
             ->visit('/invoiceitem')
-            ->see('Show Invoice Items for invoice '.$this->invoice->invoice_number)
+            ->see('Show Invoice '.$this->invoice->invoice_number)
             ->see('/invoiceitem/create');
     }
 
