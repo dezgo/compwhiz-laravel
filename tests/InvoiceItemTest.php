@@ -28,28 +28,17 @@ class InvoiceItemTest extends TestCase
         parent::tearDown();
     }
 
-    public function testShowIndex()
-    {
-        $this->actingAs($this->user)
-            ->withSession(['invoice_id' => $this->invoice->id])
-            ->visit('/invoiceitem')
-            ->see('Show Invoice '.$this->invoice->invoice_number)
-            ->see('/invoiceitem/create');
-    }
-
     public function testCreate()
     {
         $this->actingAs($this->user)
-            ->withSession(['invoice_id' => $this->invoice->id])
-            ->visit('/invoiceitem/create')
+            ->visit('/invoiceitem/'.$this->invoice->id.'/create')
             ->see('Create Invoice Item for invoice '.$this->invoice->invoice_number);
     }
 
     public function testCreate_invalid()
     {
         $this->actingAs($this->user)
-            ->withSession(['invoice_id' => $this->invoice->id])
-            ->visit('/invoiceitem/create')
+            ->visit('/invoiceitem/'.$this->invoice->id.'/create')
             ->press('Save')
             ->see('The price field is required')
             ->see('The description field is required')
@@ -59,30 +48,27 @@ class InvoiceItemTest extends TestCase
     public function testCreate_save()
     {
         $this->actingAs($this->user)
-            ->withSession(['invoice_id' => $this->invoice->id])
-            ->visit('/invoiceitem/create')
+            ->visit('/invoiceitem/'.$this->invoice->id.'/create')
             ->select('1', 'category_id')
             ->type('LAN Cable 1mm', 'description')
             ->type('2', 'quantity')
             ->type('5.2', 'price')
             ->press('Save')
-            ->seePageIs('/invoiceitem');
+            ->seePageIs('/invoice/'.$this->invoice->id);
     }
 
     public function testEdit()
     {
         $invoice_item = factory(App\InvoiceItem::class)->create();
         $this->actingAs($this->user)
-            ->withSession(['invoice_id' => $this->invoice->id])
             ->visit('/invoiceitem/'.$invoice_item->id.'/edit')
-            ->see('Edit Invoice Item for invoice '.$this->invoice->invoice_number);
+            ->see('Edit Invoice Item for invoice '.$invoice_item->invoice->invoice_number);
     }
 
     public function testEdit_invalid()
     {
         $invoice_item = factory(App\InvoiceItem::class)->create();
         $this->actingAs($this->user)
-            ->withSession(['invoice_id' => $this->invoice->id])
             ->visit('/invoiceitem/'.$invoice_item->id.'/edit')
             ->type('', 'quantity')
             ->press('Update')
@@ -93,32 +79,29 @@ class InvoiceItemTest extends TestCase
     {
         $invoice_item = factory(App\InvoiceItem::class)->create();
         $this->actingAs($this->user)
-            ->withSession(['invoice_id' => $this->invoice->id])
             ->visit('/invoiceitem/'.$invoice_item->id.'/edit')
             ->type('A new description\n', 'description')
             ->press('Update')
-            ->seePageIs('/invoiceitem');
+            ->seePageIs('/invoice/'.$invoice_item->invoice->id);
     }
 
     public function testDetails()
     {
         $invoice_item = factory(App\InvoiceItem::class)->create();
         $this->actingAs($this->user)
-            ->withSession(['invoice_id' => $this->invoice->id])
             ->visit('/invoiceitem/'.$invoice_item->id)
-            ->see('Show Invoice Item for invoice '.$this->invoice->invoice_number)
+            ->see('Show Invoice Item for invoice '.$invoice_item->invoice->invoice_number)
             ->see('disabled="true"')
             ->press('Edit')
-            ->see('Edit Invoice Item for invoice '.$this->invoice->invoice_number);
+            ->see('Edit Invoice Item for invoice '.$invoice_item->invoice->invoice_number);
     }
 
     public function testDelete()
     {
         $invoice_item = factory(App\InvoiceItem::class)->create();
         $this->actingAs($this->user)
-            ->withSession(['invoice_id' => $this->invoice->id])
             ->visit('/invoiceitem/'.$invoice_item->id.'/delete')
             ->press('Delete')
-            ->seePageIs('/invoiceitem');
+            ->seePageIs('/invoice/'.$invoice_item->invoice->id);
     }
 }

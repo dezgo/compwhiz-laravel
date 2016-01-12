@@ -4,7 +4,7 @@
     <h1 align="left">Create Invoice Item for invoice {{ $invoice->description }}</h1>
 
     {!! Form::open(['route' => 'invoiceitem.store']) !!}
-        @include('invoiceitem.form', ['submitButtonText' => 'Save'])
+        @include('invoiceitem.form', ['submitButtonText' => 'Save', 'invoice_id' => $invoice->id])
     {!! Form::close() !!}
 
     @include('errors.list')

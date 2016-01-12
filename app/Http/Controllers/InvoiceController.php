@@ -46,9 +46,8 @@ class InvoiceController extends Controller
 	 */
 	public function store(InvoiceRequest $request)
 	{
-//		dd($request->all());
-		Invoice::create($request->all());
-		return redirect('/invoice');
+		$invoice = Invoice::create($request->all());
+		return redirect('/invoice/'.$invoice->id);
 	}
 
 	/**
@@ -72,7 +71,8 @@ class InvoiceController extends Controller
 	public function edit($id)
 	{
 		$invoice = Invoice::findOrFail($id);
-		return view('invoice.edit', compact('invoice'));
+		$invoice_items = InvoiceItem::all()->where('invoice_id', $invoice->id);
+		return view('invoice.edit', compact('invoice','invoice_items'));
 	}
 
 	/**
@@ -86,7 +86,7 @@ class InvoiceController extends Controller
 	{
 		$invoice = Invoice::findOrFail($id);
 		$invoice->update($request->all());
-		return redirect('/invoice');
+		return redirect('/invoice/'.$id);
 	}
 
 	/**

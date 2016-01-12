@@ -5,10 +5,7 @@
 
     {!! Form::model($invoice_item, ['method' => 'DELETE', 'url' => 'invoiceitem/'.$invoice_item->id]) !!}
 
-    <?php
-    $options['disabled'] = 'true';
-    ?>
-    @include('invoiceitem.form', ['submitButtonText' => 'Delete'])
+    <?php $options['disabled'] = 'true'; ?>
+    @include('invoiceitem.form', ['submitButtonText' => 'Delete', 'invoice_id' => $invoice_item->invoice->id])
     {!! Form::close() !!}
 @stop
-

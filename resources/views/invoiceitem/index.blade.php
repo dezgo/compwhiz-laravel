@@ -1,22 +1,14 @@
-@extends('admin')
-
-@section('content1')
-    <h1>Show Invoice {{ $invoice->description }}</h1>
-
-    {!! Form::model($invoice, ['method' => 'GET', 'url' => 'invoice/'.$invoice->id.'/edit']) !!}
-        <?php $options['disabled'] = 'true'; ?>
-        @include('invoice.form', ['submitButtonText' => 'Edit'])
-    {!! Form::close() !!}
-
-    <div class="form-group">
+<div class="form-group">
     <div class="row">
-        <h4 class="col-xs-1">Quantity</h4>
-        <h4 class="col-xs-2">Category</h4>
-        <h4 class="col-xs-4">Description</h4>
-        <h4 class="col-xs-1">Price</h4>
-        <h4 class="col-xs-4">Actions</h4>
+        @if ($invoice->invoice_items->count() > 0)
+            <h4 class="col-xs-1">Quantity</h4>
+            <h4 class="col-xs-2">Category</h4>
+            <h4 class="col-xs-4">Description</h4>
+            <h4 class="col-xs-1">Price</h4>
+            <h4 class="col-xs-4">Actions</h4>
+        @endif
     </div>
-    @foreach($invoice_items as $invoice_item)
+    @foreach($invoice->invoice_items as $invoice_item)
         <div class="row">
             <div class="col-xs-1">
                 {{ $invoice_item->quantity }}
@@ -46,17 +38,11 @@
         <div class="row"><div class="col-md-10"></div></div>
     @endforeach
 
+</div>
         <div class="row">
             <div class="col-md-1">
-                <button onclick="location.href='{{ action('InvoiceItemController@create', $invoice->id) }}'" class="btn btn-primary">
-                    Create
-                </button>
-            </div>
-            <div class="col-md-1">
-                <button onclick="location.href='{{ action('InvoiceItemController@clear') }}'" class="btn btn-success">
-                    Back
+                <button onclick="location.href='/invoiceitem/{{ $invoice->id }}/create'" class="btn btn-primary">
+                    Create Item
                 </button>
             </div>
         </div>
-    </div>
-@stop
