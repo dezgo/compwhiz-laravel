@@ -56,10 +56,11 @@ class InvoiceItem extends Model
 	*/
 	public function getPrice()
 	{
-		return InvoiceItem::where('description', $this->description)
-			->orderBy('created_at', 'DESC')
-			->first()
-			->price;
+		$item = InvoiceItem::where('description', $this->description)
+			->orderBy('updated_at', 'DESC')
+			->first();
+
+		return is_null($item) ? 0 : $item->price;
 	}
 
 }

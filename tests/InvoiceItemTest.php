@@ -31,7 +31,8 @@ class InvoiceItemTest extends TestCase
     public function testCreate()
     {
         $this->actingAs($this->user)
-            ->visit('/invoiceitem/'.$this->invoice->id.'/create')
+            ->visit('/invoice')
+            ->click('View')
             ->see('Create Invoice Item for invoice '.$this->invoice->invoice_number);
     }
 

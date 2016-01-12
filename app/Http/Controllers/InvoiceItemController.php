@@ -54,7 +54,12 @@ class InvoiceItemController extends Controller
      */
     public function store(InvoiceItemRequest $request)
     {
-        InvoiceItem::create($request->all());
+        $item = InvoiceItem::findOrFail($request->id);
+        $item->category_id = $request->category_id;
+        $item->description = $request->description;
+        $item->quantity = $request->quantity;
+        $item->price = $request->price;
+        $item->save();
         return redirect('/invoice/'.$request->invoice_id);
     }
 
