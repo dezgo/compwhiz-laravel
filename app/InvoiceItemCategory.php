@@ -41,4 +41,18 @@ class InvoiceItemCategory extends Model
 	public static function categoryList() {
 		return InvoiceItemCategory::all()->lists('description', 'id');
 	}
+
+	/**
+	 * Return a unique list of descriptions for the current category
+	 *
+	 */
+	public function description_list()
+	{
+		return \App\InvoiceItem::distinct()
+			->select('description')
+			->where('category_id', '=', $this->id)
+			->groupBy('description')
+			->get()
+			->lists('description');
+	}
 }
