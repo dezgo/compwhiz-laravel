@@ -41,7 +41,7 @@
 </div>
         <div class="row">
             <div class="col-md-1">
-                <button onclick="location.href='/invoiceitem/{{ $invoice->id }}/create'" class="btn btn-primary">
+                <button onclick="location.href='/invoiceitem/{{ $invoice->id }}/create1'" class="btn btn-primary">
                     Create Item
                 </button>
             </div>

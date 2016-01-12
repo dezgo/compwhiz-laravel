@@ -24,7 +24,7 @@ class InvoiceItemController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+    * First step in creating an invoice item - select category
      *
      * @return \Illuminate\Http\Response
      */
@@ -33,6 +33,18 @@ class InvoiceItemController extends Controller
         $invoice = Invoice::findOrFail($id);
         return view('invoiceitem.create', compact('invoice'));
     }
+
+    /**
+     * Second step in creating an invoice item - select category
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create1($id)
+    {
+        $invoice = Invoice::findOrFail($id);
+        return view('invoiceitem.create', compact('invoice'));
+    }
+
 
     /**
      * Store a newly created resource in storage.
