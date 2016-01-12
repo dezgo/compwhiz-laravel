@@ -35,8 +35,7 @@ class InvoiceItem extends Model
 				->lists('description', 'description');
 		}
 		else {
-			return InvoiceItem::all()
-				->where('category_id', $category_id)
+			return InvoiceItem::where('category_id', $category_id)
 				->orderBy('description')
 				->lists('description', 'description');
 		}
@@ -49,7 +48,18 @@ class InvoiceItem extends Model
 
 	public function invoice()
 	{
-		return $this->belongsTo('App\Invoice');		
+		return $this->belongsTo('App\Invoice');
+	}
+
+	/**
+	* Get the price the was last used for an item with this description
+	*/
+	public function getPrice()
+	{
+		return InvoiceItem::where('description', $this->description)
+			->orderBy('created_at', 'DESC')
+			->first()
+			->price;
 	}
 
 }

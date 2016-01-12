@@ -35,16 +35,16 @@ class InvoiceItemController extends Controller
     }
 
     /**
-     * Second step in creating an invoice item - select category
+     * First step in creating an invoice item - select category
      *
      * @return \Illuminate\Http\Response
      */
     public function create1($id)
     {
         $invoice = Invoice::findOrFail($id);
-        return view('invoiceitem.create', compact('invoice'));
+        $invoice_item_categories = \App\InvoiceItemCategory::all()->lists('description', 'id');
+        return view('invoiceitem.create1', compact('invoice','invoice_item_categories'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -56,6 +56,53 @@ class InvoiceItemController extends Controller
     {
         InvoiceItem::create($request->all());
         return redirect('/invoice/'.$request->invoice_id);
+    }
+
+    /**
+     * End step 1. Pass through invoice to which item relates and
+     * and the selected category to step 2
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store1(Request $request)
+    {
+        $this->validate($request, [
+                'category_id' => 'required',
+            ]);
+
+        $invoice = Invoice::findOrFail($request->invoice_id);
+        $category = \App\InvoiceItemCategory::findOrFail($request->category_id);
+        $invoice_item_list = \App\InvoiceItem::invoiceItemList($category->id);
+
+        return view('invoiceitem.create2', compact('invoice','category',
+            'invoice_item_list'));
+    }
+
+    /**
+     * End step 1. Pass through invoice to which item relates and
+     * and the selected category to step 2
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store2(Request $request)
+    {
+        $this->validate($request, [
+                'description' => 'required',
+            ]);
+
+        $invoice_id = $request->invoice_id;
+        $invoice = Invoice::findOrFail($invoice_id);
+        $invoice_item = new InvoiceItem();
+        $invoice_item->invoice_id = $invoice_id;
+        $invoice_item->category_id = $request->category_id;
+        $invoice_item->description = $request->description;
+        $invoice_item->quantity = 1;
+        $invoice_item->price = $invoice_item->getPrice();
+        $invoice_item->save();
+
+        return view('invoiceitem.create', compact('invoice','invoice_item', 'invoice_id'));
     }
 
     /**

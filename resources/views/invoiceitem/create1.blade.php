@@ -1,9 +1,11 @@
 @extends('admin')
 
 @section('content1')
+
     <h1 align="left">Create Invoice Item for invoice {{ $invoice->description }}</h1>
     <h2>Step 1 - Select category</h2>
     {!! Form::open(['route' => 'invoiceitem.store1']) !!}
+    {!! Form::hidden('invoice_id', $invoice->id) !!}
 
     <div class="form-group">
         {!! Form::label('category', 'Category:', ['class' => 'control-label']) !!}
