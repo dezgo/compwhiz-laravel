@@ -41,8 +41,8 @@
 </div>
         <div class="row">
             <div class="col-md-1">
-                <button onclick="location.href='{{ action('InvoiceItemController@create1', [$invoice->id]) }}'" class="btn btn-primary">
-                    Create Item
-                </button>
+                <a name='btnCreateItem' href="{{ action('InvoiceItemController@create1', [$invoice->id]) }}">
+                    <button class="btn btn-primary">Create Item</button>
+                </a>
             </div>
         </div>

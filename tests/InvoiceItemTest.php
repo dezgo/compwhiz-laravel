@@ -36,19 +36,20 @@ class InvoiceItemTest extends TestCase
             ->see('Show Invoice')
             ->click('Create Item')
             ->see('Step 1 - Select category')
-            ->click('Next')
-            ->see('The category fireld is required');
+            ->press('Next')
+            ->see('The category field is required');
     }
 
     public function testCreate_noDescr()
     {
+        $category = App\InvoiceItemCategory::orderBy(DB::raw('RAND()'))->take(1)->get();
         $this->actingAs($this->user)
             ->visit('/invoice')
             ->click('View')
-            ->click('Create Item')
-            ->type('Software','category_id')
-            ->click('Next')
-            ->click('Next')
+            ->click('btnCreateItem')
+            ->select($category->id,'category_id')
+            ->press('Next')
+            ->press('Next')
             ->see('The description field is required');
     }
 
