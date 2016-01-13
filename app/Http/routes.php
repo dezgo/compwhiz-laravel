@@ -59,7 +59,7 @@ Route::group(['middleware' => 'admin'], function() {
 
     Route::resource('invoiceitem', 'InvoiceItemController');
     Route::get('invoiceitem/{invoice}/create', 'InvoiceItemController@create');
-    Route::get('invoiceitem/{invoiceitem}/create1', 'InvoiceItemController@create1');
+    Route::get('invoiceitem/{invoice}/create1', 'InvoiceItemController@create1');
     Route::post('invoiceitem/store1', 'InvoiceItemController@store1')->name('invoiceitem.store1');
     Route::get('invoiceitem/{category_id}/create2', 'InvoiceItemController@create2');
     Route::post('invoiceitem/store2', 'InvoiceItemController@store2')->name('invoiceitem.store2');

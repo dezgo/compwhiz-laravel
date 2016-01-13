@@ -28,22 +28,28 @@ class InvoiceItemTest extends TestCase
         parent::tearDown();
     }
 
-    public function testCreate()
+    public function testCreate_noCategory()
     {
         $this->actingAs($this->user)
             ->visit('/invoice')
             ->click('View')
-            ->see('Create Invoice Item for invoice '.$this->invoice->invoice_number);
+            ->see('Show Invoice')
+            ->click('Create Item')
+            ->see('Step 1 - Select category')
+            ->click('Next')
+            ->see('The category fireld is required');
     }
 
-    public function testCreate_invalid()
+    public function testCreate_noDescr()
     {
         $this->actingAs($this->user)
-            ->visit('/invoiceitem/'.$this->invoice->id.'/create')
-            ->press('Save')
-            ->see('The price field is required')
-            ->see('The description field is required')
-            ->see('The category field is required');
+            ->visit('/invoice')
+            ->click('View')
+            ->click('Create Item')
+            ->type('Software','category_id')
+            ->click('Next')
+            ->click('Next')
+            ->see('The description field is required');
     }
 
     public function testCreate_save()
