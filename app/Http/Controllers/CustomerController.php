@@ -50,9 +50,8 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Customer $customer)
     {
-        $customer = Customer::findOrFail($id);
         return view('customer.show', compact('customer'));
     }
 
@@ -62,9 +61,8 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Customer $customer)
     {
-        $customer = Customer::findOrFail($id);
         return view('customer.edit', compact('customer'));
     }
 
@@ -75,9 +73,8 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CustomerRequest $request, $id)
+    public function update(CustomerRequest $request, Customer $customer)
     {
-        $customer = Customer::findOrFail($id);
         $customer->update($request->all());
         return redirect('/customer');
     }
@@ -88,9 +85,8 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Customer $customer)
     {
-        $customer = Customer::findOrFail($id);
         $customer->delete();
         return redirect('/customer');
     }
@@ -101,9 +97,8 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function delete(Customer $customer)
     {
-        $customer = Customer::findOrFail($id);
         return view('customer.delete', compact('customer'));
     }
 }

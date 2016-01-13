@@ -4,7 +4,7 @@
 
     <h1 align="left">Create Invoice Item for invoice {{ $invoice->description }}</h1>
     <h2>Step 2 - Enter/select description</h2>
-    {!! Form::open(['route' => 'invoiceitem.store2']) !!}
+    {!! Form::open(['route' => ['invoice_item.store2', $invoice, $category]]) !!}
     {!! Form::hidden('invoice_id', $invoice->id) !!}
 
     <div class="form-group">

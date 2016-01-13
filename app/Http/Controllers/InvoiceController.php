@@ -56,9 +56,8 @@ class InvoiceController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show($id)
+	public function show(Invoice $invoice)
 	{
-		$invoice = Invoice::findOrFail($id);
 		return view('invoice.show', compact('invoice'));
 	}
 
@@ -68,9 +67,8 @@ class InvoiceController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit($id)
+	public function edit(Invoice $invoice)
 	{
-		$invoice = Invoice::findOrFail($id);
 		$invoice_items = InvoiceItem::all()->where('invoice_id', $invoice->id);
 		return view('invoice.edit', compact('invoice','invoice_items'));
 	}
@@ -82,9 +80,8 @@ class InvoiceController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(InvoiceRequest $request, $id)
+	public function update(InvoiceRequest $request, Invoice $invoice)
 	{
-		$invoice = Invoice::findOrFail($id);
 		$invoice->update($request->all());
 		return redirect('/invoice/'.$id);
 	}
@@ -95,9 +92,8 @@ class InvoiceController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy(Invoice $invoice)
 	{
-		$invoice = Invoice::findOrFail($id);
 		$invoice->delete();
 		return redirect('/invoice');
 	}
@@ -108,9 +104,8 @@ class InvoiceController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function delete($id)
+	public function delete(Invoice $invoice)
 	{
-		$invoice = Invoice::findOrFail($id);
 		return view('invoice.delete', compact('invoice'));
 	}
 
@@ -118,19 +113,16 @@ class InvoiceController extends Controller
 	 * Show the printed version of the invoice
 	 *
 	 */
-	public function prnt($id)
+	public function prnt(Invoice $invoice)
 	{
-		$invoice = Invoice::findOrFail($id);
 		return view('invoice.print', compact('invoice'));
 	}
 
 	/**
 	 * Email the invoice to the Customer
 	 */
-	public function email($id)
+	public function email(Invoice $invoice)
 	{
-		$invoice = Invoice::findOrFail($id);
-
 		$sent = Mail::send('invoice.print', ['invoice' => $invoice], function ($m) use ($invoice) {
             $m->from('mail@computerwhiz.com.au', 'Computer Whiz - Canberra');
 

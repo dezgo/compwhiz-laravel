@@ -50,9 +50,8 @@ class InvoiceItemCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(InvoiceItemCategory $invoice_item_category)
     {
-        $invoice_item_category = InvoiceItemCategory::findOrFail($id);
         return view('invoiceitemcategory.show', compact('invoice_item_category'));
     }
 
@@ -62,9 +61,8 @@ class InvoiceItemCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(InvoiceItemCategory $invoice_item_category)
     {
-        $invoice_item_category = InvoiceItemCategory::findOrFail($id);
         return view('invoiceitemcategory.edit', compact('invoice_item_category'));
     }
 
@@ -75,9 +73,8 @@ class InvoiceItemCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(InvoiceItemCategoryRequest $request, $id)
+    public function update(InvoiceItemCategoryRequest $request, InvoiceItemCategory $invoice_item_category)
     {
-        $invoice_item_category = InvoiceItemCategory::findOrFail($id);
         $invoice_item_category->update($request->all());
         return redirect('/invoiceitemcategory');
     }
@@ -88,9 +85,8 @@ class InvoiceItemCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(InvoiceItemCategory $invoice_item_category)
     {
-        $invoice_item_category = InvoiceItemCategory::findOrFail($id);
         $invoice_item_category->delete();
         return redirect('/invoiceitemcategory');
     }
@@ -101,9 +97,8 @@ class InvoiceItemCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function delete(InvoiceItemCategory $invoice_item_category)
     {
-        $invoice_item_category = InvoiceItemCategory::findOrFail($id);
         return view('invoiceitemcategory.delete', compact('invoice_item_category'));
     }
 }
