@@ -12,7 +12,7 @@ class InvoiceItemCategoryTest extends TestCase
 	{
 		$user = factory(App\User::class)->create();
 		$this->actingAs($user)
-			->visit('/invoiceitemcategory')
+			->visit('/invoice_item_category')
 			->see('Show Invoice Item Categories')
 			->see('/create\'" class="btn btn-success">');
 	}
@@ -21,7 +21,7 @@ class InvoiceItemCategoryTest extends TestCase
 	{
 		$user = factory(App\User::class)->create();
 		$this->actingAs($user)
-			->visit('/invoiceitemcategory/create')
+			->visit('/invoice_item_category/create')
 			->see('Create Invoice Item Category');
 	}
 
@@ -29,7 +29,7 @@ class InvoiceItemCategoryTest extends TestCase
 	{
 		$user = factory(App\User::class)->create();
 		$this->actingAs($user)
-			->visit('/invoiceitemcategory/create')
+			->visit('/invoice_item_category/create')
 			->press('Save')
 			->see('description field is required');
 	}
@@ -38,17 +38,17 @@ class InvoiceItemCategoryTest extends TestCase
 	{
 		$user = factory(App\User::class)->create();
 		$this->actingAs($user)
-			->visit('/invoiceitemcategory/create')
+			->visit('/invoice_item_category/create')
 			->type('A new one', 'description')
 			->press('Save')
-			->seePageIs('/invoiceitemcategory');
+			->seePageIs('/invoice_item_category');
 	}
 
 	public function testEdit()
 	{
 		$user = factory(App\User::class)->create();
 		$this->actingAs($user)
-			->visit('/invoiceitemcategory/1/edit')
+			->visit('/invoice_item_category/1/edit')
 			->see('Edit Invoice Item Category');
 	}
 
@@ -56,7 +56,7 @@ class InvoiceItemCategoryTest extends TestCase
 	{
 		$user = factory(App\User::class)->create();
 		$this->actingAs($user)
-			->visit('/invoiceitemcategory/1/edit')
+			->visit('/invoice_item_category/1/edit')
 			->type('', 'description')
 			->press('Update')
 			->see('description field is required');
@@ -66,29 +66,29 @@ class InvoiceItemCategoryTest extends TestCase
 	{
 		$user = factory(App\User::class)->create();
 		$this->actingAs($user)
-			->visit('/invoiceitemcategory/1/edit')
+			->visit('/invoice_item_category/1/edit')
 			->type('A new one', 'description')
 			->press('Update')
-			->seePageIs('/invoiceitemcategory');
+			->seePageIs('/invoice_item_category');
 	}
 
 	public function testDetails()
 	{
 		$user = factory(App\User::class)->create();
 		$this->actingAs($user)
-			->visit('/invoiceitemcategory/1')
+			->visit('/invoice_item_category/1')
 			->see('Show Invoice Item Category')
 			->see('disabled="true"')
 			->press('Edit')
-			->seePageIs('/invoiceitemcategory/1/edit');
+			->seePageIs('/invoice_item_category/1/edit');
 	}
 
 	public function testDelete()
 	{
 		$user = factory(App\User::class)->create();
 		$this->actingAs($user)
-			 ->visit('/invoiceitemcategory/1/delete')
+			 ->visit('/invoice_item_category/1/delete')
 			 ->press('Delete')
-			 ->seePageIs('/invoiceitemcategory');
+			 ->seePageIs('/invoice_item_category');
 	}
 }

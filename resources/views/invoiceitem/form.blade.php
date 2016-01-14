@@ -12,11 +12,10 @@
     </div>
 
     <div class="form-group">
-        {!! Form::label('description', 'Description:', ['class' => 'control-label']) !!}
+        {!! Form::label('description_label', 'Description:', ['class' => 'control-label']) !!}
+
         <?php $options['id'] = 'description_list' ?>
-        {!! Form::select('description_sel', ['' => ''] + $invoice_item_list->toArray(), null, $options) !!}
-        <?php $options['id'] = 'description' ?>
-        {!! Form::hidden('description', null, $options) !!}
+        {!! Form::select('description', ['' => ''] + $invoice_item_list->toArray(), null, $options) !!}
         <?php unset($options['id']) ?>
     </div>
 
@@ -30,33 +29,23 @@
         {!! Form::text('price', null, $options) !!}
     </div>
 
-    {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary', 'onclick' => 'populateDescription()']) !!}
+
+    {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
 
 @section('footer1')
 <script type="text/javascript">
+$( document ).ready(function() {
     $('#category_list').select2({
         placeholder: "Choose a category",
         tags: false,
         theme: "classic"
     });
 
-    var $desc = $('[name="description"]').val();
-    var $sel = $('#description_list').select2();
     $('#description_list').select2({
         placeholder: "Choose an item",
         tags: true,
         theme: "classic",
     });
-    // trigger the change event to populate the select
-    // box with the hidden description fields value
-    $sel.val($desc).trigger("change");
-
-    // When the form is submitted, populate the hidden description field
-    // with the value of the select. Using the hidden field is easier
-    // than accessing the jquery select element when running tests.
-    function populateDescription() {
-      $('[name="description"]').val($('#description_list').val());
-    }
-
+});
 </script>
 @stop
