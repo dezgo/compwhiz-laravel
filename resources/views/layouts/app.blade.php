@@ -1,17 +1,31 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Computer Whiz - Canberra</title>
-    <link href="/css/all.css" rel="stylesheet">
-    {!! Html::script('/js/image_manipulation.js', array('type' => 'text/javascript')) !!}
 
+    <title>Laravel</title>
+
+    <!-- Fonts -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
+
+    <!-- Styles -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+
+    <style>
+        body {
+            font-family: 'Lato';
+        }
+
+        .fa-btn {
+            margin-right: 6px;
+        }
+    </style>
 </head>
-
-<body onload="MM_preloadImages('/images/btn01r.jpg','/images/btnPricingR.jpg','/images/btn03r.jpg','/images/btn04r.jpg','/images/btn05r.jpg')">
+<body id="app-layout">
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
@@ -26,17 +40,14 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-
+                    Laravel
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="spark-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Home</a></li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/admin/invoice') }}">Invoicing</a></li>
+                    <li><a href="{{ url('/home') }}">Home</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -59,15 +70,13 @@
                 </ul>
             </div>
         </div>
-        <div id="wrapper">
+    </nav>
+
     @yield('content')
-    <div id="footer">
-        <script src="/js/all.js"></script>
-        @yield('footer')
-        @yield('footer1')
-        <span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span>
-        <small>Computer Whiz - Canberra 2015</small>
-    </div>
-</div>
+
+    <!-- JavaScripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>
