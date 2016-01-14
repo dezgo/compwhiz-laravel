@@ -66,3 +66,9 @@ Route::group(['middleware' => 'admin'], function() {
     Route::resource('invoiceitemcategory', 'InvoiceItemCategoryController');
     Route::get('invoiceitemcategory/{invoiceitemcategory}/delete', 'InvoiceItemCategoryController@delete');
 });
+
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
+});
