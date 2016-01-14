@@ -83,7 +83,7 @@ class InvoiceController extends Controller
 	public function update(InvoiceRequest $request, Invoice $invoice)
 	{
 		$invoice->update($request->all());
-		return redirect('/invoice/'.$id);
+		return redirect('/invoice/'.$invoice->id);
 	}
 
 	/**

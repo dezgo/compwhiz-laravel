@@ -41,7 +41,7 @@ class InvoiceItemCategoryController extends Controller
     public function store(InvoiceItemCategoryRequest $request)
     {
         InvoiceItemCategory::create($request->all());
-        return redirect('/invoiceitemcategory');
+        return redirect('/invoice_item_category');
     }
 
     /**
@@ -76,7 +76,7 @@ class InvoiceItemCategoryController extends Controller
     public function update(InvoiceItemCategoryRequest $request, InvoiceItemCategory $invoice_item_category)
     {
         $invoice_item_category->update($request->all());
-        return redirect('/invoiceitemcategory');
+        return redirect('/invoice_item_category');
     }
 
     /**
@@ -88,7 +88,7 @@ class InvoiceItemCategoryController extends Controller
     public function destroy(InvoiceItemCategory $invoice_item_category)
     {
         $invoice_item_category->delete();
-        return redirect('/invoiceitemcategory');
+        return redirect('/invoice_item_category');
     }
 
     /**
