@@ -49,6 +49,6 @@ class InvoicingMainPageTest extends TestCase
     $this->actingAs($this->user)
       ->visit('/admin/invoice')
       ->click('Invoice Item Categories')
-      ->seePageIs('/invoiceitemcategory');
+      ->seePageIs('/invoice_item_category');
   }
 }

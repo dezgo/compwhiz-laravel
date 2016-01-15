@@ -53,8 +53,7 @@
 
 <div class="row">
   <div class="col-xs-1"><b>Qty</b></div>
-  <div class="col-xs-1"><b>Code</b></div>
-  <div class="col-xs-8"><b>Description</b></div>
+  <div class="col-xs-9"><b>Description</b></div>
   <div class="col-xs-1 text-right"><b>Unit&nbsp;Price</b></div>
   <div class="col-xs-1 text-right"><b>Total</b></div>
 </div>
@@ -62,8 +61,7 @@
 @foreach($invoice->invoice_items as $invoice_item)
 <div class="row">
   <div class="col-xs-1">{{ (int) $invoice_item->quantity }}</div>
-  <div class="col-xs-1">{{ $invoice_item->id }}</div>
-  <div class="col-xs-8">{{ $invoice_item->description }}</div>
+  <div class="col-xs-9">{{ $invoice_item->description }}</div>
   <div class="col-xs-1 text-right">{{ $invoice_item->price }}</div>
   <div class="col-xs-1 text-right">{{ number_format($invoice_item->total, 2) }}</div>
 </div>

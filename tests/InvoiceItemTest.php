@@ -28,40 +28,55 @@ class InvoiceItemTest extends TestCase
         parent::tearDown();
     }
 
-    public function testCreate()
+    public function testCreate_noCategory()
     {
         $this->actingAs($this->user)
-            ->visit('/invoiceitem/'.$this->invoice->id.'/create')
-            ->see('Create Invoice Item for invoice '.$this->invoice->invoice_number);
-    }
-
-    public function testCreate_invalid()
-    {
-        $this->actingAs($this->user)
-            ->visit('/invoiceitem/'.$this->invoice->id.'/create')
-            ->press('Save')
-            ->see('The price field is required')
-            ->see('The description field is required')
+            ->visit('/invoice')
+            ->click('View')
+            ->see('Show Invoice')
+            ->click('Create Item')
+            ->see('Step 1 - Select category')
+            ->press('Next')
             ->see('The category field is required');
     }
 
-    public function testCreate_save()
+    public function testCreate_noDescr()
     {
+        $category = App\InvoiceItemCategory::orderBy(DB::raw('RAND()'))->take(1)->first();
+        // dd($category);
         $this->actingAs($this->user)
-            ->visit('/invoiceitem/'.$this->invoice->id.'/create')
-            ->select('1', 'category_id')
-            ->type('LAN Cable 1mm', 'description')
-            ->type('2', 'quantity')
-            ->type('5.2', 'price')
-            ->press('Save')
-            ->seePageIs('/invoice/'.$this->invoice->id);
+            ->visit('/invoice')
+            ->click('View')
+            ->click('btnCreateItem')
+            ->select($category->id,'category_id')
+            ->press('Next')
+            ->press('Next')
+            ->see('The description field is required');
     }
+
+    // public function testCreate_save()
+    // {
+    //     $category = App\InvoiceItemCategory::orderBy(DB::raw('RAND()'))->take(1)->first();
+    //     // dd($category);
+    //     $this->actingAs($this->user)
+    //         ->visit('/invoice')
+    //         ->click('View')
+    //         ->click('btnCreateItem')
+    //         ->select($category->id,'category_id')
+    //         ->press('Next')
+    //         ->type('LAN Cable 1m test', 'description')
+    //         ->press('Next')
+    //         ->type('2', 'quantity')
+    //         ->type('5.2', 'price')
+    //         ->press('Save')
+    //         ->seePageIs('/invoice/'.$this->invoice->id);
+    // }
 
     public function testEdit()
     {
         $invoice_item = factory(App\InvoiceItem::class)->create();
         $this->actingAs($this->user)
-            ->visit('/invoiceitem/'.$invoice_item->id.'/edit')
+            ->visit('/invoice_item/'.$invoice_item->id.'/edit')
             ->see('Edit Invoice Item for invoice '.$invoice_item->invoice->invoice_number);
     }
 
@@ -69,7 +84,7 @@ class InvoiceItemTest extends TestCase
     {
         $invoice_item = factory(App\InvoiceItem::class)->create();
         $this->actingAs($this->user)
-            ->visit('/invoiceitem/'.$invoice_item->id.'/edit')
+            ->visit('/invoice_item/'.$invoice_item->id.'/edit')
             ->type('', 'quantity')
             ->press('Update')
             ->see('quantity field is required');
@@ -77,10 +92,11 @@ class InvoiceItemTest extends TestCase
 
     public function testEdit_save()
     {
+        $description = App\InvoiceItem::orderBy(DB::raw('RAND()'))->take(1)->first();
         $invoice_item = factory(App\InvoiceItem::class)->create();
         $this->actingAs($this->user)
-            ->visit('/invoiceitem/'.$invoice_item->id.'/edit')
-            ->type('A new description\n', 'description')
+            ->visit('/invoice_item/'.$invoice_item->id.'/edit')
+            ->type($description->description, 'description')
             ->press('Update')
             ->seePageIs('/invoice/'.$invoice_item->invoice->id);
     }
@@ -89,7 +105,7 @@ class InvoiceItemTest extends TestCase
     {
         $invoice_item = factory(App\InvoiceItem::class)->create();
         $this->actingAs($this->user)
-            ->visit('/invoiceitem/'.$invoice_item->id)
+            ->visit('/invoice_item/'.$invoice_item->id)
             ->see('Show Invoice Item for invoice '.$invoice_item->invoice->invoice_number)
             ->see('disabled="true"')
             ->press('Edit')
@@ -100,7 +116,7 @@ class InvoiceItemTest extends TestCase
     {
         $invoice_item = factory(App\InvoiceItem::class)->create();
         $this->actingAs($this->user)
-            ->visit('/invoiceitem/'.$invoice_item->id.'/delete')
+            ->visit('/invoice_item/'.$invoice_item->id.'/delete')
             ->press('Delete')
             ->seePageIs('/invoice/'.$invoice_item->invoice->id);
     }

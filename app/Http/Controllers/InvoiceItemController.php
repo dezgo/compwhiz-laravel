@@ -8,10 +8,83 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Invoice;
 use App\InvoiceItem;
+use App\InvoiceItemCategory;
 use App\Http\Requests\InvoiceItemRequest;
 
 class InvoiceItemController extends Controller
 {
+    /**
+     * First step in creating an invoice item - select category
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create1(Invoice $invoice)
+    {
+        $invoice_item_categories = \App\InvoiceItemCategory::all()->lists('description', 'id');
+        return view('invoiceitem.create1', compact('invoice','invoice_item_categories'));
+    }
+
+    /**
+     * End step 1. Pass through invoice to which item relates and
+     * and the selected category to step 2
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store1(Request $request, $invoice_id)
+    {
+        $rules = ['category_id' => 'required'];
+        $messages = ['category_id.required' => 'The category field is required'];
+        $this->validate($request, $rules, $messages);
+
+        return redirect('/invoice/'.$invoice_id.'/item/'.$request->category_id.'/create2');
+    }
+
+    /**
+     * Second step in creating an invoice item - select description or
+     * enter a new one
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create2(Invoice $invoice, InvoiceItemCategory $category)
+    {
+        $invoice_item_list = InvoiceItem::invoiceItemList($category->id);
+        return view('invoiceitem.create2', compact('invoice', 'category', 'invoice_item_list'));
+    }
+
+    /**
+     * End step 2. Pass category and description and create invoice item
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store2(Request $request, Invoice $invoice, InvoiceItemCategory $category)
+    {
+        $this->validate($request, [
+                'description' => 'required',
+            ]);
+        // $validator = \Validator::make($request->all(), [
+        //         'description' => 'required',
+        //     ]);
+        // if ($validator->fails()) {
+        //     return redirect()
+        //         ->back()
+        //         ->withErrors($validator)
+        //         ->withInput();
+        // }
+
+        $invoice_id = $invoice->id;
+        $invoice_item = new InvoiceItem();
+        $invoice_item->invoice_id = $invoice->id;
+        $invoice_item->category_id = $category->id;
+        $invoice_item->description = $request->description;
+        $invoice_item->quantity = 1;
+        $invoice_item->price = $invoice_item->getPrice();
+        $invoice_item->save();
+
+        return view('invoiceitem.create', compact('invoice','invoice_item', 'invoice_id'));
+    }
+
     /**
      * No longer showing the invoiceitem list separately, shown when viewing
      * an invoice
@@ -28,23 +101,10 @@ class InvoiceItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create(InvoiceItem $invoice_item)
     {
-        $invoice = Invoice::findOrFail($id);
-        return view('invoiceitem.create', compact('invoice'));
+        return view('invoiceitem.create', compact('invoice_item'));
     }
-
-    /**
-     * Second step in creating an invoice item - select category
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create1($id)
-    {
-        $invoice = Invoice::findOrFail($id);
-        return view('invoiceitem.create', compact('invoice'));
-    }
-
 
     /**
      * Store a newly created resource in storage.
@@ -52,10 +112,12 @@ class InvoiceItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InvoiceItemRequest $request)
+    public function store(InvoiceItemRequest $request, InvoiceItem $invoice_item)
     {
-        InvoiceItem::create($request->all());
-        return redirect('/invoice/'.$request->invoice_id);
+        $invoice_item->quantity = $request->quantity;
+        $invoice_item->price = $request->price;
+        $invoice_item->save();
+        return redirect('/invoice/'.$invoice_item->invoice->id);
     }
 
     /**
@@ -64,9 +126,8 @@ class InvoiceItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(InvoiceItem $invoice_item)
     {
-        $invoice_item = InvoiceItem::findOrFail($id);
         return view('invoiceitem.show', compact('invoice_item'));
     }
 
@@ -76,9 +137,8 @@ class InvoiceItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(InvoiceItem $invoice_item)
     {
-        $invoice_item = InvoiceItem::findOrFail($id);
         return view('invoiceitem.edit', compact('invoice_item'));
     }
 
@@ -89,9 +149,8 @@ class InvoiceItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(InvoiceItemRequest $request, $id)
+    public function update(InvoiceItemRequest $request, InvoiceItem $invoice_item)
     {
-        $invoice_item = InvoiceItem::findOrFail($id);
         $invoice_item->update($request->all());
         return redirect('/invoice/'.$invoice_item->invoice->id);
     }
@@ -102,9 +161,8 @@ class InvoiceItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(InvoiceItem $invoice_item)
     {
-        $invoice_item = InvoiceItem::findOrFail($id);
         $invoice_item->delete();
         return redirect('/invoice/'.$invoice_item->invoice->id);
     }
@@ -115,9 +173,8 @@ class InvoiceItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function delete(InvoiceItem $invoice_item)
     {
-        $invoice_item = InvoiceItem::findOrFail($id);
         return view('invoiceitem.delete', compact('invoice_item'));
     }
 }

@@ -29,7 +29,7 @@
                 <a class="btn btn-primary" href="{{ action('InvoiceItemController@show', [$invoice_item->id]) }}">
                     Details
                 </a>
-                <a class="btn btn-danger" href="{{ url('/invoiceitem/'.$invoice_item->id.'/delete') }}">
+                <a class="btn btn-danger" href="{{ action('InvoiceItemController@delete', [$invoice_item->id]) }}">
                     Delete
                 </a>
             </div>
@@ -41,8 +41,8 @@
 </div>
         <div class="row">
             <div class="col-md-1">
-                <button onclick="location.href='/invoiceitem/{{ $invoice->id }}/create1'" class="btn btn-primary">
-                    Create Item
-                </button>
+                <a name='btnCreateItem' href="{{ action('InvoiceItemController@create1', [$invoice->id]) }}">
+                    <button class="btn btn-primary">Create Item</button>
+                </a>
             </div>
         </div>
