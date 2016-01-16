@@ -11,7 +11,7 @@
 
 </head>
 
-<body onload="MM_preloadImages('/images/btn01r.jpg','/images/btnPricingR.jpg','/images/btn03r.jpg','/images/btn04r.jpg','/images/btn05r.jpg')">
+<body id="app-layout">
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
@@ -35,9 +35,13 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/">Home</a></li>
                 </ul>
+                @if (!is_null(Auth::user()))
+                @if (Auth::user()->isAdmin())
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/admin/invoice') }}">Invoicing</a></li>
                 </ul>
+                @endif
+                @endif
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
