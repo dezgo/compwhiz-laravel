@@ -26,5 +26,5 @@ elixir(function(mix) {
         'libs/jquery.js',
         'libs/jquery-ui.js',
         'libs/select2.min.js'
-    ])
+    ]);
 });

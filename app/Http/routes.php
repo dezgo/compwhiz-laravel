@@ -31,14 +31,18 @@ Route::get('/subscribe', function () {
     return view('content.subscribe');
 });
 
-// Authentication routes...
-Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+});
 
-// Registration routes...
-Route::get('auth/register', 'Auth\AuthController@getRegister');
-Route::post('auth/register', 'Auth\AuthController@postRegister');
+// // Authentication routes...
+// Route::get('auth/login', 'Auth\AuthController@getLogin');
+// Route::post('auth/login', 'Auth\AuthController@postLogin');
+// Route::get('auth/logout', 'Auth\AuthController@getLogout');
+//
+// // Registration routes...
+// Route::get('auth/register', 'Auth\AuthController@getRegister');
+// Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 // admin-only routes
 Route::group(['middleware' => 'admin'], function() {
