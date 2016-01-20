@@ -1,7 +1,6 @@
 @extends('master')
 
 @section('content')
-    @include('login')
     <div id="header"></div>
     <div id="navigation">
         <div id="navigation_im"></div>

@@ -15,9 +15,10 @@ elixir(function(mix) {
 //    mix.sass('app.scss');
 
     mix.styles([
-        'libs/bootstrap.min.css',
+        'libs/bootstrap.css',
+        'libs/font-awesome.css',
         'app.css',
-        'libs/select2.min.css',
+        'libs/select2.css',
         'libs/jquery-ui.css'
     ]);
 
@@ -25,6 +26,7 @@ elixir(function(mix) {
         'image_manipulation.js',
         'libs/jquery.js',
         'libs/jquery-ui.js',
-        'libs/select2.min.js'
+        'libs/select2.js',
+        'libs/bootstrap.js'
     ])
 });
