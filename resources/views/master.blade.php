@@ -31,9 +31,9 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 <li><a href="{{ url('/home') }}">Home</a></li>
-                @if (!Auth::guest() && Auth::user()->isAdmin())
+                @can('create-invoice')
                     <li><a href="/admin/invoice">Invoicing</a></li>
-                @endif
+                @endcan
             </ul>
 
             <!-- Right Side Of Navbar -->
