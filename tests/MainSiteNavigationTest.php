@@ -9,6 +9,7 @@ class MainSiteNavigationTest extends TestCase
 	public function testHome()
 	{
 		$this->visit('/')
+			->click('Home')
 			->see('Home');
 	}
 
