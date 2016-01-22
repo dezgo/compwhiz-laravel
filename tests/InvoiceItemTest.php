@@ -92,6 +92,7 @@ class InvoiceItemTest extends TestCase
 
     public function testEdit_save()
     {
+        $invoice_item = factory(App\InvoiceItem::class)->create();
         $description = App\InvoiceItem::orderBy(DB::raw('RAND()'))->take(1)->first();
         $invoice_item = factory(App\InvoiceItem::class)->create();
         $this->actingAs($this->user)
