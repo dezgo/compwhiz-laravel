@@ -1,5 +1,5 @@
-APP_ENV=production
-APP_DEBUG=false
+APP_ENV=local
+APP_DEBUG=true
 APP_KEY=VmF30V1LpE5i9BN6TMcz88fsTtaYWs6q
 
 DB_HOST=localhost
@@ -11,7 +11,7 @@ CACHE_DRIVER=file
 SESSION_DRIVER=file
 QUEUE_DRIVER=sync
 
-MAIL_DRIVER=mailgun
+MAIL_DRIVER=smtp
 MAIL_HOST=mailtrap.io
 MAIL_PORT=2525
 MAIL_USERNAME=null
