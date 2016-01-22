@@ -20,8 +20,11 @@
         </p>
 
         <p>
-            <button type="submit">Login</button>
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-btn fa-sign-in"></i>Login
+            </button>
         </p>
+
     </form>
     @include('errors.list')
 @stop

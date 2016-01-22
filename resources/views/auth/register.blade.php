@@ -30,11 +30,7 @@
     </p>
 </form>
 
-@if($errors->any())
-    @foreach($errors->getMessages() as $this_error)
-        <div class="alert alert-danger">{{$this_error[0]}}</div>
-    @endforeach
-@endif
+@include('errors.list')
 
 @stop
 
