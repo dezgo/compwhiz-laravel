@@ -37,7 +37,22 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
-    public function hasRole($roleDescription)
+    public function isAdmin()
+    {
+        return $this->hasRole('admin') || $this->isSuperAdmin();
+    }
+
+    public function isSuperAdmin()
+    {
+        return $this->hasRole('super_admin');
+    }
+
+    public function isCustomer()
+    {
+        return $this->hasRole('customer');
+    }
+
+    private function hasRole($roleDescription)
     {
         return $this->roles()->where('description', $roleDescription)->exists();
     }

@@ -2,7 +2,7 @@
 
 @section('content1')
     <h1 align="left">Login</h1>
-    <form method="POST" action="/auth/login">
+    <form method="POST" action="/login">
         {!! csrf_field() !!}
 
         <p>

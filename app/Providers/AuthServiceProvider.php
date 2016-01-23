@@ -18,22 +18,22 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies($gate);
 
         $gate->before(function ($user, $ability) {
-            if ($user->hasRole('super_admin')) {
+            if ($user->isSuperAdmin()) {
                 return true;
             }
         });
 
         $gate->define('create-invoice', function ($user) {
-            return ($user->hasRole('admin'));
+            return ($user->isAdmin());
         });
 
         $gate->define('view-invoice', function ($user, $invoice) {
-            if ($user->hasRole('admin'))
+            if ($user->isAdmin())
             {
                 return true;
             }
 
-            if ($user->hasRole('customer'))
+            if ($user->isCustomer())
             {
                 return $user->hasCustomer($invoice->customer);
             }

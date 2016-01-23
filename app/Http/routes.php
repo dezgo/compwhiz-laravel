@@ -11,37 +11,34 @@
 |
 */
 
-Route::get('/', function () {
-    return view('content.index');
+Route::group(['middleware' => 'web'], function () {
+
+    Route::auth();
+
+    Route::get('/', function () {
+       return view('content.index');
+    });
+
+    Route::get('/about', function () {
+        return view('content.about');
+    });
+
+    Route::get('/services', function () {
+        return view('content.services');
+    });
+
+    Route::get('/contact', function () {
+        return view('content.contact');
+    });
+
+    Route::get('/subscribe', function () {
+        return view('content.subscribe');
+    });
+
 });
-
-Route::get('/about', function () {
-    return view('content.about');
-});
-
-Route::get('/services', function () {
-    return view('content.services');
-});
-
-Route::get('/contact', function () {
-    return view('content.contact');
-});
-
-Route::get('/subscribe', function () {
-    return view('content.subscribe');
-});
-
-// Authentication routes...
-Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
-
-// Registration routes...
-Route::get('auth/register', 'Auth\AuthController@getRegister');
-Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 // admin-only routes
-Route::group(['middleware' => 'admin'], function() {
+Route::group(['middleware' => ['web', 'admin']], function() {
 
     // Main invoicing menu
     Route::get('/admin/invoice', function () {
