@@ -32,7 +32,19 @@
             <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
                 @can('create-invoice')
-                    <li><a href="/admin/invoice">Invoicing</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Invoicing <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="/customer" name='customersAnchor'>Customers</a></li>
+                            <li><a href="/invoice" name='invoicesAnchor'>Invoices</a></li>
+                            <li><a href="/invoice_item_category" name='invoiceItemCategoriesAnchor'>Invoice Item Categories</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/customer/select" name='createInvoiceAnchor'>Create Invoice</a></li>
+                        </ul>
+                    </li>
                 @endcan
             </ul>
 
