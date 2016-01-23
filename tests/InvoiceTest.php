@@ -16,7 +16,8 @@ class InvoiceTest extends TestCase
         // This method will automatically be called prior to any of your test cases
         parent::setUp();
 
-        $this->user = factory(App\User::class)->make();
+        $this->user = factory(App\User::class)->create();
+        $this->user->roles()->attach(1);
     }
 
     public function testShowIndex()

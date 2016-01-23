@@ -17,7 +17,8 @@ class CustomerTest extends TestCase
 		parent::setUp();
 
 		$this->customer = factory(App\Customer::class)->create();
-		$this->user = factory(App\User::class)->make();
+		$this->user = factory(App\User::class)->create();
+		$this->user->roles()->attach(1);
 	}
 
 	public function tearDown()

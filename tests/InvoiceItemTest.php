@@ -18,7 +18,8 @@ class InvoiceItemTest extends TestCase
         parent::setUp();
 
         $this->invoice = factory(App\Invoice::class)->create();
-        $this->user = factory(App\User::class)->make();
+        $this->user = factory(App\User::class)->create();
+        $this->user->roles()->attach(1);
     }
 
     public function tearDown()

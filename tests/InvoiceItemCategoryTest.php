@@ -8,10 +8,20 @@ class InvoiceItemCategoryTest extends TestCase
 {
 	use DatabaseTransactions;
 
+	private $user;
+
+	public function setUp()
+	{
+		// This method will automatically be called prior to any of your test cases
+		parent::setUp();
+
+		$this->user = factory(App\User::class)->create();
+		$this->user->roles()->attach(1);
+	}
+
 	public function testShowIndex()
 	{
-		$user = factory(App\User::class)->create();
-		$this->actingAs($user)
+		$this->actingAs($this->user)
 			->visit('/invoice_item_category')
 			->see('Show Invoice Item Categories')
 			->see('/create\'" class="btn btn-success">');
@@ -19,16 +29,14 @@ class InvoiceItemCategoryTest extends TestCase
 
 	public function testCreate()
 	{
-		$user = factory(App\User::class)->create();
-		$this->actingAs($user)
+		$this->actingAs($this->user)
 			->visit('/invoice_item_category/create')
 			->see('Create Invoice Item Category');
 	}
 
 	public function testCreate_invalid()
 	{
-		$user = factory(App\User::class)->create();
-		$this->actingAs($user)
+		$this->actingAs($this->user)
 			->visit('/invoice_item_category/create')
 			->press('Save')
 			->see('description field is required');
@@ -36,8 +44,7 @@ class InvoiceItemCategoryTest extends TestCase
 
 	public function testCreate_save()
 	{
-		$user = factory(App\User::class)->create();
-		$this->actingAs($user)
+		$this->actingAs($this->user)
 			->visit('/invoice_item_category/create')
 			->type('A new one', 'description')
 			->press('Save')
@@ -46,16 +53,14 @@ class InvoiceItemCategoryTest extends TestCase
 
 	public function testEdit()
 	{
-		$user = factory(App\User::class)->create();
-		$this->actingAs($user)
+		$this->actingAs($this->user)
 			->visit('/invoice_item_category/1/edit')
 			->see('Edit Invoice Item Category');
 	}
 
 	public function testEdit_invalid()
 	{
-		$user = factory(App\User::class)->create();
-		$this->actingAs($user)
+		$this->actingAs($this->user)
 			->visit('/invoice_item_category/1/edit')
 			->type('', 'description')
 			->press('Update')
@@ -64,8 +69,7 @@ class InvoiceItemCategoryTest extends TestCase
 
 	public function testEdit_save()
 	{
-		$user = factory(App\User::class)->create();
-		$this->actingAs($user)
+		$this->actingAs($this->user)
 			->visit('/invoice_item_category/1/edit')
 			->type('A new one', 'description')
 			->press('Update')
@@ -74,8 +78,7 @@ class InvoiceItemCategoryTest extends TestCase
 
 	public function testDetails()
 	{
-		$user = factory(App\User::class)->create();
-		$this->actingAs($user)
+		$this->actingAs($this->user)
 			->visit('/invoice_item_category/1')
 			->see('Show Invoice Item Category')
 			->see('disabled="true"')
@@ -85,8 +88,7 @@ class InvoiceItemCategoryTest extends TestCase
 
 	public function testDelete()
 	{
-		$user = factory(App\User::class)->create();
-		$this->actingAs($user)
+		$this->actingAs($this->user)
 			 ->visit('/invoice_item_category/1/delete')
 			 ->press('Delete')
 			 ->seePageIs('/invoice_item_category');
