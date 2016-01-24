@@ -1,4 +1,4 @@
-@extends('master')
+@extends('print')
 @section('content')
 <br>
 <div class="row">

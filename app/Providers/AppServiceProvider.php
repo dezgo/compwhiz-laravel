@@ -32,6 +32,11 @@ class AppServiceProvider extends ServiceProvider
         {
             $view->with('customer_list', Customer::all()->lists('description', 'id'));
         });
+
+        view()->composer('customer.select', function($view)
+        {
+            $view->with('customer_list', Customer::all()->lists('description', 'id'));
+        });
     }
 
     /**

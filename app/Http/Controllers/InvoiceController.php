@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Invoice;
 use App\InvoiceItem;
+use App\Customer;
 use App\Http\Requests\InvoiceRequest;
 
 class InvoiceController extends Controller
@@ -24,15 +25,28 @@ class InvoiceController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new invoice - step2, the actual invoice.
+	 * Use this method when coming into the invoice creation screen*
+	 * having already selected a customer
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function create($customer_id = 0)
+	public function createFromCustomer(Customer $customer)
+	{
+		return redirect('/invoice/'.$customer->id.'/create');
+	}
+
+	/**
+	 * Show the form for creating a new invoice - step2, the actual invoice.
+	 * optionally pass in the customer - to cover the wizard where Customer
+	 * is selected on previous screen
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create(Customer $customer = null)
 	{
 		$invoice = new Invoice();
-		if ($customer_id > 0) {
-			$invoice->customer_id = $customer_id;
+		if (!is_null($customer)) {
+			$invoice->customer_id = $customer->id;
 		}
 		$invoice_items = InvoiceItem::invoiceItemList();
 		return view('invoice.create',compact('invoice','invoice_items'));

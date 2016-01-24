@@ -46,6 +46,8 @@ Route::group(['middleware' => ['web', 'admin']], function() {
     });
 
     // Customer
+    Route::get('customer/select', 'CustomerController@select')->name('customer.select');
+    Route::post('customer/select', 'CustomerController@selected')->name('customer.selected');
     Route::resource('customer', 'CustomerController');
     Route::get('customer/{customer}/delete', 'CustomerController@delete');
 

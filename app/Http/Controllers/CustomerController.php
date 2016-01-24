@@ -24,11 +24,20 @@ class CustomerController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * $flag not empty means request came from the new invoice wizard
+     * so ensure we go back there after creating customer
      *
+     * @param  int  $flag
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request = null)
     {
+        if (is_null($request)) {
+            session()->forget('inv_wizard');
+        }
+        else {
+            session(['inv_wizard' => $request->flag]);
+        }
         return view('customer.create');
     }
 
@@ -40,8 +49,14 @@ class CustomerController extends Controller
      */
     public function store(CustomerRequest $request)
     {
-        Customer::create($request->all());
-        return redirect('/customer');
+        $customer = Customer::create($request->all());
+        if (session('inv_wizard') != '') {
+            session()->forget('inv_wizard');
+            return redirect('/invoice/'.$customer->id.'/create');
+        }
+        else {
+            return redirect('/customer');
+        }
     }
 
     /**
@@ -100,5 +115,28 @@ class CustomerController extends Controller
     public function delete(Customer $customer)
     {
         return view('customer.delete', compact('customer'));
+    }
+
+    /**
+     * First step in create invoice wizard, select customer
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function select()
+    {
+        return view('customer.select');
+    }
+
+    /**
+     * Comning back from selecting a customner, now on to create the invoice
+     * - customer pre-filled
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function selected(Request $request)
+    {
+        return redirect('/invoice/'.$request->customer.'/create');
     }
 }

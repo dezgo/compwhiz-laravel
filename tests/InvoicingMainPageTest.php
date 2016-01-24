@@ -22,34 +22,34 @@ class InvoicingMainPageTest extends TestCase
 	public function testMain()
 	{
 		$this->actingAs($this->user)
-			->visit('/admin/invoice')
+			 ->visit('/')
 			->see('Invoicing')
-      ->see('Customers')
-      ->see('Invoices')
-      ->see('Invoice Item Categories');
+			->see('Customers')
+			->see('Invoices')
+			->see('Invoice Item Categories');
 	}
 
   public function testCustomersLink()
   {
     $this->actingAs($this->user)
-      ->visit('/admin/invoice')
-      ->click('Customers')
-      ->seePageIs('/customer');
+		->visit('/')
+		->click('Customers')
+		->seePageIs('/customer');
   }
 
   public function testInvoicesLink()
   {
     $this->actingAs($this->user)
-      ->visit('/admin/invoice')
-      ->click('Invoices')
-      ->seePageIs('/invoice');
+		->visit('/')
+		->click('Invoices')
+		->seePageIs('/invoice');
   }
 
   public function testInvoiceItemCategoriesLink()
   {
     $this->actingAs($this->user)
-      ->visit('/admin/invoice')
-      ->click('Invoice Item Categories')
-      ->seePageIs('/invoice_item_category');
+		->visit('/')
+		->click('Invoice Item Categories')
+		->seePageIs('/invoice_item_category');
   }
 }
