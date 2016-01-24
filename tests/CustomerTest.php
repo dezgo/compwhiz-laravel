@@ -40,7 +40,7 @@ class CustomerTest extends TestCase
 	{
 		$this->actingAs($this->user)
 			->visit('/customer')
-			->click('Create')
+			->click('Create Customer')
 			->see('Create Customer');
 	}
 

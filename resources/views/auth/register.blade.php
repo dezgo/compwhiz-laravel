@@ -2,7 +2,7 @@
 
 @section('content1')
     <h1 align="left">Register</h1>
-    <form method="POST" action="/auth/register">
+    <form method="POST" action="/register">
     {!! csrf_field() !!}
 
     <p>
@@ -26,7 +26,9 @@
     </p>
 
     <p>
-        <button type="submit">Register</button>
+        <button type="submit" class="btn btn-primary">
+            Register
+        </button>
     </p>
 </form>
 

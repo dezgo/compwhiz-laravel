@@ -22,7 +22,7 @@ class Authentication extends TestCase
     // message is displayed
     public function testRegisterDiffPasswords()
     {
-        $this->visit('/auth/register')
+        $this->visit('/register')
              ->type('Holly Edwards','name')
              ->type('holly@edwards.com', 'email')
              ->type('password1','password')
@@ -35,7 +35,7 @@ class Authentication extends TestCase
     // message is displayed
     public function testInvalidEmail()
     {
-        $this->visit('/auth/register')
+        $this->visit('/register')
              ->type('Holly Edwards','name')
              ->type('holly@edwards','email')
              ->type('password1','password')
@@ -49,16 +49,16 @@ class Authentication extends TestCase
     // then try logging in with wrong password
     public function testRegisterOK()
     {
-        $this->visit('/auth/register')
+        $this->visit('/register')
              ->type('Holly Edwards','name')
              ->type('holly@edwards.com','email')
              ->type('password1','password')
              ->type('password1','password_confirmation')
              ->press('Register')
              ->see('Holly Edwards')
-             ->visit('/auth/logout');
+             ->visit('/logout');
 
-        $this->visit('/auth/register')
+        $this->visit('/register')
               ->type('Holly Edwards','name')
               ->type('holly@edwards.com','email')
               ->type('password1','password')
@@ -66,12 +66,12 @@ class Authentication extends TestCase
               ->press('Register')
               ->see('The email has already been taken');
 
-        $this->visit('/auth/login')
+        $this->visit('/login')
              ->type('holly@edwards.com','email')
              ->type('wrong password','password')
              ->press('Login')
              ->see('These credentials do not match our records');
     }
 
-    
+
 }

@@ -32,5 +32,5 @@
         <div class="row"><div class="col-md-10"></div></div>
     @endforeach
 
-    <a href='{{ action('CustomerController@create') }}'" class="btn btn-success">Create</a>
+    <a href='{{ action('CustomerController@create') }}'" class="btn btn-success">Create Customer</a>
 @stop
