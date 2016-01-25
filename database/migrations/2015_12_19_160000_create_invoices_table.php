@@ -20,7 +20,7 @@ class CreateInvoicesTable extends Migration
 			$table->integer('invoice_number')->unsigned();
 			$table->date('due_date');
 			$table->decimal('paid',8,2);
-			$table->date('deleted_at');
+			$table->softDeletes();
 			$table->timestamps();
 		});
 	}
