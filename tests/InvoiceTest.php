@@ -19,6 +19,8 @@ class InvoiceTest extends TestCase
         $this->user = factory(App\User::class)->create();
         $this->user->roles()->attach(1);
         $this->invoice = factory(App\Invoice::class)->create();
+        factory(App\InvoiceItem::class, 5)->create(['invoice_id' => $this->invoice->id]);
+
     }
 
     public function testShowIndex()
@@ -107,6 +109,25 @@ class InvoiceTest extends TestCase
             ->see('Customer Details')
             ->see('How to Pay')
             ->see('Enquiries');
+    }
+
+    public function testPrintPartiallyPaid()
+    {
+        $this->invoice->paid = $this->invoice->owing/2;
+        $this->invoice->save();
+        $this->actingAs($this->user)
+            ->visit('/invoice/'.$this->invoice->id.'/print')
+            ->see(number_format($this->invoice->paid,2));
+    }
+
+    public function testPrintReceipt()
+    {
+        $this->invoice->paid = $this->invoice->owing;
+        $this->invoice->save();
+        $this->actingAs($this->user)
+            ->visit('/invoice/'.$this->invoice->id.'/print')
+            ->see(number_format($this->invoice->paid,2))
+            ->see('RECEIPT');
     }
 
     public function testCreateInvoiceWizardValidation()

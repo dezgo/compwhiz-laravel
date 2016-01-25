@@ -5,12 +5,15 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Invoice extends Model
 {
+	use SoftDeletes;
+
 	protected $table = 'invoices';
 	protected $dateFormat = 'd-m-Y';
-	protected $dates = ['invoice_date', 'due_date'];
+	protected $dates = ['invoice_date', 'due_date', 'deleted_at'];
 
 	/**
 	 * The attributes that are mass assignable.
@@ -99,6 +102,20 @@ class Invoice extends Model
 	public function getInvoiceDateAttribute($value)
 	{
 		return date($this->dateFormat, strtotime($value));
+	}
+
+	/*
+	 * Always return invoice date in set format
+	 *
+	 */
+	public function getTypeAttribute($value)
+	{
+		if ($this->owing > 0) {
+			return "Invoice";
+		}
+		else {
+			return "Receipt";
+		}
 	}
 
 	/**

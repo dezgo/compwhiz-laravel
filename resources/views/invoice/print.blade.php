@@ -6,12 +6,8 @@
     <img src='/images/cw_logo.png' width="70%" height="70%">
   </div>
   <div class="col-xs-3">
-    <h2 class="text-right cred">
-        @if ($invoice->paid < $invoice->total)
-            INVOICE
-        @else
-            RECEIPT
-        @endif
+    <h2 class="text-right cred text-uppercase">
+        {{ $invoice->type }}
     </h2><br>
     <br>
     <div class="text-right">ABN:&nbsp;26&nbsp;537&nbsp;857&nbsp;341</div>
@@ -24,7 +20,7 @@
     <div class="cred">Customer Details:</div>
   </div>
   <div class="col-xs-1">
-    <div class="cred">Invoice&nbsp;Number:</div>
+    <div class="cred">{{ $invoice->type }}&nbsp;Number:</div>
   </div>
   <div class="col-xs-2 text-right">
     {{ $invoice->invoice_number }}
@@ -36,7 +32,7 @@
     {{ $invoice->customer->full_name }}
   </div>
   <div class="col-xs-1">
-    <div class="cred">Invoice&nbsp;Date:</div>
+    <div class="cred">{{ $invoice->type }}&nbsp;Date:</div>
   </div>
   <div class="col-xs-2 text-right">
     {{ $invoice->invoice_date }}
@@ -47,12 +43,14 @@
   <div class="col-xs-9">
     {!! $invoice->customer->address_multi !!}
   </div>
+  @if ($invoice->owing > 0)
   <div class="col-xs-1">
     <div class="cred">Payment&nbsp;Terms:</div>
   </div>
   <div class="col-xs-2 text-right">
     7 Days
   </div>
+  @endif
 </div>
 
 <br><br>
