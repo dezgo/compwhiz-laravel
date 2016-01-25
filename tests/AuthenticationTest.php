@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class Authentication extends TestCase
+class AuthenticationTest extends TestCase
 {
     // leave all fields blank and check correct validation messages are shown
     public function testRegisterAllBlank()
