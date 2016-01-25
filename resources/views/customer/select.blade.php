@@ -1,7 +1,7 @@
 @extends('admin')
 
 @section('content1')
-    <h1 align="left">Create Invoice Step 1 - Select Customer</h1>
+    <h1 align="left">Create Invoice</h1>
 
     {!! Form::open(['url' => '/customer/select']) !!}
 

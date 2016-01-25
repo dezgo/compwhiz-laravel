@@ -18,6 +18,7 @@ class InvoiceTest extends TestCase
 
         $this->user = factory(App\User::class)->create();
         $this->user->roles()->attach(1);
+        $this->invoice = factory(App\Invoice::class)->create();
     }
 
     public function testShowIndex()
@@ -57,17 +58,15 @@ class InvoiceTest extends TestCase
 
     public function testEdit()
     {
-        $invoice = factory(App\Invoice::class)->create();
         $this->actingAs($this->user)
-            ->visit('/invoice/'.$invoice->id.'/edit')
+            ->visit('/invoice/'.$this->invoice->id.'/edit')
             ->see('Edit Invoice');
     }
 
     public function testEdit_invalid()
     {
-        $invoice = factory(App\Invoice::class)->create();
         $this->actingAs($this->user)
-            ->visit('/invoice/'.$invoice->id.'/edit')
+            ->visit('/invoice/'.$this->invoice->id.'/edit')
             ->type('', 'invoice_number')
             ->press('Update')
             ->see('invoice number field is required');
@@ -75,19 +74,17 @@ class InvoiceTest extends TestCase
 
     public function testEdit_save()
     {
-        $invoice = factory(App\Invoice::class)->create();
         $this->actingAs($this->user)
-            ->visit('/invoice/'.$invoice->id.'/edit')
+            ->visit('/invoice/'.$this->invoice->id.'/edit')
             ->type('01-02-2015', 'invoice_date')
             ->press('Update')
-            ->seePageIs('/invoice/'.$invoice->id);
+            ->seePageIs('/invoice/'.$this->invoice->id);
     }
 
     public function testDetails()
     {
-        $invoice = factory(App\Invoice::class)->create();
         $this->actingAs($this->user)
-            ->visit('/invoice/'.$invoice->id)
+            ->visit('/invoice/'.$this->invoice->id)
             ->see('Show Invoice')
             ->see('disabled="true"')
             ->press('Edit')
@@ -96,15 +93,59 @@ class InvoiceTest extends TestCase
 
     public function testDelete()
     {
-        $invoice = factory(App\Invoice::class)->create();
         $this->actingAs($this->user)
-            ->visit('/invoice/'.$invoice->id.'/delete')
+            ->visit('/invoice/'.$this->invoice->id.'/delete')
             ->press('Delete')
             ->seePageIs('/invoice');
     }
 
     public function testPrint()
     {
+        $this->actingAs($this->user)
+            ->visit('/invoice')
+            ->click('Print')
+            ->see('Customer Details')
+            ->see('How to Pay')
+            ->see('Enquiries');
+    }
 
+    public function testCreateInvoiceWizardValidation()
+    {
+        $this->actingAs($this->user)
+            ->visit('/')
+            ->click('Create Invoice')
+            ->see('Pick a Customer:')
+            ->press('Next')
+            ->see('The customer field is required');
+    }
+
+    public function testCreateInvoiceWizardExistingCustomer()
+    {
+        $customer = factory(App\Customer::class)->create();
+        $this->actingAs($this->user)
+            ->visit('/')
+            ->click('Create Invoice')
+            ->select($customer->id, 'customer')
+            ->press('Next')
+            ->seePageIs('/invoice/'.$customer->id.'/create');
+    }
+
+    public function testCreateInvoiceWizardNewCustomer()
+    {
+        $customer = factory(App\Customer::class)->create();
+        $this->actingAs($this->user)
+            ->visit('/')
+            ->click('Create Invoice')
+            ->click('Create a new customer')
+            ->seePageIs('/customer/create?flag=1')
+            ->type('Robert', 'first_name')
+            ->type('Wagner', 'last_name')
+            ->type('1 Waid Road', 'address1')
+            ->type('Knoxton', 'suburb')
+            ->select('ACT', 'state')
+            ->type('2000', 'postcode')
+            ->press('Save')
+            ->see('Create Invoice')
+            ->see('Robert Wagner');
     }
 }

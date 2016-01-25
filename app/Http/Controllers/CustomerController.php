@@ -146,6 +146,10 @@ class CustomerController extends Controller
      */
     public function selected(Request $request)
     {
+        $this->validate($request, [
+                'customer' => 'required',
+            ]);
+
         return redirect('/invoice/'.$request->customer.'/create');
     }
 }
