@@ -16,6 +16,11 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('paid', 'Amount Paid:', ['class' => 'control-label']) !!}
+    {!! Form::text('paid', null, $options) !!}
+</div>
+
+<div class="form-group">
     {!! Form::label('invoice_date', 'Invoice Date:', ['class' => 'control-label']) !!}
 
     <?php $options['id'] = 'invoice_date' ?>

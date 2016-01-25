@@ -22,6 +22,7 @@ class Invoice extends Model
 		'customer_id',
 		'invoice_date',
 		'due_date',
+		'paid',
 	];
 
 	public function __construct(array $attributes = array())

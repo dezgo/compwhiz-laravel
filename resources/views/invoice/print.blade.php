@@ -6,7 +6,13 @@
     <img src='/images/cw_logo.png' width="70%" height="70%">
   </div>
   <div class="col-xs-3">
-    <h2 class="text-right cred">INVOICE</h2><br>
+    <h2 class="text-right cred">
+        @if ($invoice->paid < $invoice->total)
+            INVOICE
+        @else
+            RECEIPT
+        @endif
+    </h2><br>
     <br>
     <div class="text-right">ABN:&nbsp;26&nbsp;537&nbsp;857&nbsp;341</div>
   </div>
