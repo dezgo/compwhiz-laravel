@@ -9,31 +9,6 @@ class MainSiteNavigationTest extends TestCase
 	public function testHome()
 	{
 		$this->visit('/')
-			->click('Home')
-			->see('Home');
+			->see('Hi, I\'m Derek Gillett and I run Computer Whiz');
 	}
-
-  public function testAbout()
-  {
-    $this->visit('/about')
-      ->see('Pricing');
-  }
-
-  public function testServices()
-  {
-    $this->visit('/services')
-      ->see('Services');
-  }
-
-  public function testContact()
-  {
-    $this->visit('/contact')
-      ->see('Contact');
-  }
-
-  public function testSubscribe()
-  {
-    $this->visit('/subscribe')
-      ->see('Subscribe');
-  }
 }
