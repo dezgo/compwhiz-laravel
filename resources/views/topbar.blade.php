@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
 
@@ -12,17 +12,14 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="#">CW</a>
+            <a class="navbar-brand" href="/">
+                <i class="glyphicon glyphicon-home">&nbsp;</i>
+            </a>
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">Pricing</a></li>
-                <li><a href="/services">Services</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/subscribe">Subscribe</a></li>
                 @can('create-invoice')
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

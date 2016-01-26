@@ -9,8 +9,9 @@
 </head>
 
 <body id="app-layout">
-<img src="/images/logo.jpg" />
     @yield('topbar')
+<Br /><br /><br />
+<img class="center-block" src="/images/logo.jpg" /><br /><br />
     <div class="container">
         @yield('content')
 

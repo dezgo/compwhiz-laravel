@@ -1,10 +1,9 @@
 <div class="form-group">
     <div class="row">
         @if ($invoice->invoice_items->count() > 0)
-            <h4 class="col-xs-1">Quantity</h4>
-            <h4 class="col-xs-2">Category</h4>
-            <h4 class="col-xs-4">Description</h4>
-            <h4 class="col-xs-1">Price</h4>
+            <h4 class="col-xs-1">Qty</h4>
+            <h4 class="col-xs-5">Description</h4>
+            <h4 class="col-xs-2">Price</h4>
             <h4 class="col-xs-4">Actions</h4>
         @endif
     </div>
@@ -13,13 +12,10 @@
             <div class="col-xs-1">
                 {{ $invoice_item->quantity }}
             </div>
-            <div class="col-xs-2">
-                {{ $invoice_item->category->description }}
-            </div>
-            <div class="col-xs-4">
+            <div class="col-xs-5">
                 {{ $invoice_item->description }}
             </div>
-            <div class="col-xs-1">
+            <div class="col-xs-2">
                 {{ $invoice_item->price }}
             </div>
             <div class="col-xs-4">
@@ -27,7 +23,7 @@
                     Edit
                 </a>
                 <a class="btn btn-primary" href="{{ action('InvoiceItemController@show', [$invoice_item->id]) }}">
-                    Details
+                    View
                 </a>
                 <a class="btn btn-danger" href="{{ action('InvoiceItemController@delete', [$invoice_item->id]) }}">
                     Delete
