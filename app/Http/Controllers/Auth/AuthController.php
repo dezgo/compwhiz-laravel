@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -37,7 +39,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('guest', ['except' => ['logout', 'edit', 'update']]);
     }
 
     /**
@@ -68,5 +70,41 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    /**
+     * Open user profile for updating
+     *
+     * @param  array  $data
+     * @return User
+     */
+    protected function edit()
+    {
+        $user = Auth::user();
+        return view('auth.edit', compact('user'));
+    }
+
+    /**
+     * Update made, process it
+     *
+     * @param  array  $data
+     * @return User
+     */
+    protected function update(Request $request)
+    {
+        // dd($request);
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users,email,'.Auth::user()->id,
+        ]);
+
+        Auth::user()->name = $request->name;
+        Auth::user()->email = $request->email;
+        Auth::user()->save();
+
+        $request->session()->flash('status', 'User record updated');
+        $user = Auth::user();
+
+        return view('auth.edit', compact('user'));
     }
 }

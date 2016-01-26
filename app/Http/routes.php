@@ -14,25 +14,11 @@
 Route::group(['middleware' => 'web'], function () {
 
     Route::auth();
-
+    // Route::match(['put', 'patch'], 'profile/update', 'Auth\AuthController@update');
+    Route::post('profile/edit', 'Auth\AuthController@update');
+    Route::get('profile/edit', 'Auth\AuthController@edit');
     Route::get('/', function () {
        return view('content.index');
-    });
-
-    Route::get('/about', function () {
-        return view('content.about');
-    });
-
-    Route::get('/services', function () {
-        return view('content.services');
-    });
-
-    Route::get('/contact', function () {
-        return view('content.contact');
-    });
-
-    Route::get('/subscribe', function () {
-        return view('content.subscribe');
     });
 
 });
