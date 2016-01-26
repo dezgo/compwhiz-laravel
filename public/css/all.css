@@ -8846,6 +8846,17 @@ button.close {
   content: "\f295";
 }
 
+h1, h2, h3 {
+  /* font-size: 24px;
+  font-family: "impact"; */
+  color: #BD1522;
+  /* margin-left: 25px;
+  margin-top: 25px; }*/ }
+
+.cred {
+  color: #BD1522;
+}
+
 .select2-container {
   box-sizing: border-box;
   display: inline-block;
