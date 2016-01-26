@@ -75,17 +75,19 @@ class InvoiceItemTest extends TestCase
 
     public function testEdit()
     {
-        $invoice_item = factory(App\InvoiceItem::class)->create();
+        $invoice = factory(App\Invoice::class)->create();
+        factory(App\InvoiceItem::class, 5)->create(['invoice_id' => $invoice->id]);
         $this->actingAs($this->user)
-            ->visit('/invoice_item/'.$invoice_item->id.'/edit')
-            ->see('Edit Invoice Item for invoice '.$invoice_item->invoice->invoice_number);
+            ->visit('/invoice_item/'.$invoice->invoice_items->first()->id.'/edit')
+            ->see('Edit Invoice Item for invoice '.$invoice->invoice_number);
     }
 
     public function testEdit_invalid()
     {
-        $invoice_item = factory(App\InvoiceItem::class)->create();
+        $invoice = factory(App\Invoice::class)->create();
+        factory(App\InvoiceItem::class, 5)->create(['invoice_id' => $invoice->id]);
         $this->actingAs($this->user)
-            ->visit('/invoice_item/'.$invoice_item->id.'/edit')
+            ->visit('/invoice_item/'.$invoice->invoice_items->first()->id.'/edit')
             ->type('', 'quantity')
             ->press('Update')
             ->see('quantity field is required');
@@ -93,33 +95,35 @@ class InvoiceItemTest extends TestCase
 
     public function testEdit_save()
     {
-        $invoice_item = factory(App\InvoiceItem::class)->create();
+        $invoice = factory(App\Invoice::class)->create();
+        factory(App\InvoiceItem::class, 5)->create(['invoice_id' => $invoice->id]);
         $description = App\InvoiceItem::orderBy(DB::raw('RAND()'))->take(1)->first();
-        $invoice_item = factory(App\InvoiceItem::class)->create();
         $this->actingAs($this->user)
-            ->visit('/invoice_item/'.$invoice_item->id.'/edit')
+            ->visit('/invoice_item/'.$invoice->invoice_items->first()->id.'/edit')
             ->type($description->description, 'description')
             ->press('Update')
-            ->seePageIs('/invoice/'.$invoice_item->invoice->id);
+            ->seePageIs('/invoice/'.$invoice->id);
     }
 
     public function testDetails()
     {
-        $invoice_item = factory(App\InvoiceItem::class)->create();
+        $invoice = factory(App\Invoice::class)->create();
+        factory(App\InvoiceItem::class, 5)->create(['invoice_id' => $invoice->id]);
         $this->actingAs($this->user)
-            ->visit('/invoice_item/'.$invoice_item->id)
-            ->see('Show Invoice Item for invoice '.$invoice_item->invoice->invoice_number)
+            ->visit('/invoice_item/'.$invoice->invoice_items->first()->id)
+            ->see('Show Invoice Item for invoice '.$invoice->invoice_number)
             ->see('disabled="true"')
             ->press('Edit')
-            ->see('Edit Invoice Item for invoice '.$invoice_item->invoice->invoice_number);
+            ->see('Edit Invoice Item for invoice '.$invoice->invoice_number);
     }
 
     public function testDelete()
     {
-        $invoice_item = factory(App\InvoiceItem::class)->create();
+        $invoice = factory(App\Invoice::class)->create();
+        factory(App\InvoiceItem::class, 5)->create(['invoice_id' => $invoice->id]);
         $this->actingAs($this->user)
-            ->visit('/invoice_item/'.$invoice_item->id.'/delete')
+            ->visit('/invoice_item/'.$invoice->invoice_items->first()->id.'/delete')
             ->press('Delete')
-            ->seePageIs('/invoice/'.$invoice_item->invoice->id);
+            ->seePageIs('/invoice/'.$invoice->id);
     }
 }

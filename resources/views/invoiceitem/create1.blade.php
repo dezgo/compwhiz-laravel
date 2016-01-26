@@ -1,6 +1,6 @@
-@extends('admin')
+@extends('web')
 
-@section('content1')
+@section('content')
 
     <h1 align="left">Create Invoice Item for invoice {{ $invoice->description }}</h1>
     <h2>Step 1 - Select category</h2>
@@ -21,7 +21,7 @@
     @include('errors.list')
 @stop
 
-@section('footer1')
+@section('footer')
 <script type="text/javascript">
 $('#category_list').select2({
     placeholder: "Choose a category",

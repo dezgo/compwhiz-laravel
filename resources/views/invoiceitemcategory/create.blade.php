@@ -1,6 +1,6 @@
-@extends('admin')
+@extends('web')
 
-@section('content1')
+@section('content')
     <h1 align="left">Create Invoice Item Category</h1>
 
     {!! Form::open(['route' => 'invoice_item_category.store']) !!}

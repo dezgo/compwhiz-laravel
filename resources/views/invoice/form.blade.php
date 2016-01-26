@@ -6,25 +6,25 @@
     {!! Form::label('customer', 'Customer:', ['class' => 'control-label']) !!}
 
     <?php $options['id'] = 'customer_list' ?>
-    {!! Form::select('customer_id', ['' => ''] + $customer_list->toArray(), null, $options) !!}
+    {{ Form::select('customer_id', ['' => ''] + $customer_list->toArray(), null, $options) }}
     <?php unset($options['id']) ?>
 </div>
 
 <div class="form-group">
     {!! Form::label('invoice_number', 'Invoice Number:', ['class' => 'control-label']) !!}
-    {!! Form::text('invoice_number', null, $options) !!}
+    {{ Form::text('invoice_number', null, $options) }}
 </div>
 
 <div class="form-group">
     {!! Form::label('paid', 'Amount Paid:', ['class' => 'control-label']) !!}
-    {!! Form::text('paid', null, $options) !!}
+    {{ Form::text('paid', null, $options) }}
 </div>
 
 <div class="form-group">
     {!! Form::label('invoice_date', 'Invoice Date:', ['class' => 'control-label']) !!}
 
     <?php $options['id'] = 'invoice_date' ?>
-    {!! Form::text('invoice_date', null, $options) !!}
+    {{ Form::text('invoice_date', null, $options) }}
     <?php unset($options['id']) ?>
 </div>
 
@@ -32,7 +32,7 @@
     {!! Form::label('due_date', 'Due Date:', ['class' => 'control-label']) !!}
 
     <?php $options['id'] = 'due_date' ?>
-    {!! Form::text('due_date', null, $options) !!}
+    {{ Form::text('due_date', null, $options) }}
     <?php unset($options['id']) ?>
 </div>
 

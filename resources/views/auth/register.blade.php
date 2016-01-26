@@ -1,6 +1,6 @@
-@extends('app')
+@extends('web')
 
-@section('content1')
+@section('content')
     <h1 align="left">Register</h1>
     <form method="POST" action="/register">
     {!! csrf_field() !!}
@@ -34,8 +34,4 @@
 
 @include('errors.list')
 
-@stop
-
-@section('bgimage')
-    url('/images/sidebar1.jpg')
 @stop

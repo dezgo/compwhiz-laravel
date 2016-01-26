@@ -1,6 +1,6 @@
-@extends('admin')
+@extends('web')
 
-@section('content1')
+@section('content')
     <h1 align="left">Show Invoice Item for invoice {{ $invoice_item->invoice->description }}</h1>
 
     {!! Form::model($invoice_item, ['method' => 'GET', 'url' => 'invoice_item/'.$invoice_item->id.'/edit']) !!}

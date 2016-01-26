@@ -1,6 +1,6 @@
-@extends('admin')
+@extends('web')
 
-@section('content1')
+@section('content')
     <h1 align="left">Show Customer</h1>
 
     {!! Form::model($customer, ['method' => 'GET', 'route' => ['customer.edit', $customer->id]]) !!}
@@ -8,4 +8,3 @@
         @include('customer.form', ['submitButtonText' => 'Edit'])
     {!! Form::close() !!}
 @stop
-

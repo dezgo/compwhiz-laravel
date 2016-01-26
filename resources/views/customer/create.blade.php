@@ -1,6 +1,6 @@
-@extends('admin')
+@extends('web')
 
-@section('content1')
+@section('content')
     <h1 align="left">Create Customer</h1>
 
     {!! Form::open(['route' => 'customer.store']) !!}
@@ -25,4 +25,3 @@
         });
     </script>
 @stop
-

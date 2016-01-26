@@ -1,6 +1,6 @@
-@extends('admin')
+@extends('web')
 
-@section('content1')
+@section('content')
     <h1 align="left">Edit Customer</h1>
 
     {!! Form::model($customer, ['method' => 'PUT', 'url' => 'customer/'.$customer->id]) !!}
@@ -25,4 +25,3 @@
         });
     </script>
 @stop
-

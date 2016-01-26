@@ -1,34 +1,30 @@
-@extends('app')
+@extends('web')
 
-@section('content1')
+@section('content')
     <h1 align="left">Login</h1>
     <form method="POST" action="/login">
         {!! csrf_field() !!}
 
-        <p>
-            Email
-            <input type="email" name="email" value="{{ old('email') }}">
-        </p>
+        <div class="form-group">
+            {{ Form::label('email', 'Email:', ['class' => 'control-label']) }}
+            {{ Form::text('email', old('email'), ['class' => 'control-label', 'autofocus' => 'true']) }}
+        </div>
 
-        <p>
-            Password
-            <input type="password" name="password" id="password">
-        </p>
+        <div class="form-group">
+            {{ Form::label('password', 'Password:', ['class' => 'control-label']) }}
+            {{ Form::password('password', old('password'), ['class' => 'control-label', 'autofocus' => 'true']) }}
+        </div>
 
-        <p>
+        <div class="form-group">
             <input type="checkbox" name="remember"> Remember Me
-        </p>
+        </div>
 
-        <p>
+        <div class="form-group">
             <button type="submit" class="btn btn-primary">
                 <i class="fa fa-btn fa-sign-in"></i>Login
             </button>
-        </p>
+        </div>
 
     </form>
     @include('errors.list')
-@stop
-
-@section('bgimage')
-    url('/images/sidebar1.jpg')
 @stop

@@ -1,6 +1,6 @@
-@extends('admin')
+@extends('web')
 
-@section('content1')
+@section('content')
     <h1 align="left">Delete Customer</h1>
 
     {!! Form::model($customer, ['method' => 'DELETE', 'url' => 'customer/'.$customer->id]) !!}
@@ -11,4 +11,3 @@
     @include('customer.form', ['submitButtonText' => 'Delete'])
     {!! Form::close() !!}
 @stop
-

@@ -1,6 +1,6 @@
-@extends('admin')
+@extends('web')
 
-@section('content1')
+@section('content')
     <h1>Show Invoice Item Categories</h1>
 
     <div class="container">

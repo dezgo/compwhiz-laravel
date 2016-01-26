@@ -1,6 +1,6 @@
-@extends('app')
+@extends('web')
 
-@section('content1')
+@section('content')
     <h1>Contact</h1>
     <p>
         This is a part-time business for me, which means I can't take calls during business hours. When you contact
@@ -20,8 +20,4 @@
     <p>
         Book online: <a target="_blank" href="http://computerwhiz.simplybook.me/">http://computerwhiz.simplybook.me</a>
     </p>
-@stop
-
-@section('bgimage')
-    url('/images/comp.jpg')
 @stop

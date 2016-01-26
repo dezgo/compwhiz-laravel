@@ -1,6 +1,6 @@
-@extends('admin')
+@extends('web')
 
-@section('content1')
+@section('content')
     <h1 align="left">Delete Invoice Item Category</h1>
 
     {!! Form::model($invoice_item_category, ['method' => 'DELETE', 'url' => 'invoice_item_category/'.$invoice_item_category->id]) !!}

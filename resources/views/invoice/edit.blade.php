@@ -1,6 +1,6 @@
-@extends('admin')
+@extends('web')
 
-@section('content1')
+@section('content')
     <h1 align="left">Edit Invoice</h1>
 
     {!! Form::model($invoice, ['method' => 'PUT', 'url' => 'invoice/'.$invoice->id]) !!}

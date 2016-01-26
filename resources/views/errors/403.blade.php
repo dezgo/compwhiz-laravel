@@ -1,12 +1,8 @@
-@extends('app')
+@extends('web')
 
-@section('content1')
+@section('content')
     <h1 align="left">Forbidden</h1>
     <p>
         Sorry, but you don't have access to the requested resource.
     </p>
-@stop
-
-@section('bgimage')
-    url('/images/sidebar1.jpg')
 @stop

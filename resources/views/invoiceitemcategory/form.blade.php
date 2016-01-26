@@ -3,8 +3,8 @@
 
 <!-- description Form Input -->
 <div class="form-group">
-    {!! Form::label('description', 'Description:', ['class' => 'control-label']) !!}
-    {!! Form::text('description', null, $options) !!}
+    {{ Form::label('description', 'Description:', ['class' => 'control-label']) }}
+    {{ Form::text('description', null, $options) }}
 </div>
 
-{!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
+{{ Form::submit($submitButtonText, ['class' => 'btn btn-primary']) }}

@@ -1,14 +1,6 @@
-@extends('app')
+@extends('web')
 
-@section('rightbar')
-    <p>&nbsp;</p>
-@stop
-
-@section('bgimage')
-    url('/images/monitor.jpg')
-@stop
-
-@section('content1')
+@section('content')
     <h1>Services</h1>
     <p>
         You name it, if it's technical, I can probably help! Here's a sample of some of the areas my customers
