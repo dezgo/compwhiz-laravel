@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/phpinfo', function () {
+    return view('content.phpinfo');
+});
+
 Route::group(['middleware' => 'web'], function () {
 
     Route::auth();
