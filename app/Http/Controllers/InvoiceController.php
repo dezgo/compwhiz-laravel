@@ -137,11 +137,17 @@ class InvoiceController extends Controller
 	 */
 	public function email(Invoice $invoice)
 	{
-		$sent = Mail::send('invoice.print', ['invoice' => $invoice], function ($m) use ($invoice) {
-            $m->from('mail@computerwhiz.com.au', 'Computer Whiz - Canberra');
-
-			$m->to('test@derekgillett.com', 'Derek')->subject('Hi '.$invoice->customer->first_name.', here\'s that invoice');
-			// $m->to($user->email, $user->name)->subject('Here\'s that invoice!');
-        });
+		$pdf = \PDF::loadView('invoice.print', compact('invoice'));
+		return $pdf->stream();
+		//
+		// $pdf = \PDF::loadView('invoice.print', $invoice);
+		// return $pdf->download('invoice.pdf');
+		//
+		// $sent = Mail::send('invoice.print', ['invoice' => $invoice], function ($m) use ($invoice) {
+		//     $m->from('mail@computerwhiz.com.au', 'Computer Whiz - Canberra');
+		//
+		// 	$m->to('test@derekgillett.com', 'Derek')->subject('Hi '.$invoice->customer->first_name.', here\'s that invoice');
+		// 	// $m->to($user->email, $user->name)->subject('Here\'s that invoice!');
+		// });
 	}
 }
