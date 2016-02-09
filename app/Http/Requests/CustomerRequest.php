@@ -27,6 +27,7 @@ class CustomerRequest extends Request
         return [
             'first_name' => 'required',
             'last_name' => 'required',
+            'email' => 'email',
             'address1' => 'required',
             'suburb' => 'required',
             'state' => 'required|min:2|max:3',

@@ -137,11 +137,27 @@ class InvoiceController extends Controller
 	 */
 	public function email(Invoice $invoice)
 	{
-		$sent = Mail::send('invoice.print', ['invoice' => $invoice], function ($m) use ($invoice) {
-            $m->from('mail@computerwhiz.com.au', 'Computer Whiz - Canberra');
+		if ($invoice->customer->email != '') {
+			// create the pdf of the printed invoice
+			$pdf = \PDF::loadView('invoice.print', compact('invoice'));
 
-			$m->to('test@derekgillett.com', 'Derek')->subject('Hi '.$invoice->customer->first_name.', here\'s that invoice');
-			// $m->to($user->email, $user->name)->subject('Here\'s that invoice!');
-        });
+			// and save it somewhere
+			$pdf->save('/tmp/invoice.pdf');
+
+			// then email the customer attaching the invoice
+			$sent = \Mail::send('emails.invoice', ['invoice' => $invoice], function ($m) use ($invoice) {
+			    // $m->from('mail@computerwhiz.com.au', 'Computer Whiz - Canberra');
+				$m->to($invoice->customer->email, $invoice->customer->full_name)
+				  ->subject('Invoice '.$invoice->invoice_number)
+				  ->attach('/tmp/invoice.pdf');
+			});
+
+			\File::delete('/tmp/invoice.pdf');
+		}
+		else {
+			\Session()->flash('status', 'Customer does not have an email address!');
+		}
+
+		return redirect('/invoice/'.$invoice->id);
 	}
 }

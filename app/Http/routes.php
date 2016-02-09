@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/phpinfo', function () {
-    return view('content.phpinfo');
-});
 
 Route::group(['middleware' => 'web'], function () {
 
@@ -25,6 +22,10 @@ Route::group(['middleware' => 'web'], function () {
        return view('content.index');
     });
 
+});
+
+Route::group(['middleware' => ['web', 'superadmin']], function() {
+    Route::get('/phpinfo', 'SuperAdminController@phpinfo');
 });
 
 // admin-only routes
