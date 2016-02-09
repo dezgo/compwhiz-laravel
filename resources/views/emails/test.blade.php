@@ -1,9 +1,17 @@
 @extends('master')
 @section('content')
 <h1>This is a test email</h1>
-<p>Invoice: {{ $invoice->invoice_number }}</p>
-
 <p>
-    And here's some text in the email
+  This is a test, an email test.
+</p>
+<p>
+  The variable <code>$testVar</code> contains the value:
+</p>
+<ul>
+  <li><strong>{{ $testVar }}</strong></li>
+</ul>
+<hr>
+<p>
+  That is all.
 </p>
 @stop
