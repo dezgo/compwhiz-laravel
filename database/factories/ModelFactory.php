@@ -26,6 +26,7 @@ $factory->define(App\Customer::class, function (Faker\Generator $faker) {
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
+        'email' => $faker->email,
         'address1' => $faker->streetAddress,
         'suburb' => $faker->city,
         'state' => $state,

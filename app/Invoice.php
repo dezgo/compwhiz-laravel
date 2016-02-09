@@ -110,7 +110,7 @@ class Invoice extends Model
 	 */
 	public function getTypeAttribute($value)
 	{
-		if ($this->owing > 0.00) {
+		if (round($this->owing,2) > 0.00) {
 			return "Invoice";
 		}
 		else {

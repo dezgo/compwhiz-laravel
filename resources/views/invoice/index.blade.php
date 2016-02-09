@@ -27,12 +27,6 @@
                 <a class="btn btn-danger" href="{{ url('/invoice/'.$invoice->id.'/delete') }}">
                     Delete
                 </a>
-                <a class="btn btn-info" target="_blank" href="{{ url('/invoice/'.$invoice->id.'/print') }}">
-                    Print
-                </a>
-                <a class="btn btn-info" target="_blank" href="{{ url('/invoice/'.$invoice->id.'/email') }}">
-                    Email
-                </a>
             </div>
         </div>
         <!-- add this empty row to get a 1 pixel separator between buttons on each row -->

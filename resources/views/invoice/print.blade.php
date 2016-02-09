@@ -1,15 +1,5 @@
 @extends('print')
 @section('content')
-<style>
-html {
-  font-family: sans-serif;
-  font-size: 10px;
-}
-.cred {
-  color: #BD1522;
-}
-
-</style>
 <table cellpadding="0" cellspacing="0" width="100%" border="0">
     <tr>
         <td width="8.33%">&nbsp;</td>

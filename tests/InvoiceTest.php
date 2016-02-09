@@ -104,7 +104,7 @@ class InvoiceTest extends TestCase
     public function testPrint()
     {
         $this->actingAs($this->user)
-            ->visit('/invoice')
+            ->visit('/invoice/'.$this->invoice->id)
             ->click('Print')
             ->see('Customer Details')
             ->see('How to Pay')

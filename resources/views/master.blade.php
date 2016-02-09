@@ -5,13 +5,13 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Computer Whiz - Canberra</title>
-    <link href="/css/all.css" rel="stylesheet">
+    <link href="{{ url('/css/all.css') }}" rel="stylesheet">
 </head>
 
 <body id="app-layout">
     @yield('topbar')
 <Br /><br /><br />
-<img class="center-block" src="/images/logo.jpg" /><br /><br />
+<img class="center-block" src="{{ url('/images/logo.jpg') }}" /><br /><br />
     <div class="container">
         @yield('content')
 
