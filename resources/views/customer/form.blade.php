@@ -18,6 +18,12 @@
     {{ Form::text('email', null, $options) }}
 </div>
 
+<!-- Email Form Input -->
+<div class="form-group">
+    {!! Form::label('business_name', 'Business Name:', ['class' => 'control-label']) !!}
+    {{ Form::text('business_name', null, $options) }}
+</div>
+
 <!-- Address 1 Form Input -->
 <div class="form-group">
     {!! Form::label('address1', 'Address:', ['class' => 'control-label']) !!}

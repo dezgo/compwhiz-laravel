@@ -1,6 +1,7 @@
 <?php
 
-return [
+$mail_arr = [
+// return [
 
     /*
     |--------------------------------------------------------------------------
@@ -120,5 +121,14 @@ return [
     */
 
     'pretend' => false,
-
 ];
+
+// in local development mode, send all emails to one address
+if (env('APP_ENV') == 'local') {
+    $mail_arr['to'] = [
+        'address' => 'mail@computerwhiz.com.au',
+        'name' => 'CW Dev'
+    ];
+}
+
+return $mail_arr;

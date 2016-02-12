@@ -31,6 +31,7 @@ class Customer extends Model
 	protected $fillable = [
 		'first_name',
 		'last_name',
+		'business_name',
 		'email',
 		'address1',
 		'address2',
@@ -41,7 +42,12 @@ class Customer extends Model
 
 	public function getDescriptionAttribute()
 	{
-		return $this->full_name;
+		if ($this->business_name == '') {
+			return $this->full_name;
+		}
+		else {
+			return $this->business_name;
+		}
 	}
 
 	public function getFullNameAttribute() {
@@ -53,6 +59,9 @@ class Customer extends Model
 	}
 
 	public function getAddressMultiAttribute() {
-		return $this->address1.'<br>'.(($this->address2 != '')?$this->address2.'<br>':'').$this->suburb.' '.$this->state.' '.$this->postcode;
+		return (($this->business_name != '')?$this->business_name.'<br>':'').
+			$this->address1.'<br>'.
+			(($this->address2 != '')?$this->address2.'<br>':'').
+			$this->suburb.' '.$this->state.' '.$this->postcode;
 	}
 }
