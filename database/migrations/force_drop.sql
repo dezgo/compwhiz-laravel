@@ -8,4 +8,5 @@ drop table if exists password_resets;
 drop table if exists role_user;
 drop table if exists users;
 drop table if exists roles;
+drop table if exists settings;
 drop table if exists migrations;

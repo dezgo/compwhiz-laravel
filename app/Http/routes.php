@@ -31,10 +31,9 @@ Route::group(['middleware' => ['web', 'superadmin']], function() {
 // admin-only routes
 Route::group(['middleware' => ['web', 'admin']], function() {
 
-    // Main invoicing menu
-    Route::get('/admin/invoice', function () {
-        return view('admin.invoice');
-    });
+    // Settings
+    Route::get('settings', 'AdminController@show')->name('settings.show');
+    Route::post('settings', 'AdminController@update')->name('settings.update');
 
     // Customer
     Route::get('customer/select', 'CustomerController@select')->name('customer.select');

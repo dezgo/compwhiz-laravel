@@ -28,6 +28,11 @@ class Invoice extends Model
 		'paid',
 	];
 
+	/**
+	 * Constructor - set default invoice date, due date and invoice number
+	 *
+	 * @return null
+	 */
 	public function __construct(array $attributes = array())
 	{
 		$this->setRawAttributes(array(
@@ -38,9 +43,32 @@ class Invoice extends Model
 		parent::__construct($attributes);
 	}
 
+	/**
+	 * Check if the given invoice number has already been used
+	 *
+	 * @return boolean (true if available)
+	 */
+	private function checkInvoiceNumber($invoice_number)
+	{
+		$count = DB::table('invoices')->where('invoice_number', '=', $invoice_number)->count();
+		return $count == 0;
+	}
+
+	/**
+	 * Gets the next invoice number, being the setting, but if that's already
+	 * taken, keep incrementing until we find an available one
+	 *
+	 * @return int
+	 */
 	private function getNextInvoiceNumber()
 	{
-		return DB::table('invoices')->max('invoice_number')+1;
+		$invoice_number = \Setting::get('next_invoice_number',1);
+		while (!$this->checkInvoiceNumber($invoice_number)) {
+			$invoice_number = $invoice_number + 1;
+		}
+		\Setting::set('next_invoice_number',$invoice_number+1);
+		\Setting::save();
+		return $invoice_number;
 	}
 
 	private function getDefaultInvoiceDate()
@@ -55,6 +83,7 @@ class Invoice extends Model
 
 	public function getDescriptionAttribute()
 	{
+		// dd($this->customer);
 		return $this->invoice_number.': '.$this->customer->fullname;
 	}
 

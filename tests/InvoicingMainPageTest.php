@@ -33,7 +33,7 @@ class InvoicingMainPageTest extends TestCase
   {
     $this->actingAs($this->user)
 		->visit('/')
-		->click('Customers')
+		->click('customersAnchor')
 		->seePageIs('/customer');
   }
 

@@ -37,11 +37,11 @@ class RoleUserTest extends TestCase
     {
         $this->actingAs($this->userSuperAdmin)
              ->visit('/')
-             ->see('Invoicing')
-             ->see('Customers')
-             ->see('Invoices')
-             ->see('Invoice Item Categories')
-             ->see('Create Invoice');
+             ->see('customersAnchor')
+             ->see('invoicesAnchor')
+             ->see('invoiceItemCategoriesAnchor')
+             ->see('settingsAnchor')
+             ->see('createInvoiceAnchor');
     }
 
     /**
@@ -53,11 +53,11 @@ class RoleUserTest extends TestCase
     {
         $this->actingAs($this->userAdmin)
              ->visit('/')
-             ->see('Invoicing')
-             ->see('Customers')
-             ->see('Invoices')
-             ->see('Invoice Item Categories')
-             ->see('Create Invoice');
+             ->see('customersAnchor')
+             ->see('invoicesAnchor')
+             ->see('invoiceItemCategoriesAnchor')
+             ->see('settingsAnchor')
+             ->see('createInvoiceAnchor');
     }
 
     /**
@@ -69,7 +69,11 @@ class RoleUserTest extends TestCase
     {
         $this->actingAs($this->userCustomer)
              ->visit('/')
-             ->dontSee('Invoicing');
+             ->see('customersAnchor')
+             ->see('invoicesAnchor')
+             ->dontSee('invoiceItemCategoriesAnchor')
+             ->dontSee('settingsAnchor')
+             ->dontSee('createInvoiceAnchor');
     }
 
     /**
@@ -81,6 +85,10 @@ class RoleUserTest extends TestCase
     {
         $this->actingAs($this->user)
              ->visit('/')
-             ->dontSee('Invoicing');
+             ->dontSee('customersAnchor')
+             ->dontSee('invoicesAnchor')
+             ->dontSee('invoiceItemCategoriesAnchor')
+             ->dontSee('settingsAnchor')
+             ->dontSee('createInvoiceAnchor');
     }
 }

@@ -19,23 +19,33 @@
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
-            <ul class="nav navbar-nav">
-                @can('create-invoice')
+            @if(Gate::check('create-invoice') || Gate::check('view-invoice'))
+                <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <a href="#" class="dropdown-toggle" id="dropdownMenu1"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             Invoicing <span class="caret"></span>
                         </a>
-
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="/customer" name='customersAnchor'>Customers</a></li>
+                            <li><a href="/customer" name='customersAnchor'>Customer(s)</a></li>
                             <li><a href="/invoice" name='invoicesAnchor'>Invoices</a></li>
-                            <li><a href="/invoice_item_category" name='invoiceItemCategoriesAnchor'>Invoice Item Categories</a></li>
+            @endif
+
+            @if(Gate::check('create-invoice'))
+                            <li><a href="/invoice_item_category" name='invoiceItemCategoriesAnchor'>
+                                Invoice Item Categories</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="/customer/select" name='createInvoiceAnchor'>Create Invoice</a></li>
+                            <li><a href="/customer/select" name='createInvoiceAnchor'>
+                                Create Invoice</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/settings" name='settingsAnchor'>Settings</a></li>
+            @endif
+
+            @if(Gate::check('create-invoice') || Gate::check('view-invoice'))
                         </ul>
                     </li>
-                @endcan
-            </ul>
+                </ul>
+            @endif
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
