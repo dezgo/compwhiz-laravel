@@ -10,6 +10,7 @@ use App\Invoice;
 use App\InvoiceItem;
 use App\Customer;
 use App\Http\Requests\InvoiceRequest;
+use App\Jobs\SendInvoiceEmail;
 
 class InvoiceController extends Controller
 {
@@ -138,24 +139,11 @@ class InvoiceController extends Controller
 	public function email(Invoice $invoice)
 	{
 		if ($invoice->customer->email != '') {
-			// create the pdf of the printed invoice
-			$pdf = \PDF::loadView('invoice.print', compact('invoice'));
-
-			// and save it somewhere
-			$pdf->save('/tmp/invoice.pdf');
-
-			// then email the customer attaching the invoice
-			$sent = \Mail::send('emails.invoice', ['invoice' => $invoice], function ($m) use ($invoice) {
-			    // $m->from('mail@computerwhiz.com.au', 'Computer Whiz - Canberra');
-				$m->to($invoice->customer->email, $invoice->customer->full_name)
-				  ->subject('Invoice '.$invoice->invoice_number)
-				  ->attach('/tmp/invoice.pdf');
-			});
-
-			\File::delete('/tmp/invoice.pdf');
+			$this->dispatch(new SendInvoiceEmail($invoice));
+			\Session()->flash('status-success', 'Email sent to '.$invoice->customer->email);
 		}
 		else {
-			\Session()->flash('status', 'Customer does not have an email address!');
+			\Session()->flash('status-warning', 'Customer does not have an email address!');
 		}
 
 		return redirect('/invoice/'.$invoice->id);

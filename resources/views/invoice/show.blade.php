@@ -1,14 +1,7 @@
 @extends('web')
 
 @section('content')
-    @if (Session::has('status'))
-    <div class="alert alert-warning alert-dismissible" role="alert" id="warning-alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        {{ Session::get('status') }}
-    </div>
-    @endif
+    @include('includes.flash_message_content')
 
     <h1 align="left">Show Invoice</h1>
 
@@ -29,11 +22,5 @@
 @stop
 
 @section('footer')
-<script language="Javascript">
-$(document).ready (function(){
-    $("#warning-alert").fadeTo(2000, 500).slideUp(500, function(){
-        $("#warning-alert").alert('close');
-    });
-});
-</script>
+    @include('includes.flash_message_footer')
 @stop
