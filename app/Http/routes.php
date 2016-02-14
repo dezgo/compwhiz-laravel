@@ -26,6 +26,7 @@ Route::group(['middleware' => 'web'], function () {
 
 Route::group(['middleware' => ['web', 'superadmin']], function() {
     Route::get('/phpinfo', 'SuperAdminController@phpinfo');
+    Route::resource('user', 'UserController');
 });
 
 // customer-only Routes
