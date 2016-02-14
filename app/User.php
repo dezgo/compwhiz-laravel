@@ -49,7 +49,7 @@ class User extends Model implements AuthenticatableContract,
 
     public function isCustomer()
     {
-        return $this->hasRole('customer');
+        return $this->hasRole('customer') || $this->isAdmin();
     }
 
     private function hasRole($roleDescription)
@@ -67,7 +67,7 @@ class User extends Model implements AuthenticatableContract,
         return $this->belongsToMany('App\Customer');
     }
 
-    public function hasCustomer(App\Customer $customer)
+    public function hasCustomer(Customer $customer)
     {
         return $this->customers()->where('id', $customer->id)->exists();
     }

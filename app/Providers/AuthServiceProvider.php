@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\Customer;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -43,6 +44,25 @@ class AuthServiceProvider extends ServiceProvider
             if ($user->isAdmin() || $user->isCustomer())
             {
                 return true;
+            }
+        });
+
+        $gate->define('view-customer', function($user) {
+            if ($user->isAdmin() || $user->isCustomer())
+            {
+                return true;
+            }
+        });
+
+        $gate->define('view-customer-x', function ($user, Customer $customer) {
+            if ($user->isAdmin())
+            {
+                return true;
+            }
+
+            if ($user->isCustomer())
+            {
+                return $user->hasCustomer($customer);
             }
         });
     }

@@ -18,7 +18,8 @@ class CustomerTest extends TestCase
 
 		$this->customer = factory(App\Customer::class)->create();
 		$this->user = factory(App\User::class)->create();
-		$this->user->roles()->attach(1);
+		$this->user->roles()->attach(3);
+		$this->customer->users()->attach($this->user);
 	}
 
 	public function tearDown()
@@ -67,7 +68,8 @@ class CustomerTest extends TestCase
 			->type('ACT', 'state')
 			->type('2600', 'postcode')
 			->press('Save')
-			->seePageIs('/customer');
+			->seePageIs('/customer')
+			->see('34 Ape St');
 	}
 
 	public function testEdit()

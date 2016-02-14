@@ -50,6 +50,7 @@ class CustomerController extends Controller
     public function store(CustomerRequest $request)
     {
         $customer = Customer::create($request->all());
+        $customer->users()->attach(\Auth::user());
         if (session('inv_wizard') != '') {
             session()->forget('inv_wizard');
 
@@ -68,6 +69,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
+        $this->authorize('view-customer-x', $customer);
         return view('customer.show', compact('customer'));
     }
 
@@ -80,6 +82,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
+        $this->authorize('view-customer-x', $customer);
         return view('customer.edit', compact('customer'));
     }
 
@@ -93,8 +96,8 @@ class CustomerController extends Controller
      */
     public function update(CustomerRequest $request, Customer $customer)
     {
+        $this->authorize('view-customer-x', $customer);
         $customer->update($request->all());
-
         return redirect('/customer');
     }
 
@@ -107,8 +110,8 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
+        $this->authorize('view-customer-x', $customer);
         $customer->delete();
-
         return redirect('/customer');
     }
 

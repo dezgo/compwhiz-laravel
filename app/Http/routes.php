@@ -28,18 +28,22 @@ Route::group(['middleware' => ['web', 'superadmin']], function() {
     Route::get('/phpinfo', 'SuperAdminController@phpinfo');
 });
 
-// admin-only routes
-Route::group(['middleware' => ['web', 'admin']], function() {
-
-    // Settings
-    Route::get('settings', 'AdminController@show')->name('settings.show');
-    Route::post('settings', 'AdminController@update')->name('settings.update');
+// customer-only Routes
+Route::group(['middleware' => ['web', 'customer']], function() {
 
     // Customer
     Route::get('customer/select', 'CustomerController@select')->name('customer.select');
     Route::post('customer/select', 'CustomerController@selected')->name('customer.selected');
     Route::resource('customer', 'CustomerController');
     Route::get('customer/{customer}/delete', 'CustomerController@delete');
+});
+
+// admin-only routes
+Route::group(['middleware' => ['web', 'admin']], function() {
+
+    // Settings
+    Route::get('settings', 'AdminController@show')->name('settings.show');
+    Route::post('settings', 'AdminController@update')->name('settings.update');
 
     // Invoice
     Route::resource('invoice', 'InvoiceController');

@@ -34,5 +34,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'joeuser@computerwhiz.com.au',
             'password' => bcrypt('9E%QovBUBJCRSqcRvEZl8&TzjFx5E^'),
         ]);
+
+        $this->user = factory(App\User::class, 20)->create();
     }
 }

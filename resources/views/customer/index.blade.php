@@ -9,6 +9,7 @@
         <h4 class="col-xs-4">Actions</h4>
     </div>
     @foreach($customers as $customer)
+        @if(Gate::check('view-customer-x', $customer))
         <div class="row">
             <div class="col-xs-2">
                 {{ $customer->full_name }}
@@ -30,6 +31,7 @@
         </div>
         <!-- add this empty row to get a 1 pixel separator between buttons on each row -->
         <div class="row"><div class="col-md-10"></div></div>
+        @endif
     @endforeach
 
     <a href='{{ action('CustomerController@create') }}'" class="btn btn-success">Create Customer</a>
