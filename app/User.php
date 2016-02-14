@@ -71,4 +71,9 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->customers()->where('id', $customer->id)->exists();
     }
+
+    // ensure email is always saved as lowercase
+    public function setEmailAttribute($value) {
+        $this->attributes['email'] = strtolower($value);
+    }
 }

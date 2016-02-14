@@ -64,4 +64,20 @@ class Customer extends Model
 			(($this->address2 != '')?$this->address2.'<br>':'').
 			$this->suburb.' '.$this->state.' '.$this->postcode;
 	}
+
+	// intercept setting of email to see if we can match to an existing user
+	// and ensure email is saved as lowercase
+	public function setEmailAttribute($value) {
+		$value = strtolower($value);
+		$user = User::where('email', $value)->first();
+		if (!is_null($user)) {
+			$this->users()->attach($user);
+		}
+		$this->attributes['email'] = $value;
+	}
+
+	public function users()
+	{
+		return $this->belongsToMany('App\User');
+	}
 }

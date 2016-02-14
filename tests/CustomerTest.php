@@ -114,4 +114,15 @@ class CustomerTest extends TestCase
 			->press('Delete')
 			->seePageIs('/customer');
 	}
+
+	// test setting email to email address of an existing user
+	public function testEditEmail()
+	{
+		$this->actingAs($this->user)
+			->visit('/customer/'.$this->customer->id.'/edit')
+			->type($this->user->email, 'email')
+			->press('Update')
+			->seeInDatabase('customer_user', ['customer_id' => $this->customer->id,
+				'user_id' => $this->user->id]);
+	}
 }
