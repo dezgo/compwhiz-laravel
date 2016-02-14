@@ -14,10 +14,4 @@ class SuperAdminController extends Controller
     {
         return view('content.phpinfo');
     }
-
-    public function useradmin()
-    {
-        $users = User::all();
-        return view('admin.users', compact('users'));
-    }
 }

@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Computer Whiz - Canberra</title>
     <link href="{{ url('/css/all.css') }}" rel="stylesheet">
+    @yield('head')
 </head>
 
 <body id="app-layout">

@@ -24,6 +24,10 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        $gate->define('super-admin', function ($user) {
+            return true;
+        });
+
         $gate->define('create-invoice', function ($user) {
             return ($user->isAdmin());
         });

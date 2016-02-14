@@ -41,6 +41,11 @@
                             <li><a href="/settings" name='settingsAnchor'>Settings</a></li>
             @endif
 
+            @if(Gate::check('super-admin'))
+                            <li><a href="/user" name='userAnchor'>Users</a></li>
+            @endif
+
+
             @if(Gate::check('create-invoice') || Gate::check('view-invoice'))
                         </ul>
                     </li>
