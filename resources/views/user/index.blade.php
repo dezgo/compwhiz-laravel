@@ -10,6 +10,7 @@
                 <tr>
                     <td><h4>Name</h4></td>
                     <td><h4>Email</h4></td>
+                    <td><h4>Role</h4></td>
                 </tr>
             @foreach($users as $user)
             <tr>
@@ -17,6 +18,7 @@
                     <a href='{{ action('UserController@edit', $user->id) }}'>{{ $user->name }}</a>
                 </td>
                 <td>{{ $user->email }}</td>
+                <td>{{ $user->role }}</td>
             </tr>
             @endforeach
             </tbody>

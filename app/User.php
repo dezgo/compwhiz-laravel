@@ -28,7 +28,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password', 'role'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -52,6 +52,12 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasRole('customer') || $this->isAdmin();
     }
 
+    public function isUser()
+    {
+        return !$this->isAdmin() && !$this->isSuperAdmin() &&
+            !$this->isCustomer();
+    }
+
     private function hasRole($roleDescription)
     {
         return $this->roles()->where('description', $roleDescription)->exists();
@@ -73,7 +79,34 @@ class User extends Model implements AuthenticatableContract,
     }
 
     // ensure email is always saved as lowercase
-    public function setEmailAttribute($value) {
+    public function setEmailAttribute($value)
+    {
         $this->attributes['email'] = strtolower($value);
+    }
+
+    public function getRoleAttribute()
+    {
+        if ($this->isSuperAdmin()) { return 'super_admin'; }
+        if ($this->isAdmin()) { return 'admin'; }
+        if ($this->isCustomer()) { return 'customer'; }
+        if ($this->isUser()) { return 'user'; }
+    }
+
+    // update roles for the user
+    public function setRoleAttribute($value)
+    {
+        $this->roles()->detach();
+        switch ($value)
+        {
+            case 'super_admin':
+                $this->roles()->attach(1);
+                break;
+            case 'admin':
+                $this->roles()->attach(2);
+                break;
+            case 'customer':
+                $this->roles()->attach(3);
+                break;
+        }
     }
 }

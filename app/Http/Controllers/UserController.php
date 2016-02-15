@@ -73,6 +73,11 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required|email',
+            ]);
+
         $user->update($request->all());
         $request->session()->flash('status-success', 'User updated');
 		return redirect('/user');
