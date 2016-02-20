@@ -9,26 +9,71 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword;
+    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes;
 
     /**
-     * The database table used by the model.
+     * The attributes that should be mutated to dates.
      *
-     * @var string
+     * @var array
      */
-    protected $table = 'users';
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'role'];
+    protected $fillable = [
+        'password',
+        'role',
+        'first_name',
+        'last_name',
+        'business_name',
+        'email',
+        'address1',
+        'address2',
+        'suburb',
+        'state',
+        'postcode'
+    ];
+
+    public function getDescriptionAttribute()
+    {
+        if ($this->business_name == '') {
+            return $this->full_name;
+        }
+        else {
+            return $this->business_name;
+        }
+    }
+
+    public function getFullNameAttribute() {
+        return $this->first_name.' '.$this->last_name;
+    }
+
+    public function getAddressAttribute() {
+        return $this->address1.' '.(($this->address2 != '')?$this->address2.' ':'').$this->suburb.' '.$this->state.' '.$this->postcode;
+    }
+
+    public function getAddressMultiAttribute()
+    {
+        return (($this->business_name != '')?$this->business_name.'<br>':'').
+            $this->address1.'<br>'.
+            (($this->address2 != '')?$this->address2.'<br>':'').
+            $this->suburb.' '.$this->state.' '.$this->postcode;
+    }
+
+    // intercept setting of email to ensure it's saved as lowercase
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
+    }
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -68,28 +113,17 @@ class User extends Model implements AuthenticatableContract,
         return $this->belongsToMany('App\Role');
     }
 
-    public function customers()
-    {
-        return $this->belongsToMany('App\Customer');
-    }
-
-    public function hasCustomer(Customer $customer)
-    {
-        return $this->customers()->where('id', $customer->id)->exists();
-    }
-
-    // ensure email is always saved as lowercase
-    public function setEmailAttribute($value)
-    {
-        $this->attributes['email'] = strtolower($value);
-    }
-
     public function getRoleAttribute()
     {
         if ($this->isSuperAdmin()) { return 'super_admin'; }
         if ($this->isAdmin()) { return 'admin'; }
         if ($this->isCustomer()) { return 'customer'; }
         if ($this->isUser()) { return 'user'; }
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->first_name.' '.$this->last_name;
     }
 
     // update roles for the user

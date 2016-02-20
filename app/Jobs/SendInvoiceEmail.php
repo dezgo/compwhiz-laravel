@@ -13,16 +13,16 @@ class SendInvoiceEmail extends Job implements ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
-    protected $invoice;
+    protected email;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Invoice $invoice)
+    public function __construct(Email $email)
     {
-        $this->invoice = $invoice;
+        $this->email = $email;
     }
 
     /**
@@ -32,7 +32,7 @@ class SendInvoiceEmail extends Job implements ShouldQueue
      */
     public function handle(Mailer $mailer)
     {
-        $invoice = $this->invoice;
+        $email = $this->email;
 
         // create the pdf of the printed invoice
         $pdf = \PDF::loadView('invoice.print', compact('invoice'));

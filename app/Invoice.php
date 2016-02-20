@@ -22,7 +22,7 @@ class Invoice extends Model
 	 */
 	protected $fillable = [
 		'invoice_number',
-		'customer_id',
+		'user_id',
 		'invoice_date',
 		'due_date',
 		'paid',
@@ -83,18 +83,17 @@ class Invoice extends Model
 
 	public function getDescriptionAttribute()
 	{
-		// dd($this->customer);
-		return $this->invoice_number.': '.$this->customer->fullname;
+		return $this->invoice_number.': '.$this->user->fullname;
 	}
 
 	/**
-	 * Setup the relationship to customers
+	 * Setup the relationship to users
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function customer()
+	public function user()
 	{
-		return $this->belongsTo('App\Customer');
+		return $this->belongsTo('App\User');
 	}
 
 	/**
