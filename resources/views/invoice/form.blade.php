@@ -36,7 +36,7 @@
     <?php unset($options['id']) ?>
 </div>
 
-{!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
+{!! Form::submit($submitButtonText, ['class' => 'btn btn-primary', 'id' => 'btnSubmit']) !!}
 
 @section('footer1')
     <script type="text/javascript">

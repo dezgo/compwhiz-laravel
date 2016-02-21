@@ -49,7 +49,7 @@ class InvoiceTest extends TestCase
 
     public function testCreate_save()
     {
-        $customer = factory(App\Customer::class)->create();
+        $customer = factory(App\User::class)->create();
         $this->actingAs($this->user)
             ->visit('/invoice/create')
             ->select($customer->id, 'customer_id')
@@ -89,7 +89,7 @@ class InvoiceTest extends TestCase
             ->visit('/invoice/'.$this->invoice->id)
             ->see('Show Invoice')
             ->see('disabled="true"')
-            ->press('Edit')
+            ->press('btnSubmit')
             ->see('Edit Invoice');
     }
 
@@ -142,7 +142,7 @@ class InvoiceTest extends TestCase
 
     public function testCreateInvoiceWizardExistingCustomer()
     {
-        $customer = factory(App\Customer::class)->create();
+        $customer = factory(App\User::class)->create();
         $this->actingAs($this->user)
             ->visit('/')
             ->click('Create Invoice')
@@ -153,14 +153,15 @@ class InvoiceTest extends TestCase
 
     public function testCreateInvoiceWizardNewCustomer()
     {
-        $customer = factory(App\Customer::class)->create();
+        $customer = factory(App\User::class)->create();
         $this->actingAs($this->user)
             ->visit('/')
             ->click('Create Invoice')
             ->click('Create a new customer')
-            ->seePageIs('/customer/create?flag=1')
+            ->seePageIs('/user/create?flag=1')
             ->type('Robert', 'first_name')
             ->type('Wagner', 'last_name')
+            ->type('rwagner@gmail.com', 'email')
             ->type('1 Waid Road', 'address1')
             ->type('Knoxton', 'suburb')
             ->select('ACT', 'state')

@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Invoice;
 use App\InvoiceItem;
-use App\Customer;
+use App\User;
 use App\Email;
 use App\Http\Requests\InvoiceRequest;
 use App\Jobs\SendInvoiceEmail;
@@ -32,7 +32,7 @@ class InvoiceController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function createFromCustomer(Customer $customer)
+	public function createFromCustomer(User $customer)
 	{
 		return redirect('/invoice/'.$customer->id.'/create');
 	}
@@ -44,7 +44,7 @@ class InvoiceController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function create(Customer $customer = null)
+	public function create(User $customer = null)
 	{
 		$invoice = new Invoice();
 		if (!is_null($customer)) {

@@ -29,12 +29,12 @@ class InvoicingMainPageTest extends TestCase
 			->see('Invoice Item Categories');
 	}
 
-  public function testCustomersLink()
+  public function testUsersLink()
   {
     $this->actingAs($this->user)
 		->visit('/')
-		->click('customersAnchor')
-		->seePageIs('/customer');
+		->click('userAnchor')
+		->seePageIs('/user');
   }
 
   public function testInvoicesLink()

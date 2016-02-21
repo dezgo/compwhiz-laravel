@@ -37,7 +37,7 @@ class RoleUserTest extends TestCase
     {
         $this->actingAs($this->userSuperAdmin)
              ->visit('/')
-             ->see('customersAnchor')
+             ->see('userAnchor')
              ->see('invoicesAnchor')
              ->see('invoiceItemCategoriesAnchor')
              ->see('settingsAnchor')
@@ -53,7 +53,7 @@ class RoleUserTest extends TestCase
     {
         $this->actingAs($this->userAdmin)
              ->visit('/')
-             ->see('customersAnchor')
+             ->dontSee('userAnchor')
              ->see('invoicesAnchor')
              ->see('invoiceItemCategoriesAnchor')
              ->see('settingsAnchor')
@@ -69,7 +69,7 @@ class RoleUserTest extends TestCase
     {
         $this->actingAs($this->userCustomer)
              ->visit('/')
-             ->see('customersAnchor')
+             ->dontSee('userAnchor')
              ->see('invoicesAnchor')
              ->dontSee('invoiceItemCategoriesAnchor')
              ->dontSee('settingsAnchor')
@@ -85,7 +85,7 @@ class RoleUserTest extends TestCase
     {
         $this->actingAs($this->user)
              ->visit('/')
-             ->dontSee('customersAnchor')
+             ->dontSee('userAnchor')
              ->dontSee('invoicesAnchor')
              ->dontSee('invoiceItemCategoriesAnchor')
              ->dontSee('settingsAnchor')

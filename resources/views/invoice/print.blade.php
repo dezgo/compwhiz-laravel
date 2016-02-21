@@ -41,7 +41,7 @@
 
     <tr>
       <td colspan="7">
-          {{ $invoice->customer->full_name }}
+          {{ $invoice->user->full_name }}
       </td>
       <td colspan="2">
         <div class="cred">{{ $invoice->type }}&nbsp;Date:</div>
@@ -53,7 +53,7 @@
 
     <tr>
       <td colspan="7">
-        {!! $invoice->customer->address_multi !!}
+        {!! $invoice->user->address_multi !!}
       </td>
       @if ($invoice->owing > 0)
       <td colspan="2" valign="top">

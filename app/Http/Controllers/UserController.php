@@ -146,8 +146,20 @@ class UserController extends Controller
         return view('user.select');
     }
 
+    /**
+     * Coming back from selecting a customer, now on to create the invoice
+     * - customer pre-filled.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function selected(Request $request)
     {
-        
+        $this->validate($request, [
+                'customer' => 'required',
+            ]);
+
+        return redirect('/invoice/'.$request->customer.'/create');
     }
 }

@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Invoice;
 use App\InvoiceItem;
 use App\InvoiceItemCategory;
-use App\Customer;
 use App\User;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('invoice.form', function($view)
         {
-            $view->with('customer_list', Customer::all()->lists('description', 'id'));
+            $view->with('customer_list', User::all()->lists('description', 'id'));
         });
 
         view()->composer('user.select', function($view)

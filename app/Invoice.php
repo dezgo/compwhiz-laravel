@@ -22,7 +22,7 @@ class Invoice extends Model
 	 */
 	protected $fillable = [
 		'invoice_number',
-		'user_id',
+		'customer_id',
 		'invoice_date',
 		'due_date',
 		'paid',
@@ -83,7 +83,7 @@ class Invoice extends Model
 
 	public function getDescriptionAttribute()
 	{
-		return $this->invoice_number.': '.$this->user->fullname;
+		return $this->invoice_number.': '.$this->user->full_name;
 	}
 
 	/**
@@ -93,7 +93,7 @@ class Invoice extends Model
 	 */
 	public function user()
 	{
-		return $this->belongsTo('App\User');
+		return $this->belongsTo('App\User', 'customer_id');
 	}
 
 	/**

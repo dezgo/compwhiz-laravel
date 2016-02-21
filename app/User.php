@@ -112,6 +112,13 @@ class User extends Model implements AuthenticatableContract,
         return $this->belongsToMany('App\Role');
     }
 
+    // user has many invoices, but note foreign key in invoice table is
+    // customer_id so specify that explicity in hasMany relationship
+    public function invoices()
+    {
+        return $this->hasMany('App\Invoice', 'customer_id');
+    }
+
     public function getRoleAttribute()
     {
         if ($this->isSuperAdmin()) { return 'super_admin'; }
