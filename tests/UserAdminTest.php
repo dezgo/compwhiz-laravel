@@ -35,13 +35,22 @@ class UserAdminTest extends TestCase
             ->see('joecustomer@computerwhiz.com.au');
     }
 
-    public function testEditBlankName()
+    public function testEditBlankFirstName()
     {
         $this->actingAs($this->user)
             ->visit('/user/'.$this->user->id.'/edit')
-            ->type('','name')
+            ->type('','first_name')
             ->press('Update')
-            ->see('The name field is required');
+            ->see('The first name field is required');
+    }
+
+    public function testEditBlankLastName()
+    {
+        $this->actingAs($this->user)
+            ->visit('/user/'.$this->user->id.'/edit')
+            ->type('','last_name')
+            ->press('Update')
+            ->see('The last name field is required');
     }
 
     public function testEditBlankEmail()

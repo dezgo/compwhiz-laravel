@@ -15,7 +15,7 @@
             @foreach($users as $user)
             <tr>
                 <td>
-                    <a href='{{ action('UserController@edit', $user->id) }}'>{{ $user->name }}</a>
+                    <a href='{{ action('UserController@edit', $user->id) }}'>{{ $user->full_name }}</a>
                 </td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->role }}</td>
@@ -26,6 +26,9 @@
 <hr />
     </div>
 
+    <a class="btn btn-success" href="{{ action('UserController@create') }}">
+        New
+    </a>
 @stop
 
 @section('footer')

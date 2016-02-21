@@ -1,5 +1,7 @@
 <?php $options['class'] = 'form-control' ?>
 
+{{ Form::hidden('id') }}
+
 <!-- First_name Form Input -->
 <div class="form-group">
     {!! Form::label('first_name', 'First name:', ['class' => 'control-label']) !!}
@@ -61,10 +63,41 @@
     {{ Form::text('postcode', null, $options) }}
 </div>
 
+<div class="form-group">
+    @if(Gate::check('super-admin'))
+        {{ Form::radio('role', 'super_admin', null) }}&nbsp;
+        {{ Form::label('super_admin', 'Super Admin', ['class' => 'control-label']) }}
+        <br />
+    @endif
+
+    @if(Gate::check('admin'))
+        {{ Form::radio('role', 'admin', null) }}&nbsp;
+        {{ Form::label('admin', 'Admin', ['class' => 'control-label']) }}
+        <br />
+    @endif
+
+    @if(Gate::check('customer'))
+        {{ Form::radio('role', 'customer', null) }}&nbsp;
+        {{ Form::label('customer', 'Customer', ['class' => 'control-label']) }}
+        <br />
+    @endif
+
+    {{ Form::radio('role', 'user', null) }}&nbsp;
+    {{ Form::label('user', 'User', ['class' => 'control-label']) }}
+</div>
+
 {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    To change your password, logout and select the 'forgot your password' link
+  </div>
+</div>
 
 @section('footer1')
     <script type="text/javascript">
+        $('#btnSuperAdmin').trigger('click');
+
         $('#state_list').select2({
             placeholder: 'Choose a state',
             tags: false,

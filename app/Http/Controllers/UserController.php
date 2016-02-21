@@ -8,8 +8,19 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 
+use App\Http\Requests\UserRequest;
+
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
+
 class UserController extends Controller
 {
+    // check if user is allowed to use this controller
+    private function checkAccess($user_id)
+    {
+        return Gate::check('admin') || Auth::user()->id == $user_id;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,18 +28,39 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('user.index', compact('users'));
+        if (Gate::check('admin')) {
+            $users = User::all();
+            return view('user.index', compact('users'));
+        }
+        else {
+            $user = User::find(Auth::user()->id);
+            return view('user.edit', compact('user'));
+        }
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new user. $request->flag not
+     * null means the request came from the 'new invoice' wiz
+     * so ensure we go back there after customer creation.
+     *
+     * @param Request $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request = null)
     {
-        //
+        if (!Gate::check('admin')) {
+            abort('403');
+        }
+        else {
+            if (is_null($request)) {
+                session()->forget('inv_wizard');
+            } else {
+                session(['inv_wizard' => $request->flag]);
+            }
+
+            return view('user.create');
+        }
     }
 
     /**
@@ -37,20 +69,21 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
-    }
+        if (!Gate::check('admin')) {
+            abort('403');
+        }
+        else {
+            $user = User::create($request->all());
+            if (session('inv_wizard') != '') {
+                session()->forget('inv_wizard');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+                return redirect('/invoice/'.$user->id.'/create');
+            } else {
+                return redirect('/user');
+            }
+        }
     }
 
     /**
@@ -61,6 +94,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if (Gate::denies('update-user', $user))
+        {
+            abort(403);
+        }
+
         return view('user.edit', compact('user'));
     }
 
@@ -71,12 +109,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        $this->validate($request, [
-                'name' => 'required',
-                'email' => 'required|email',
-            ]);
+        if (Gate::denies('update-user', $user))
+        {
+            abort(403);
+        }
 
         $user->update($request->all());
         $request->session()->flash('status-success', 'User updated');
@@ -89,8 +127,27 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $this->authorize('update-user', $user);
+        $user->delete();
+        return redirect('/user');
+    }
+
+    // this method is meant to allow a read-only view of the User.
+    // I don't have one so am just redirecting to the edit view
+    public function show(User $user)
+    {
+        return $this->edit($user);
+    }
+
+    public function select()
+    {
+        return view('user.select');
+    }
+
+    public function selected(Request $request)
+    {
+        
     }
 }

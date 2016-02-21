@@ -25,11 +25,17 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         $gate->define('super-admin', function ($user) {
-            return true;
+            return $user->isSuperAdmin();
+        });
+        $gate->define('admin', function ($user) {
+            return $user->isAdmin();
+        });
+        $gate->define('customer', function ($user) {
+            return $user->isCustomer();
         });
 
         $gate->define('create-invoice', function ($user) {
-            return ($user->isAdmin());
+            return $user->isAdmin();
         });
 
         $gate->define('view-invoice-x', function ($user, $invoice) {
@@ -51,22 +57,17 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
-        $gate->define('view-customer', function($user) {
-            if ($user->isAdmin() || $user->isCustomer())
+        $gate->define('view-user', function($user, $userToView) {
+            if ($user->isAdmin() || $user->id == $userToView->id)
             {
                 return true;
             }
         });
 
-        $gate->define('view-customer-x', function ($user, Customer $customer) {
-            if ($user->isAdmin())
+        $gate->define('update-user', function($user, $userToView) {
+            if ($user->isAdmin() || $user->id == $userToView->id)
             {
                 return true;
-            }
-
-            if ($user->isCustomer())
-            {
-                return $user->hasCustomer($customer);
             }
         });
     }

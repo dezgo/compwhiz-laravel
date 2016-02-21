@@ -10,7 +10,6 @@ class InvoiceItemTest extends TestCase
 
     private $invoice;
     private $user;
-    private $customer;
 
     public function setUp()
     {

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request;
 use Auth;
 
-class CustomerRequest extends Request
+class UserRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,11 +27,9 @@ class CustomerRequest extends Request
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'email',
-            'address1' => 'required',
-            'suburb' => 'required',
-            'state' => 'required|min:2|max:3',
-            'postcode' => 'required|Regex:/^[0-9]{4}$/',
+            'email' => 'required|email|unique:users,email,'.$this->id,
+            'state' => 'min:2|max:3',
+            'postcode' => 'Regex:/^[0-9]{4}$/',
         ];
     }
 
@@ -44,7 +42,6 @@ class CustomerRequest extends Request
     {
         return [
             'postcode.regex' => 'Postcode must be 4 numbers.',
-            'address1.required' => 'The address field is required.',
         ];
     }
 }

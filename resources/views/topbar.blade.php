@@ -27,7 +27,6 @@
                             Invoicing <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="/customer" name='customersAnchor'>Customer(s)</a></li>
                             <li><a href="/invoice" name='invoicesAnchor'>Invoices</a></li>
             @endif
 
@@ -35,7 +34,7 @@
                             <li><a href="/invoice_item_category" name='invoiceItemCategoriesAnchor'>
                                 Invoice Item Categories</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="/customer/select" name='createInvoiceAnchor'>
+                            <li><a href="/user/select" name='createInvoiceAnchor'>
                                 Create Invoice</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="/settings" name='settingsAnchor'>Settings</a></li>
@@ -61,11 +60,11 @@
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            {{ Auth::user()->full_name }} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/profile/edit') }}">Edit Profile</a></li>
+                            <li><a href="{{ url('/user/'.Auth::user()->id.'/edit') }}">Edit Profile</a></li>
                             <li><a href="{{ url('/logout') }}" name='logoutAnchor'><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                         </ul>
                     </li>

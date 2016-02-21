@@ -82,14 +82,14 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
-    public function isAdmin()
-    {
-        return $this->hasRole('admin') || $this->isSuperAdmin();
-    }
-
     public function isSuperAdmin()
     {
         return $this->hasRole('super_admin');
+    }
+
+    public function isAdmin()
+    {
+        return $this->hasRole('admin') || $this->isSuperAdmin();
     }
 
     public function isCustomer()
@@ -99,8 +99,7 @@ class User extends Model implements AuthenticatableContract,
 
     public function isUser()
     {
-        return !$this->isAdmin() && !$this->isSuperAdmin() &&
-            !$this->isCustomer();
+        return !$this->isCustomer();
     }
 
     private function hasRole($roleDescription)
@@ -119,11 +118,6 @@ class User extends Model implements AuthenticatableContract,
         if ($this->isAdmin()) { return 'admin'; }
         if ($this->isCustomer()) { return 'customer'; }
         if ($this->isUser()) { return 'user'; }
-    }
-
-    public function getNameAttribute()
-    {
-        return $this->first_name.' '.$this->last_name;
     }
 
     // update roles for the user

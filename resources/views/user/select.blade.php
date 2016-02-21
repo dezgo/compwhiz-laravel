@@ -3,7 +3,7 @@
 @section('content')
     <h1 align="left">Create Invoice</h1>
 
-    {!! Form::open(['url' => '/customer/select']) !!}
+    {!! Form::open(['url' => '/user/select']) !!}
 
     <!-- Customer Form Input -->
     <div class="form-group">
@@ -22,7 +22,7 @@
     </div>
 
     <div class="form-group">
-        <a href="/customer/create?flag=1" type="button" class="btn btn-primary">
+        <a href="/user/create?flag=1" type="button" class="btn btn-primary">
             Create a new customer
         </a>
     </div>

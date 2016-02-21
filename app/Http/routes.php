@@ -11,13 +11,13 @@
 |
 */
 
-
+// routes accessible to anyone whether authenticated or not
 Route::group(['middleware' => 'web'], function () {
 
     Route::auth();
     // Route::match(['put', 'patch'], 'profile/update', 'Auth\AuthController@update');
-    Route::post('profile/edit', 'Auth\AuthController@update');
-    Route::get('profile/edit', 'Auth\AuthController@edit');
+    // Route::post('profile/edit', 'Auth\AuthController@update');
+    // Route::get('profile/edit', 'Auth\AuthController@edit');
     Route::get('/', function () {
        return view('content.index');
     });
@@ -26,21 +26,14 @@ Route::group(['middleware' => 'web'], function () {
 
 Route::group(['middleware' => ['web', 'superadmin']], function() {
     Route::get('/phpinfo', 'SuperAdminController@phpinfo');
-    Route::resource('user', 'UserController');
-});
-
-// customer-only Routes
-Route::group(['middleware' => ['web', 'customer']], function() {
-
-    // Customer
-    Route::get('customer/select', 'CustomerController@select')->name('customer.select');
-    Route::post('customer/select', 'CustomerController@selected')->name('customer.selected');
-    Route::resource('customer', 'CustomerController');
-    Route::get('customer/{customer}/delete', 'CustomerController@delete');
 });
 
 // admin-only routes
 Route::group(['middleware' => ['web', 'admin']], function() {
+
+    // select customer as first step when creating invoice
+    Route::get('user/select', 'UserController@select')->name('user.select');
+    Route::post('user/select', 'UserController@selected')->name('user.selected');
 
     // Settings
     Route::get('settings', 'AdminController@show')->name('settings.show');
@@ -69,4 +62,9 @@ Route::group(['middleware' => ['web', 'admin']], function() {
     // Invoice item category
     Route::resource('invoice_item_category', 'InvoiceItemCategoryController');
     Route::get('invoice_item_category/{invoice_item_category}/delete', 'InvoiceItemCategoryController@delete');
+});
+
+// routes accessible to all authenticated users
+Route::group(['middleware' => ['web', 'auth']], function() {
+    Route::resource('user', 'UserController');
 });
