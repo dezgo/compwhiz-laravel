@@ -23,7 +23,7 @@ class UserAdminTest extends TestCase
 	{
 		$this->actingAs($this->user)
 			->visit('/user')
-			->see('Show Users');
+			->see('Show Users'); 
     }
 
     public function testShowEditPage()
