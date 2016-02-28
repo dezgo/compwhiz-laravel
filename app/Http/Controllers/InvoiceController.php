@@ -16,6 +16,21 @@ use Illuminate\Support\Facades\Auth;
 class InvoiceController extends Controller
 {
 	/**
+	 * Check that the current user is allowed to see the specified invoice
+	 *
+	 * @return boolean
+	 */
+	private function checkOKToAccess(Invoice $invoice)
+	{
+		if (Auth::user()->isAdmin()) {
+			return true;
+		}
+		else {
+			return Auth::user()->id == $invoice->user->id;
+		}
+	}
+
+	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
@@ -51,6 +66,10 @@ class InvoiceController extends Controller
 	 */
 	public function create(User $customer = null)
 	{
+		if (!Auth::user()->isAdmin()) {
+			abort(403);
+		}
+
 		$invoice = new Invoice();
 		if (!is_null($customer)) {
 			$invoice->customer_id = $customer->id;
@@ -67,6 +86,10 @@ class InvoiceController extends Controller
 	 */
 	public function store(InvoiceRequest $request)
 	{
+		if (!Auth::user()->isAdmin()) {
+			abort(403);
+		}
+
 		$invoice = Invoice::create($request->all());
 		return redirect('/invoice/'.$invoice->id);
 	}
@@ -79,6 +102,10 @@ class InvoiceController extends Controller
 	 */
 	public function show(Invoice $invoice)
 	{
+		if (!$this->checkOKToAccess($invoice)) {
+			abort(403);
+		}
+
 		return view('invoice.show', compact('invoice'));
 	}
 
@@ -90,6 +117,10 @@ class InvoiceController extends Controller
 	 */
 	public function edit(Invoice $invoice)
 	{
+		if (!$this->checkOKToAccess($invoice)) {
+			abort(403);
+		}
+
 		$invoice_items = InvoiceItem::all()->where('invoice_id', $invoice->id);
 		return view('invoice.edit', compact('invoice','invoice_items'));
 	}
@@ -103,6 +134,10 @@ class InvoiceController extends Controller
 	 */
 	public function update(InvoiceRequest $request, Invoice $invoice)
 	{
+		if (!$this->checkOKToAccess($invoice)) {
+			abort(403);
+		}
+
 		$invoice->update($request->all());
 		return redirect('/invoice/'.$invoice->id);
 	}
@@ -115,6 +150,10 @@ class InvoiceController extends Controller
 	 */
 	public function destroy(Invoice $invoice)
 	{
+		if (!$this->checkOKToAccess($invoice)) {
+			abort(403);
+		}
+
 		$invoice->delete();
 		return redirect('/invoice');
 	}
@@ -127,6 +166,10 @@ class InvoiceController extends Controller
 	 */
 	public function delete(Invoice $invoice)
 	{
+		if (!$this->checkOKToAccess($invoice)) {
+			abort(403);
+		}
+
 		return view('invoice.delete', compact('invoice'));
 	}
 
@@ -136,6 +179,10 @@ class InvoiceController extends Controller
 	 */
 	public function prnt(Invoice $invoice)
 	{
+		if (!$this->checkOKToAccess($invoice)) {
+			abort(403);
+		}
+
 		return view('invoice.print', compact('invoice'));
 	}
 
@@ -144,6 +191,10 @@ class InvoiceController extends Controller
 	 */
 	public function email(Invoice $invoice)
 	{
+		if (!$this->checkOKToAccess($invoice)) {
+			abort(403);
+		}
+
 		if ($invoice->user->email != '') {
 			$email = new Email;
 			$email->from = Auth::user()->email;
