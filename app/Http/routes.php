@@ -39,13 +39,15 @@ Route::group(['middleware' => ['web', 'admin']], function() {
     Route::get('settings', 'AdminController@show')->name('settings.show');
     Route::post('settings', 'AdminController@update')->name('settings.update');
 
+    // Emailing
+    Route::post('send', 'EmailController@send')->name('email.send');
+
     // Invoice
     Route::resource('invoice', 'InvoiceController');
     Route::get('invoice/{customer}/create', 'InvoiceController@create'); // create invoice for given customer
     Route::get('invoice/{invoice}/delete', 'InvoiceController@delete');
     Route::get('invoice/{invoice}/print', 'InvoiceController@prnt');
     Route::get('invoice/{invoice}/email', 'InvoiceController@email')->name('invoice.email');
-    Route::post('invoice/{invoice}/send', 'InvoiceController@send')->name('invoice.send');
 
     // Invoice item creation guided procedure
     Route::get('invoice/{invoice}/item/create1', 'InvoiceItemController@create1')->name('invoice_item.create1');

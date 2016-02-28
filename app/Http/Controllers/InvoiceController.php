@@ -11,7 +11,7 @@ use App\InvoiceItem;
 use App\User;
 use App\Email;
 use App\Http\Requests\InvoiceRequest;
-use App\Jobs\SendInvoiceEmail;
+use Illuminate\Support\Facades\Auth;
 
 class InvoiceController extends Controller
 {
@@ -139,36 +139,28 @@ class InvoiceController extends Controller
 	 */
 	public function email(Invoice $invoice)
 	{
-		if ($invoice->customer->email != '') {
+		if ($invoice->user->email != '') {
 			$email = new Email;
-			$email->from = \Auth::user()->email;
-			$email->to = $invoice->customer->email;
+			$email->from = Auth::user()->email;
+			$email->to = $invoice->user->email;
+			$email->receiver_id = $invoice->user->id;
+			$email->invoice_id = $invoice->id;
 			$email->subject = 'Invoice '.$invoice->invoice_number;
+			$email->invoice = $invoice;
 			$email->body =
-				'Hi '.$invoice->customer->first_name.',<br />'.
+				'Hi '.$invoice->user->first_name.',<br />'.
 				'<br />'.
 				'Please find attached invoice '.$invoice->invoice_number.' for $'.
 				number_format($invoice->total, 2).'<br />'.
 				'<br />'.
 				'Thanks,<br />'.
-				\Auth::user()->name.'<br />'.
-				\Auth::user()->business_name;
-			$email->save();
+				Auth::user()->name.'<br />'.
+				Auth::user()->business_name;
 
 			return view('invoice.email', compact('email'));
 		}
 		else {
 			\Session()->flash('status-warning', 'Customer does not have an email address!');
 		}
-	}
-
-	/**
-	 * Email the invoice to the Customer
-	 */
-	public function send($request)
-	{
-		$this->dispatch(new SendInvoiceEmail($invoice));
-//		\Session()->flash('status-success', 'Email sent to '.$invoice->customer->email);
-		return redirect('/invoice/'.$invoice->id);
 	}
 }

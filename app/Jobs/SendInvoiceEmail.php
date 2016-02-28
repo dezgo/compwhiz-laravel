@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Jobs\Job;
-use App\Invoice;
+use App\Email;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -13,7 +13,7 @@ class SendInvoiceEmail extends Job implements ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
-    protected email;
+    protected $email;
 
     /**
      * Create a new job instance.
@@ -33,22 +33,22 @@ class SendInvoiceEmail extends Job implements ShouldQueue
     public function handle(Mailer $mailer)
     {
         $email = $this->email;
+        $invoice = $email->invoice;
 
         // create the pdf of the printed invoice
         $pdf = \PDF::loadView('invoice.print', compact('invoice'));
         $filename = '/tmp/invoice'.$invoice->invoice_number.'.pdf';
 
         // and save it somewhere
+        \File::delete($filename);
         $pdf->save($filename);
 
         // then email the customer attaching the invoice
-        $sent = $mailer->send('emails.invoice', ['invoice' => $invoice], function ($m) use ($invoice) {
-            // $m->from('mail@computerwhiz.com.au', 'Computer Whiz - Canberra');
-            $m->to($invoice->customer->email, $invoice->customer->full_name)
-              ->subject('Invoice '.$invoice->invoice_number)
+        $mailer->send('emails.invoice', ['email' => $email], function ($m) use ($email, $filename) {
+            $m->from($email->from, $email->sender->business_name)
+              ->to($email->to, $email->receiver->full_name)
+              ->subject($email->subject)
               ->attach($filename);
         });
-
-        \File::delete($filename);
     }
 }

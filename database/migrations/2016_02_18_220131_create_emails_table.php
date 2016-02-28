@@ -14,10 +14,10 @@ class CreateEmailsTable extends Migration
     {
         Schema::create('emails', function (Blueprint $table) {
 			$table->increments('id');
-			$table->integer('sender_user_id')->unsigned();
-            $table->foreign('sender_user_id')->references('id')->on('users');
-            $table->integer('receiver_user_id')->unsigned();
-            $table->foreign('receiver_user_id')->references('id')->on('users');
+			$table->integer('sender_id')->unsigned();
+            $table->foreign('sender_id')->references('id')->on('users');
+            $table->integer('receiver_id')->unsigned();
+            $table->foreign('receiver_id')->references('id')->on('users');
             $table->integer('invoice_id')->unsigned();
             $table->foreign('invoice_id')->references('id')->on('invoices');
 			$table->string('from');

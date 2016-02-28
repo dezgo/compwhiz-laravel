@@ -7,23 +7,35 @@ use Illuminate\Database\Eloquent\Model;
 class Email extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'cc',
+        'bcc',
+        'subject',
+        'body',
+    ];
+
+    /**
      * Setup the relationship to users - the sender
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function sender()
     {
-        return $this->belongsTo('App\User', 'foreign_key', 'sender_user_id');
+        return $this->belongsTo('App\User');
     }
 
     /**
-     * Setup the relationship to users - the ccipient
+     * Setup the relationship to users - the recipient
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function receiver()
     {
-        return $this->belongsTo('App\User', 'foreign_key', 'receiver_user_id');
+        return $this->belongsTo('App\User');
     }
 
     /**

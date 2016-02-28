@@ -130,5 +130,4 @@ if (env('APP_ENV') == 'local') {
         'name' => 'CW Dev'
     ];
 }
-
 return $mail_arr;
