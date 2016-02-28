@@ -76,12 +76,6 @@
         <br />
     @endif
 
-    @if(Gate::check('customer'))
-        {{ Form::radio('role', 'customer', null) }}&nbsp;
-        {{ Form::label('customer', 'Customer', ['class' => 'control-label']) }}
-        <br />
-    @endif
-
     {{ Form::radio('role', 'user', null) }}&nbsp;
     {{ Form::label('user', 'User', ['class' => 'control-label']) }}
 </div>

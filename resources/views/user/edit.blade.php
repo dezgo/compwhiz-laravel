@@ -8,7 +8,7 @@
     {!! Form::close() !!}
 
     {!! Form::open(['method' => 'DELETE', 'route' => ['user.destroy', $user->id]]) !!}
-    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+    {!! Form::submit('Deactivate', ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}
 
     @include('errors.list')

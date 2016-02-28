@@ -19,7 +19,6 @@
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
-            @if(Gate::check('create-invoice') || Gate::check('view-invoice'))
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" id="dropdownMenu1"
@@ -28,7 +27,6 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                             <li><a href="/invoice" name='invoicesAnchor'>Invoices</a></li>
-            @endif
 
             @if(Gate::check('create-invoice'))
                             <li><a href="/invoice_item_category" name='invoiceItemCategoriesAnchor'>
@@ -45,11 +43,9 @@
             @endif
 
 
-            @if(Gate::check('create-invoice') || Gate::check('view-invoice'))
                         </ul>
                     </li>
                 </ul>
-            @endif
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">

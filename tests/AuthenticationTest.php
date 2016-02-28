@@ -13,7 +13,8 @@ class AuthenticationTest extends TestCase
              ->click('Register')
              ->see('Confirm Password')
              ->press('Register')
-             ->see('The name field is required')
+             ->see('The first name field is required')
+             ->see('The last name field is required')
              ->see('The email field is required')
              ->see('The password field is required');
     }
@@ -23,7 +24,8 @@ class AuthenticationTest extends TestCase
     public function testRegisterDiffPasswords()
     {
         $this->visit('/register')
-             ->type('Holly Edwards','name')
+             ->type('Holly','first_name')
+             ->type('Edwards','last_name')
              ->type('holly@edwards.com', 'email')
              ->type('password1','password')
              ->type('password2','password_confirmation')
@@ -36,7 +38,8 @@ class AuthenticationTest extends TestCase
     public function testInvalidEmail()
     {
         $this->visit('/register')
-             ->type('Holly Edwards','name')
+             ->type('Holly','first_name')
+             ->type('Edwards','last_name')
              ->type('holly@edwards','email')
              ->type('password1','password')
              ->type('password1','password_confirmation')
@@ -50,7 +53,8 @@ class AuthenticationTest extends TestCase
     public function testRegisterOK()
     {
         $this->visit('/register')
-             ->type('Holly Edwards','name')
+             ->type('Holly','first_name')
+             ->type('Edwards','last_name')
              ->type('holly@edwards.com','email')
              ->type('password1','password')
              ->type('password1','password_confirmation')
@@ -59,7 +63,8 @@ class AuthenticationTest extends TestCase
              ->visit('/logout');
 
         $this->visit('/register')
-              ->type('Holly Edwards','name')
+             ->type('Holly','first_name')
+             ->type('Edwards','last_name')
               ->type('holly@edwards.com','email')
               ->type('password1','password')
               ->type('password1','password_confirmation')

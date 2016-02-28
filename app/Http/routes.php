@@ -42,13 +42,6 @@ Route::group(['middleware' => ['web', 'admin']], function() {
     // Emailing
     Route::post('send', 'EmailController@send')->name('email.send');
 
-    // Invoice
-    Route::resource('invoice', 'InvoiceController');
-    Route::get('invoice/{customer}/create', 'InvoiceController@create'); // create invoice for given customer
-    Route::get('invoice/{invoice}/delete', 'InvoiceController@delete');
-    Route::get('invoice/{invoice}/print', 'InvoiceController@prnt');
-    Route::get('invoice/{invoice}/email', 'InvoiceController@email')->name('invoice.email');
-
     // Invoice item creation guided procedure
     Route::get('invoice/{invoice}/item/create1', 'InvoiceItemController@create1')->name('invoice_item.create1');
     Route::post('invoice/{invoice}/item/store1', 'InvoiceItemController@store1')->name('invoice_item.store1');
@@ -69,4 +62,14 @@ Route::group(['middleware' => ['web', 'admin']], function() {
 // routes accessible to all authenticated users
 Route::group(['middleware' => ['web', 'auth']], function() {
     Route::resource('user', 'UserController');
+
+    // Invoice
+    Route::resource('invoice', 'InvoiceController');
+    Route::get('invoice/{invoice}/print', 'InvoiceController@prnt');
+    Route::get('invoice/{invoice}/email', 'InvoiceController@email')->name('invoice.email');
+});
+
+Route::group(['middleware' => ['web', 'admin']], function() {
+    Route::get('invoice/{customer}/create', 'InvoiceController@create'); // create invoice for given customer
+    Route::get('invoice/{invoice}/delete', 'InvoiceController@delete');
 });

@@ -22,7 +22,12 @@ class InvoiceController extends Controller
 	 */
 	public function index()
 	{
-		$invoices = Invoice::all();
+		if (Auth::user()->isAdmin()) {
+			$invoices = Invoice::all();
+		}
+		else {
+			$invoices = Invoice::where('customer_id', Auth::user()->id)->get();
+		}
 		return view('invoice.index', compact('invoices'));
 	}
 
