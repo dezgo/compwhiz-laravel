@@ -24,6 +24,9 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        $gate->define('authenticated', function ($user) {
+            return true;
+        });
         $gate->define('super-admin', function ($user) {
             return $user->isSuperAdmin();
         });

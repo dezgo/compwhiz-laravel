@@ -9,6 +9,7 @@ class MainSiteNavigationTest extends TestCase
 	public function testHome()
 	{
 		$this->visit('/')
-			->see('Hi, I\'m Derek Gillett and I run Computer Whiz');
+			->see('Hi, I\'m Derek Gillett and I run Computer Whiz')
+			->dontSee('Invoicing <span class="caret"></span>');
 	}
 }
