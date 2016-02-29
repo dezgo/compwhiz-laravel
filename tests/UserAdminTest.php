@@ -23,7 +23,7 @@ class UserAdminTest extends TestCase
 	{
 		$this->actingAs($this->user)
 			->visit('/user')
-			->see('Show Users'); 
+			->see('Show Users');
     }
 
     public function testShowEditPage()
@@ -80,16 +80,6 @@ class UserAdminTest extends TestCase
              ->select('admin', 'role')
              ->press('Update')
              ->seeInDatabase('role_user', ['role_id' => 2, 'user_id' => $user->id]);
-    }
-
-    public function testSetRoleCustomer()
-    {
-        $user = factory(App\User::class)->create();
-        $this->actingAs($this->user)
-             ->visit('/user/'.$user->id.'/edit')
-             ->select('customer', 'role')
-             ->press('Update')
-             ->seeInDatabase('role_user', ['role_id' => 3, 'user_id' => $user->id]);
     }
 
     public function testSetRoleUser()

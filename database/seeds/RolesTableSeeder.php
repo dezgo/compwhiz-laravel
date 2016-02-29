@@ -13,6 +13,5 @@ class RolesTableSeeder extends Seeder
     {
         DB::table('roles')->insert(['description' => 'super_admin']);
         DB::table('roles')->insert(['description' => 'admin']);
-        DB::table('roles')->insert(['description' => 'customer']);
     }
 }

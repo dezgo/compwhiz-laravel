@@ -52,6 +52,8 @@ class AuthenticationTest extends TestCase
     // then try logging in with wrong password
     public function testRegisterOK()
     {
+        DB::table('users')->where('email', 'holly@edwards.com')->delete();
+        
         $this->visit('/register')
              ->type('Holly','first_name')
              ->type('Edwards','last_name')

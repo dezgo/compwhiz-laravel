@@ -211,7 +211,8 @@ class InvoiceController extends Controller
 				'<br />'.
 				'Thanks,<br />'.
 				Auth::user()->name.'<br />'.
-				Auth::user()->business_name;
+				Auth::user()->business_name.
+				$email->footer_text;
 
 			return view('invoice.email', compact('email'));
 		}

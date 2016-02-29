@@ -22,14 +22,5 @@ class RoleUserTableSeeder extends Seeder
             'role_id' => 2,
             'user_id' => 2,
         ]);
-
-        // joe customer : customer
-        DB::table('role_user')->insert([
-            'role_id' => 3,
-            'user_id' => 3,
-        ]);
-
-        // joe user : user
-        // so doesn't get any extra roles
     }
 }

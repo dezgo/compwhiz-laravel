@@ -10,7 +10,6 @@ class RoleUserTest extends TestCase
 
 	private $userSuperAdmin;
     private $userAdmin;
-    private $userCustomer;
 
     /**
      * Create class variables to be used in all tests
@@ -23,8 +22,6 @@ class RoleUserTest extends TestCase
 		$this->userSuperAdmin->roles()->attach(1);
         $this->userAdmin = factory(App\User::class)->create();
 		$this->userAdmin->roles()->attach(2);
-        $this->userCustomer = factory(App\User::class)->create();
-		$this->userCustomer->roles()->attach(3);
         $this->user = factory(App\User::class)->create();
 	}
 
@@ -61,13 +58,13 @@ class RoleUserTest extends TestCase
     }
 
     /**
-     * Ensure customer has appropriate access
+     * Ensure user has appropriate access
      *
      * @return void
      */
-    public function testCustomer()
+    public function testUser()
     {
-        $this->actingAs($this->userCustomer)
+        $this->actingAs($this->user)
              ->visit('/')
              ->dontSee('userAnchor')
              ->see('invoicesAnchor')
@@ -81,10 +78,9 @@ class RoleUserTest extends TestCase
      *
      * @return void
      */
-    public function testUser()
+    public function testGuest()
     {
-        $this->actingAs($this->user)
-             ->visit('/')
+        $this->visit('/')
              ->dontSee('userAnchor')
              ->dontSee('invoicesAnchor')
              ->dontSee('invoiceItemCategoriesAnchor')

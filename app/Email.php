@@ -47,4 +47,18 @@ class Email extends Model
     {
         return $this->belongsTo('App\Invoice');
     }
+
+    /**
+     * Standard footer text in emails
+     */
+    public function getFooterTextAttribute()
+    {
+        return
+            "<br />".
+            "<br />".
+            "P.S. You can now login! Go to <a href='".url('/login')."'>".url('/login').
+            "</a> to see your invoices.<br />".
+            "P.P.S. For first time users, go to <a href='".url('/password/reset').
+            "'>".url('/password/reset')."</a> to create a password.";
+    }
 }
