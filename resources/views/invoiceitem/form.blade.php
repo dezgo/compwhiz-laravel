@@ -26,7 +26,10 @@
 
     <div class="form-group">
         {!! Form::label('price', 'Price:', ['class' => 'control-label']) !!}
+
+        <?php $options['autofocus'] = 'true' ?>
         {{ Form::text('price', null, $options) }}
+        <?php unset($options['autofocus']) ?>
     </div>
 
 

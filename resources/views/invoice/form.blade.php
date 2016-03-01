@@ -36,7 +36,9 @@
     <?php unset($options['id']) ?>
 </div>
 
+@if(Gate::check('admin'))
 {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary', 'id' => 'btnSubmit']) !!}
+@endif
 
 @section('footer1')
     <script type="text/javascript">

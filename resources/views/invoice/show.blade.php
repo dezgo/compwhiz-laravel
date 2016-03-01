@@ -15,12 +15,22 @@
     <a class="btn btn-info" target="_blank" href="{{ url('/invoice/'.$invoice->id.'/print') }}">
         Print
     </a>
+    @if(Gate::check('admin'))
     <a class="btn btn-info" href="{{ url('/invoice/'.$invoice->id.'/email') }}">
         Email
     </a>
+    @endif
 
 @stop
 
 @section('footer')
     @include('includes.flash_message_footer')
+
+    <script language="javascript">
+
+    $('#invoiceItemTable').on('mouseover', 'tbody tr', function(event) {
+        $(this).addClass('bg-info').siblings().removeClass('bg-info');
+    });
+
+    </script>
 @stop

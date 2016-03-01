@@ -66,10 +66,10 @@ Route::group(['middleware' => ['web', 'auth']], function() {
     // Invoice
     Route::resource('invoice', 'InvoiceController');
     Route::get('invoice/{invoice}/print', 'InvoiceController@prnt');
-    Route::get('invoice/{invoice}/email', 'InvoiceController@email')->name('invoice.email');
 });
 
 Route::group(['middleware' => ['web', 'admin']], function() {
     Route::get('invoice/{customer}/create', 'InvoiceController@create'); // create invoice for given customer
     Route::get('invoice/{invoice}/delete', 'InvoiceController@delete');
+    Route::get('invoice/{invoice}/email', 'InvoiceController@email')->name('invoice.email');
 });

@@ -117,7 +117,7 @@ class InvoiceController extends Controller
 	 */
 	public function edit(Invoice $invoice)
 	{
-		if (!$this->checkOKToAccess($invoice)) {
+		if (!Auth::user()->isAdmin()) {
 			abort(403);
 		}
 
@@ -134,7 +134,7 @@ class InvoiceController extends Controller
 	 */
 	public function update(InvoiceRequest $request, Invoice $invoice)
 	{
-		if (!$this->checkOKToAccess($invoice)) {
+		if (!Auth::user()->isAdmin()) {
 			abort(403);
 		}
 
@@ -150,7 +150,7 @@ class InvoiceController extends Controller
 	 */
 	public function destroy(Invoice $invoice)
 	{
-		if (!$this->checkOKToAccess($invoice)) {
+		if (!Auth::user()->isAdmin()) {
 			abort(403);
 		}
 
@@ -166,7 +166,7 @@ class InvoiceController extends Controller
 	 */
 	public function delete(Invoice $invoice)
 	{
-		if (!$this->checkOKToAccess($invoice)) {
+		if (!Auth::user()->isAdmin()) {
 			abort(403);
 		}
 
@@ -191,7 +191,7 @@ class InvoiceController extends Controller
 	 */
 	public function email(Invoice $invoice)
 	{
-		if (!$this->checkOKToAccess($invoice)) {
+		if (!Auth::user()->isAdmin()) {
 			abort(403);
 		}
 
