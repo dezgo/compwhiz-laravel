@@ -22,7 +22,8 @@ class InvoiceTest extends TestCase
         $this->userAdmin->roles()->attach(2);
         $this->invoice = factory(App\Invoice::class)->create();
         factory(App\InvoiceItem::class, 5)->create(['invoice_id' => $this->invoice->id]);
-
+        $this->invoice->customer_id = $this->user->id;
+        $this->invoice->save();
     }
 
     public function testShowIndexAsAdmin()
@@ -101,7 +102,7 @@ class InvoiceTest extends TestCase
             ->seePageIs('/invoice/'.$this->invoice->id);
     }
 
-    public function testDetails()
+    public function testShowAsAdmin()
     {
         $this->actingAs($this->userAdmin)
             ->visit('/invoice/'.$this->invoice->id)
@@ -109,6 +110,15 @@ class InvoiceTest extends TestCase
             ->see('disabled="true"')
             ->press('btnSubmit')
             ->see('Edit Invoice');
+    }
+
+    public function testShowAsUser()
+    {
+        $this->actingAs($this->user)
+            ->visit('/invoice/'.$this->invoice->id)
+            ->see('Show Invoice')
+            ->see('disabled="true"')
+            ->dontSee('btnSubmit');
     }
 
     public function testDelete()
@@ -119,7 +129,17 @@ class InvoiceTest extends TestCase
             ->seePageIs('/invoice');
     }
 
-    public function testPrint()
+    public function testPrintAsUser()
+    {
+        $this->actingAs($this->user)
+            ->visit('/invoice/'.$this->invoice->id)
+            ->click('Print')
+            ->see('Customer Details')
+            ->see('How to Pay')
+            ->see('Enquiries');
+    }
+
+    public function testPrintAsAdmin()
     {
         $this->actingAs($this->userAdmin)
             ->visit('/invoice/'.$this->invoice->id)
