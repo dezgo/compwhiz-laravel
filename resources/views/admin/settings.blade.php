@@ -10,16 +10,21 @@
 </div>
 @endif
 
-    <h1 align="left">Settings</h1>
+    <h1 align="left">{{ trans('settings.title') }}</h1>
 
     {!! Form::open(['route' => 'settings.update']) !!}
 
     <div class="form-group">
-        {!! Form::label('next_invoice_number', 'Next Invoice Number:', ['class' => 'control-label']) !!}
+        {!! Form::label('next_invoice_number', trans('settings.next_invoice_number'), ['class' => 'control-label']) !!}
         {{ Form::text('next_invoice_number', Setting::get('next_invoice_number', '1'), ['class' => 'form-control']) }}
     </div>
 
-    {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
+    <div class="form-group">
+        {!! Form::label('markup', trans('settings.markup'), ['class' => 'control-label']) !!}
+        {{ Form::text('markup', Setting::get('markup', '1'), ['class' => 'form-control']) }}
+    </div>
+
+    {!! Form::submit('Update', ['class' => 'btn btn-primary', 'id' => 'btnSubmit']) !!}
 
     {!! Form::close() !!}
 

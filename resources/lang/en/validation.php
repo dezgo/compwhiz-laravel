@@ -90,6 +90,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'markup' => [
+            'numeric' => 'The '.trans('settings.markup').' must be a number',
+        ]
     ],
 
     /*

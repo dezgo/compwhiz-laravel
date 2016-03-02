@@ -21,6 +21,19 @@ class SettingsTest extends TestCase
     }
 
     /**
+     * Basic layout of settings page
+     *
+     * @return void
+     */
+    public function testSettings_layout()
+    {
+        $this->actingAs($this->user)
+             ->visit('/settings')
+             ->see(trans('settings.next_invoice_number'))
+             ->see(trans('settings.markup'));
+    }
+
+    /**
      * See settings and change them - check validation
      *
      * @return void
@@ -30,8 +43,10 @@ class SettingsTest extends TestCase
         $this->actingAs($this->user)
              ->visit('/settings')
              ->type('a', 'next_invoice_number')
-             ->press('Update')
-             ->see('The next invoice number must be a number');
+             ->type('a', 'markup')
+             ->press('btnSubmit')
+             ->see(trans('validation.numeric', ['attribute' => trans('settings.next_invoice_number')]))
+             ->see(trans('validation.custom.markup.numeric'));
     }
 
     /**
@@ -44,7 +59,9 @@ class SettingsTest extends TestCase
         $this->actingAs($this->user)
              ->visit('/settings')
              ->type('34', 'next_invoice_number')
-             ->press('Update')
-             ->see('Settings updated');
+             ->type('20', 'markup')
+             ->press('btnSubmit')
+             ->see(trans('settings.update_success'));
     }
+
 }

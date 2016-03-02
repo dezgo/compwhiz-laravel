@@ -23,12 +23,14 @@ class AdminController extends Controller
     public function update(Request $request)
     {
 		$this->validate($request, [
-				'next_invoice_number' => 'numeric',
+			'next_invoice_number' => 'numeric',
+			'markup' => 'numeric',
 			]);
 
-        \Setting::set('next_invoice_number', $request->next_invoice_number);
+		\Setting::set('next_invoice_number', $request->next_invoice_number);
+		\Setting::set('markup', $request->markup);
         \Setting::save();
-        $request->session()->flash('status', 'Settings updated');
+        $request->session()->flash('status', trans('settings.update_success'));
         return redirect(url('/settings'));
     }
 }
