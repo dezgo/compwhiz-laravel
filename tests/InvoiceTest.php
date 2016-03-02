@@ -67,7 +67,7 @@ class InvoiceTest extends TestCase
             ->select($customer->id, 'customer_id')
             ->press('Save')
             ->see('Show Invoice')
-            ->see('Create Item');
+            ->see('btnAddInvoiceItem');
     }
 
     public function testEdit()

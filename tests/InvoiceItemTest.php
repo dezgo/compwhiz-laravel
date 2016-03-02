@@ -31,10 +31,9 @@ class InvoiceItemTest extends TestCase
     public function testCreate_noCategory()
     {
         $this->actingAs($this->user)
-            ->visit('/invoice')
-            ->click('View')
+            ->visit('/invoice/'.$this->invoice->id)
             ->see('Show Invoice')
-            ->click('Create Item')
+            ->click('btnCreateItem')
             ->see('Step 1 - Select category')
             ->press('Next')
             ->see('The category field is required');
@@ -43,10 +42,8 @@ class InvoiceItemTest extends TestCase
     public function testCreate_noDescr()
     {
         $category = App\InvoiceItemCategory::orderBy(DB::raw('RAND()'))->take(1)->first();
-        // dd($category);
         $this->actingAs($this->user)
-            ->visit('/invoice')
-            ->click('View')
+            ->visit('/invoice/'.$this->invoice->id)
             ->click('btnCreateItem')
             ->select($category->id,'category_id')
             ->press('Next')

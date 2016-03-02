@@ -7,9 +7,14 @@
         <table class="table-condensed" id="invoiceTable">
             <tbody>
                 <tr>
+                    @if ($invoices->count() > 0)
                     <td><h4>Num</h4></td>
                     <td><h4>Date</h4></td>
                     <td><h4>Total</h4></td>
+                    @else
+                    <td colspan="3">Welcome to the invoicing area! Click the
+                        'Create' button below to create your first invoice.</td>
+                    @endif
                 </tr>
 
     @foreach($invoices as $invoice)

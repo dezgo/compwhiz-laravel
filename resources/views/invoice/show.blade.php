@@ -11,7 +11,7 @@
     {!! Form::close() !!}
 
     @include('/invoiceitem/index')
-<br>
+<br><br>
     <a class="btn btn-info" target="_blank" href="{{ url('/invoice/'.$invoice->id.'/print') }}">
         Print
     </a>
