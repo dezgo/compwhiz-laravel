@@ -33,9 +33,9 @@ class InvoiceItemController extends Controller
      */
     public function store1(Request $request, $invoice_id)
     {
-        $rules = ['category_id' => 'required'];
-        $messages = ['category_id.required' => 'The category field is required'];
-        $this->validate($request, $rules, $messages);
+        $this->validate($request, [
+                'category_id' => 'required',
+            ]);
 
         return redirect('/invoice/'.$invoice_id.'/item/'.$request->category_id.'/create2');
     }
@@ -63,15 +63,6 @@ class InvoiceItemController extends Controller
         $this->validate($request, [
                 'description' => 'required',
             ]);
-        // $validator = \Validator::make($request->all(), [
-        //         'description' => 'required',
-        //     ]);
-        // if ($validator->fails()) {
-        //     return redirect()
-        //         ->back()
-        //         ->withErrors($validator)
-        //         ->withInput();
-        // }
 
         $invoice_id = $invoice->id;
         $invoice_item = new InvoiceItem();

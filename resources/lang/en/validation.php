@@ -87,12 +87,15 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
         'markup' => [
-            'numeric' => 'The '.trans('settings.markup').' must be a number',
-        ]
+            'numeric' => 'The '.trans('settings.markup').' must be a number.',
+        ],
+        'category_id' => [
+            'required' => 'The category field is required.',
+        ],
+        'postcode' => [
+            'regex' => 'Postcode must be 4 numbers.',
+        ],
     ],
 
     /*

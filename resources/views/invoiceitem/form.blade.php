@@ -32,12 +32,28 @@
         <?php unset($options['autofocus']) ?>
     </div>
 
+    {!! Form::submit($submitButtonText, ['class' => 'btn btn-success']) !!}
+    <button type="button" class="btn btn-primary" id='btnMarkup'>
+        <i class="fa fa-btn fa-arrow-up"></i></button>
+    <button type="button" class="btn btn-primary" id='btnMarkDown'>
+        <i class="fa fa-btn fa-arrow-down"></i></button>
 
-    {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
 
 @section('footer1')
 <script type="text/javascript">
 $( document ).ready(function() {
+    var markUp = 1+{{ Setting::get('markup', 10)/100 }};
+    $("#btnMarkup").click(function(){
+        var newPrice = $('#price').val()*markUp;
+        newPrice = newPrice.toFixed(2);
+        $('#price').val(newPrice);
+    });
+    $("#btnMarkDown").click(function(){
+        var newPrice = $('#price').val()/markUp;
+        newPrice = newPrice.toFixed(2);
+        $('#price').val(newPrice);
+    });
+
     $('#category_list').select2({
         placeholder: "Choose a category",
         tags: false,

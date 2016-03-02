@@ -21,7 +21,7 @@
 
     <div class="form-group">
         {!! Form::label('markup', trans('settings.markup'), ['class' => 'control-label']) !!}
-        {{ Form::text('markup', Setting::get('markup', '1'), ['class' => 'form-control']) }}
+        {{ Form::text('markup', Setting::get('markup'), ['class' => 'form-control']) }}
     </div>
 
     {!! Form::submit('Update', ['class' => 'btn btn-primary', 'id' => 'btnSubmit']) !!}

@@ -32,16 +32,4 @@ class UserRequest extends Request
             'postcode' => 'Regex:/^[0-9]{4}$/',
         ];
     }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            'postcode.regex' => 'Postcode must be 4 numbers.',
-        ];
-    }
 }

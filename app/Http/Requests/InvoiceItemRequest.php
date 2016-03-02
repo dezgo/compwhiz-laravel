@@ -31,11 +31,4 @@ class InvoiceItemRequest extends Request
 			'description' 	=> 'required|string',
 		];
 	}
-
-	public function messages()
-	{
-		return [
-			'category_id.required' => 'The category field is required'
-		];
-	}
 }
