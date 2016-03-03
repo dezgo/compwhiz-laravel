@@ -1,7 +1,7 @@
 <?php $options['class'] = 'form-control' ?>
 
-    {!! Form::hidden('id', null) !!}
-    {!! Form::hidden('invoice_id', $invoice_id) !!}
+    {!! Form::hidden('id', null, $options) !!}
+    {!! Form::hidden('invoice_id', $invoice_id, $options) !!}
 
     <div class="form-group">
         {!! Form::label('category', 'Category:', ['class' => 'control-label']) !!}
@@ -33,11 +33,13 @@
     </div>
 
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-success']) !!}
-    <button type="button" class="btn btn-primary" id='btnMarkup'>
-        <i class="fa fa-btn fa-arrow-up"></i></button>
-    <button type="button" class="btn btn-primary" id='btnMarkDown'>
-        <i class="fa fa-btn fa-arrow-down"></i></button>
 
+    @if (!array_key_exists("disabled",$options))
+    <a class="btn btn-primary" id='btnMarkup'>
+        <i class="fa fa-btn fa-arrow-up"></i></a>
+    <a class="btn btn-primary" id='btnMarkDown'>
+        <i class="fa fa-btn fa-arrow-down"></i></a>
+    @endif
 
 @section('footer1')
 <script type="text/javascript">
