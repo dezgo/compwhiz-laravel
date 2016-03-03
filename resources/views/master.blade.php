@@ -11,8 +11,6 @@
 
 <body id="app-layout">
     @yield('topbar')
-<Br /><br /><br />
-<img class="center-block" src="{{ url('/images/logo.jpg') }}" /><br /><br />
     <div class="container">
         @yield('content')
 
