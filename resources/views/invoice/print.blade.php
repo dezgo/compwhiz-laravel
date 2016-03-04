@@ -16,7 +16,11 @@
         <td width="8.33%">&nbsp;</td>
     </tr>
     <tr>
-        <td colspan="12" align="right">
+        <td colspan="6" align="left" valign="top">
+            <img class="left-block" src="{{ url('/images/logo.jpg') }}" />
+        </td>
+        <td colspan="6" align="right">
+            <br><Br>
             <h2 class="cred text-uppercase">
                 {{ strtoupper($invoice->type) }}
             </h2>
