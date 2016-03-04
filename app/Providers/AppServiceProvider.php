@@ -37,6 +37,12 @@ class AppServiceProvider extends ServiceProvider
         {
             $view->with('customer_list', User::all()->lists('description', 'id'));
         });
+
+        Invoice::created(function ($invoice) {
+            \Setting::set('next_invoice_number',$invoice->invoice_number+1);
+            \Setting::save();
+        });
+
     }
 
     /**

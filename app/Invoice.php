@@ -51,7 +51,7 @@ class Invoice extends Model
 	 */
 	private function checkInvoiceNumber($invoice_number)
 	{
-		$count = DB::table('invoices')->where('invoice_number', '=', $invoice_number)->count();
+		$count = DB::table('invoices')->where('invoice_number', $invoice_number)->count();
 		return $count == 0;
 	}
 
@@ -67,8 +67,6 @@ class Invoice extends Model
 		while (!$this->checkInvoiceNumber($invoice_number)) {
 			$invoice_number = $invoice_number + 1;
 		}
-		\Setting::set('next_invoice_number',$invoice_number+1);
-		\Setting::save();
 		return $invoice_number;
 	}
 

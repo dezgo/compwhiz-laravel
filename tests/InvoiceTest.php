@@ -226,8 +226,14 @@ class InvoiceTest extends TestCase
     {
         $next = \Setting::get('next_invoice_number');
         $inv1 = new App\Invoice();
+        $inv1->customer_id = $this->user->id;
+        $inv1->save();
         $inv2 = new App\Invoice();
+        $inv2->customer_id = $this->user->id;
+        $inv2->save();
         $inv3 = new App\Invoice();
+        $inv3->customer_id = $this->user->id;
+        $inv3->save();
         assert($inv1->invoice_number == ($next));
         assert($inv2->invoice_number == ($next+1));
         assert($inv3->invoice_number == ($next+2));
