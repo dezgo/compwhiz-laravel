@@ -89,7 +89,6 @@ class InvoiceController extends Controller
 		if (!Auth::user()->isAdmin()) {
 			abort(403);
 		}
-
 		$invoice = Invoice::create($request->all());
 		return redirect('/invoice/'.$invoice->id);
 	}

@@ -1,6 +1,6 @@
 <?php $options['class'] = 'form-control' ?>
 
-{!! Form::hidden('id',null) !!}
+{!! Form::hidden('id', null, $options) !!}
 
 <div class="form-group">
     {!! Form::label('customer', 'Customer:', ['class' => 'control-label']) !!}
@@ -13,6 +13,12 @@
 <div class="form-group">
     {!! Form::label('invoice_number', 'Invoice Number:', ['class' => 'control-label']) !!}
     {{ Form::text('invoice_number', null, $options) }}
+</div>
+
+<div class="form-group">
+    {!! Form::label('is_quote', 'Is Quote:', ['class' => 'control-label']) !!}
+    {!! Form::hidden('is_quote', '', $options) !!}
+    {{ Form::checkbox('is_quote', 'on', null, $options) }}
 </div>
 
 <div class="form-group">

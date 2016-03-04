@@ -91,37 +91,61 @@
   <td colspan="3"><b>Grand-total:</b></td>
   <td colspan="2" align="right">{{ number_format($invoice->total, 2) }}</td>
 </tr>
-<tr>
-  <td colspan="7">&nbsp;</div>
-  <td colspan="3"><b>Amount&nbsp;paid:</b></div>
-  <td colspan="2" align="right">{{ number_format($invoice->paid, 2) }}</div>
-</tr>
-<tr>
-  <td colspan="7">&nbsp;</div>
-  <td colspan="3"><b>Balance&nbsp;owing:</b></div>
-  <td colspan="2" align="right">{{ number_format($invoice->owing, 2) }}</div>
-</tr>
+@if ($invoice->is_quote == '')
+    <tr>
+      <td colspan="7">&nbsp;</td>
+      <td colspan="3"><b>Amount&nbsp;paid:</b></td>
+      <td colspan="2" align="right">{{ number_format($invoice->paid, 2) }}</td>
+    </tr>
+    <tr>
+      <td colspan="7">&nbsp;</td>
+      <td colspan="3"><b>Balance&nbsp;owing:</b></td>
+      <td colspan="2" align="right">{{ number_format($invoice->owing, 2) }}</td>
+    </tr>
+@endif
 <tr><td><br /></td></tr>
 <tr>
-  <td colspan="7">&nbsp;</div>
-  <td colspan="5">No GST has been included</div>
+  <td colspan="7">&nbsp;</td>
+  <td colspan="5">No GST has been included</td>
 </tr>
 <tr><td><br /><hr /></td></tr>
 <tr>
-  <td colspan="8"><h4 class="cred">How to Pay</h4></div>
-  <td colspan="4"><h4 class="cred">Enquiries</h4></div>
+  <td colspan="4"><h4 class="cred">Enquiries</h4></td>
+  @if ($invoice->is_quote == '')
+  <td colspan="8"><h4 class="cred">How to Pay</h4></td>
+  @endif
 </tr>
 <tr>
-  <td colspan="4">Payment by EFT</div>
-  <td colspan="4">Payment by Cheque</div>
-  <td colspan="4">Phone: (02) 6112 8025</div>
+  <td colspan="4">Phone: (02) 6112 8025</td>
+  @if ($invoice->is_quote == '')
+  <td colspan="4">Payment by EFT</td>
+  <td colspan="4">Payment by Cheque</td>
+  @endif
 </tr>
 <tr>
-  <td>BSB:<br>Account:<br>Reference:</div>
-  <td colspan="3">082-902<br>115287822<br>Inv{{ $invoice->invoice_number}}</div>
-  <td colspan="4">Mail Cheques to<br>238 La Perouse St<br>Red Hill ACT 2603</div>
-  <td colspan="4">E mail@computerwhiz.com.au<br>W www.computerwhiz.com.au</div>
+  <td colspan="4">E mail@computerwhiz.com.au</td>
+  @if ($invoice->is_quote == '')
+  <td colspan="1">BSB:</td>
+  <td colspan="3">082-902</td>
+  <td colspan="4">Mail Cheques to</td>
+  @endif
 </tr>
+<tr>
+  <td colspan="4">W www.computerwhiz.com.au</td>
+  @if ($invoice->is_quote == '')
+  <td colspan="1">Account:</td>
+  <td colspan="3">115287822</td>
+  <td colspan="4">238 La Perouse St</td>
+  @endif
+</tr>
+@if ($invoice->is_quote == '')
+<tr>
+  <td colspan="4">&nbsp;</td>
+  <td colspan="1">Reference:</td>
+  <td colspan="3">Inv{{ $invoice->invoice_number}}</td>
+  <td colspan="4">Red Hill ACT 2603</td>
+</tr>
+@endif
 </table>
 
 @stop

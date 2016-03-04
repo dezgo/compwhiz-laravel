@@ -26,6 +26,7 @@ class Invoice extends Model
 		'invoice_date',
 		'due_date',
 		'paid',
+		'is_quote'
 	];
 
 	/**
@@ -138,12 +139,43 @@ class Invoice extends Model
 	 */
 	public function getTypeAttribute($value)
 	{
-		if (round($this->owing,2) > 0.00) {
+		if ($this->is_quote == 'on') {
+			return "Quote";
+		}
+		elseif (round($this->owing,2) > 0.00) {
 			return "Invoice";
 		}
 		else {
 			return "Receipt";
 		}
+	}
+
+	/**
+	 * Convert value returned by checkbox html control to boolean
+	 * suitable for storing in db
+	 */
+	/**
+	 * Convert due date into an instance of Carbon
+
+	 * @param $value
+	 */
+	public function setIsQuoteAttribute($value)
+	{
+		$this->attributes['is_quote'] = ($value == 'on');
+	}
+
+	/**
+	 * Convert value returned by checkbox html control to boolean
+	 * suitable for storing in db
+	 */
+	/**
+	 * Convert due date into an instance of Carbon
+
+	 * @param $value
+	 */
+	public function getIsQuoteAttribute($value)
+	{
+		return $value ? 'on' : '';
 	}
 
 	/**

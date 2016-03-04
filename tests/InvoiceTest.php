@@ -169,6 +169,17 @@ class InvoiceTest extends TestCase
             ->see('RECEIPT');
     }
 
+    public function testPrintQuote()
+    {
+        $this->invoice->is_quote = 'on';
+        $this->invoice->save();
+        $this->actingAs($this->userAdmin)
+            ->visit('/invoice/'.$this->invoice->id.'/print')
+            ->see('QUOTE')
+            ->dontSee('How to Pay')
+            ->dontSee('Amount Paid');
+    }
+
     public function testCreateInvoiceWizardValidation()
     {
         $this->actingAs($this->userAdmin)
@@ -220,5 +231,17 @@ class InvoiceTest extends TestCase
         assert($inv1->invoice_number == ($next));
         assert($inv2->invoice_number == ($next+1));
         assert($inv3->invoice_number == ($next+2));
+    }
+
+    // ensure there's an option to make a quote
+    public function testFindIsQuoteCheckbox()
+    {
+        $this->actingAs($this->userAdmin)
+             ->visit('/invoice/'.$this->invoice->id)
+             ->see('is_quote')
+             ->visit('/invoice/'.$this->invoice->id.'/edit')
+             ->check('is_quote')
+             ->press('btnSubmit')
+             ->seeInDatabase('invoices', ['id' => $this->invoice->id, 'is_quote' => 1]);
     }
 }
